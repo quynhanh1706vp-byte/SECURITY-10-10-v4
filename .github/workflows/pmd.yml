@@ -1,6 +1,7 @@
 name: pmd
 on:
   push:
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -18,25 +19,32 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      # Chạy PMD và xuất SARIF.
-      # Lưu ý: PMD chủ yếu hỗ trợ Java/Apex/XML. Nếu repo không có các file này, job sẽ chạy OK nhưng không ra findings.
-      - name: Run PMD
+      # Chạy PMD -> sinh SARIF (không upload artifact)
+      - name: Run PMD (generate SARIF)
+        id: pmd
         uses: pmd/pmd-github-action@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          analyze_changed_files: false
-          format: sarif
-          output: pmd.sarif
-          # Tuỳ rulesets theo codebase (Java/XML). Có thể thêm/bớt:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: '7.17.0'
+          sourcePath: .
+          # PMD chủ yếu cho Java/XML. Nếu repo .NET/C#, có thể không ra findings.
           rulesets: |
-            category/java/bestpractices.xml,
-            category/java/errorprone.xml,
-            category/java/security.xml,
-            category/java/performance.xml,
-            category/xml/security.xml
+            category/java/bestpractices.xml
+            category/java/errorprone.xml
+            category/java/security.xml
+            category/java/performance.xml
+          analyzeModifiedFilesOnly: false
+          createGitHubAnnotations: true
 
-      # Upload kết quả PMD lên Code Scanning
-      - name: Upload SARIF
+      # PMD action mặc định xuất 'pmd-report.sarif' trong thư mục làm việc
+      - name: Normalize SARIF filename
+        run: |
+          if [ -f pmd-report.sarif ]; then mv pmd-report.sarif pmd.sarif; fi
+          test -f pmd.sarif && ls -lh pmd.sarif || echo "No PMD SARIF generated."
+
+      # Upload SARIF lên Code Scanning (thay vì upload artifact)
+      - name: Upload SARIF to Code Scanning
+        if: hashFiles('pmd.sarif') != ''
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: pmd.sarif
