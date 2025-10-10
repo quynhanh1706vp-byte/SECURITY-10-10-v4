@@ -18,7 +18,8 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      # Chạy PMD và xuất SARIF
+      # Chạy PMD và xuất SARIF.
+      # Lưu ý: PMD chủ yếu hỗ trợ Java/Apex/XML. Nếu repo không có các file này, job sẽ chạy OK nhưng không ra findings.
       - name: Run PMD
         uses: pmd/pmd-github-action@v1
         with:
@@ -26,10 +27,15 @@ jobs:
           analyze_changed_files: false
           format: sarif
           output: pmd.sarif
-          # Chọn rulesets phù hợp project Java/C#
-          rulesets: 'category/java/bestpractices.xml,category/java/errorprone.xml'
+          # Tuỳ rulesets theo codebase (Java/XML). Có thể thêm/bớt:
+          rulesets: |
+            category/java/bestpractices.xml,
+            category/java/errorprone.xml,
+            category/java/security.xml,
+            category/java/performance.xml,
+            category/xml/security.xml
 
-      # Upload kết quả lên Code Scanning
+      # Upload kết quả PMD lên Code Scanning
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v3
         with:
