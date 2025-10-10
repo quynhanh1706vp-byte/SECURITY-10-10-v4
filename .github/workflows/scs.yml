@@ -1,0 +1,27 @@
+name: Security Code Scan
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  scs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      # Khôi phục & build (SCS hoạt động khi build chạy analyzer)
+      - name: Restore
+        run: dotnet restore
+      - name: Build with analyzers
+        run: dotnet build --no-restore -warnaserror -p:UseSharedCompilation=false -p:ReportAnalyzer=true -p:errorlog=scs.sarif
+      # dotnet build với Roslyn analyzers sẽ tạo SARIF qua errorlog
+      - uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: scs.sarif
