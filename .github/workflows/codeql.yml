@@ -1,4 +1,4 @@
-name: CodeQL (API only)
+name: CodeQL (API only, Windows MSBuild)
 
 on:
   push:
@@ -19,26 +19,48 @@ permissions:
 
 jobs:
   analyze:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     timeout-minutes: 60
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'csharp' ]
+
     steps:
       - uses: actions/checkout@v4
 
+      # Khởi tạo CodeQL, giới hạn phân tích trong thư mục API/
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: ${{ matrix.language }}
+          languages: csharp
           source-root: API
 
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
+      # Chuẩn bị toolchain build .NET/.NET Framework
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      # (Tuỳ chọn) Cài thêm .NET SDK mới cho case dự án .NET (Core/5+/6+/8+)
+      - name: Setup .NET SDKs (optional)
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            6.0.x
         continue-on-error: true
 
-      - name: Analyze
+      # Restore & Build thủ công solution gốc
+      # ĐỔI đường dẫn .sln nếu solution thật sự khác tên/khác vị trí.
+      - name: NuGet restore
+        run: nuget restore .\DeMasterProCloud.sln
+        shell: pwsh
+        continue-on-error: true
+
+      - name: Build solution (MSBuild)
+        run: msbuild .\DeMasterProCloud.sln /t:Build /p:Configuration=Release /m
+        shell: pwsh
+        continue-on-error: true
+
+      - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
-          category: "/language:${{ matrix.language }}"
+          category: "/language:csharp"
