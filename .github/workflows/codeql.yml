@@ -1,7 +1,16 @@
-name: CodeQL
+name: CodeQL (API only)
+
 on:
   push:
+    branches: [ main ]
+    paths:
+      - 'API/**'
+      - '.github/workflows/codeql.yml'
   pull_request:
+    branches: [ main ]
+    paths:
+      - 'API/**'
+      - '.github/workflows/codeql.yml'
   workflow_dispatch:
 
 permissions:
@@ -9,12 +18,55 @@ permissions:
   security-events: write
 
 jobs:
-  analyze:
+  codeql:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'csharp', 'actions' ]   # C# + quét workflow
+
     steps:
       - uses: actions/checkout@v4
-      - uses: github/codeql-action/init@v3
+
+      # ===== Scan GitHub Actions (workflow files) =====
+      - name: Init CodeQL (actions)
+        if: matrix.language == 'actions'
+        uses: github/codeql-action/init@v3
+        with:
+          languages: actions
+
+      - name: Analyze (actions)
+        if: matrix.language == 'actions'
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:actions"
+
+      # ===== Scan C# trong solution (các project ở API/) =====
+      - name: Setup .NET
+        if: matrix.language == 'csharp'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            6.0.x
+            7.0.x
+            8.0.x
+
+      - name: Init CodeQL (csharp)
+        if: matrix.language == 'csharp'
+        uses: github/codeql-action/init@v3
         with:
           languages: csharp
-      - uses: github/codeql-action/autobuild@v3
-      - uses: github/codeql-action/analyze@v3
+
+      - name: Restore
+        if: matrix.language == 'csharp'
+        run: dotnet restore "DeMasterProCloud.sln"
+
+      - name: Build
+        if: matrix.language == 'csharp'
+        run: dotnet build "DeMasterProCloud.sln" -c Release /p:UseSharedCompilation=false
+
+      - name: Analyze (csharp)
+        if: matrix.language == 'csharp'
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:csharp"
