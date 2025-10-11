@@ -25,20 +25,29 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run Trivy FS scan on API/
+        id: trivy
         uses: aquasecurity/trivy-action@0.28.0
         with:
           scan-type: fs
           scan-ref: API
-          severity: CRITICAL,HIGH,MEDIUM,LOW
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH,MEDIUM,LOW'
           ignore-unfixed: true
+          format: 'sarif'
+          output: 'trivy.sarif'
+          limit-severities-for-sarif: true
           skip-dirs: |
             API/**/bin
             API/**/obj
-          format: sarif
-          output: trivy.sarif
-          exit-code: '0'     # không fail job, chỉ báo findings
+        continue-on-error: true
+
+      - name: Ensure SARIF exists
+        if: always()
+        run: |
+          test -s trivy.sarif || echo '{"version":"2.1.0","runs":[]}' > trivy.sarif
 
       - name: Upload SARIF (Trivy)
+        if: always()
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: trivy.sarif

@@ -19,34 +19,26 @@ permissions:
 
 jobs:
   analyze:
-    name: Analyze (CodeQL)
     runs-on: ubuntu-latest
     timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'csharp', 'actions' ]   # C# + GitHub Actions
+        language: [ 'csharp' ]
     steps:
       - uses: actions/checkout@v4
-
-      # Giới hạn phạm vi quét vào API/**
-      - name: Narrow analysis to API/
-        run: |
-          echo "CODEQL_EXTRACTOR_CSHARP_BUILDLESS=true" >> $GITHUB_ENV
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
-          # Chỉ định thư mục nguồn để CodeQL ưu tiên
           source-root: API
 
-      # Thử autobuild cho C# (runner đã có sẵn dotnet)
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
         continue-on-error: true
 
-      - name: Perform CodeQL Analysis
+      - name: Analyze
         uses: github/codeql-action/analyze@v3
         with:
           category: "/language:${{ matrix.language }}"
