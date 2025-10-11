@@ -1,0 +1,43 @@
+name: Trivy (API only)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'API/**'
+      - '.github/workflows/trivy.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'API/**'
+      - '.github/workflows/trivy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  trivy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Quét filesystem trong thư mục API và xuất SARIF
+      - name: Run Trivy (filesystem scan on API/)
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: 'fs'
+          scan-ref: 'API'
+          ignore-unfixed: true
+          format: 'sarif'
+          output: 'trivy.sarif'
+          severity: 'CRITICAL,HIGH,MEDIUM,LOW'
+          skip-dirs: |
+            API/**/bin
+            API/**/obj
+
+      - name: Upload SARIF (Trivy)
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy.sarif
