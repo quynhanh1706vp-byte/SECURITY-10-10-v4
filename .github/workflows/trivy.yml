@@ -20,34 +20,24 @@ permissions:
 jobs:
   trivy:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run Trivy FS scan on API/
-        id: trivy
+      # Quét filesystem trong thư mục API và xuất SARIF
+      - name: Run Trivy (filesystem scan on API/)
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          scan-type: fs
-          scan-ref: API
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH,MEDIUM,LOW'
+          scan-type: 'fs'
+          scan-ref: 'API'
           ignore-unfixed: true
           format: 'sarif'
           output: 'trivy.sarif'
-          limit-severities-for-sarif: true
+          severity: 'CRITICAL,HIGH,MEDIUM,LOW'
           skip-dirs: |
             API/**/bin
             API/**/obj
-        continue-on-error: true
-
-      - name: Ensure SARIF exists
-        if: always()
-        run: |
-          test -s trivy.sarif || echo '{"version":"2.1.0","runs":[]}' > trivy.sarif
 
       - name: Upload SARIF (Trivy)
-        if: always()
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: trivy.sarif
