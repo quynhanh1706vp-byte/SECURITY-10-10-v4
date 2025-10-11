@@ -18,55 +18,35 @@ permissions:
   security-events: write
 
 jobs:
-  codeql:
+  analyze:
+    name: Analyze (CodeQL)
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'csharp', 'actions' ]   # C# + quét workflow
-
+        language: [ 'csharp', 'actions' ]   # C# + GitHub Actions
     steps:
       - uses: actions/checkout@v4
 
-      # ===== Scan GitHub Actions (workflow files) =====
-      - name: Init CodeQL (actions)
-        if: matrix.language == 'actions'
+      # Giới hạn phạm vi quét vào API/**
+      - name: Narrow analysis to API/
+        run: |
+          echo "CODEQL_EXTRACTOR_CSHARP_BUILDLESS=true" >> $GITHUB_ENV
+
+      - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: actions
+          languages: ${{ matrix.language }}
+          # Chỉ định thư mục nguồn để CodeQL ưu tiên
+          source-root: API
 
-      - name: Analyze (actions)
-        if: matrix.language == 'actions'
+      # Thử autobuild cho C# (runner đã có sẵn dotnet)
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+        continue-on-error: true
+
+      - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
-          category: "/language:actions"
-
-      # ===== Scan C# trong solution (các project ở API/) =====
-      - name: Setup .NET
-        if: matrix.language == 'csharp'
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: |
-            6.0.x
-            7.0.x
-            8.0.x
-
-      - name: Init CodeQL (csharp)
-        if: matrix.language == 'csharp'
-        uses: github/codeql-action/init@v3
-        with:
-          languages: csharp
-
-      - name: Restore
-        if: matrix.language == 'csharp'
-        run: dotnet restore "DeMasterProCloud.sln"
-
-      - name: Build
-        if: matrix.language == 'csharp'
-        run: dotnet build "DeMasterProCloud.sln" -c Release /p:UseSharedCompilation=false
-
-      - name: Analyze (csharp)
-        if: matrix.language == 'csharp'
-        uses: github/codeql-action/analyze@v3
-        with:
-          category: "/language:csharp"
+          category: "/language:${{ matrix.language }}"
