@@ -20,22 +20,23 @@ permissions:
 jobs:
   trivy:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
-      # Quét filesystem trong thư mục API và xuất SARIF
-      - name: Run Trivy (filesystem scan on API/)
+      - name: Run Trivy FS scan on API/
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          scan-type: 'fs'
-          scan-ref: 'API'
+          scan-type: fs
+          scan-ref: API
+          severity: CRITICAL,HIGH,MEDIUM,LOW
           ignore-unfixed: true
-          format: 'sarif'
-          output: 'trivy.sarif'
-          severity: 'CRITICAL,HIGH,MEDIUM,LOW'
           skip-dirs: |
             API/**/bin
             API/**/obj
+          format: sarif
+          output: trivy.sarif
+          exit-code: '0'     # không fail job, chỉ báo findings
 
       - name: Upload SARIF (Trivy)
         uses: github/codeql-action/upload-sarif@v3
