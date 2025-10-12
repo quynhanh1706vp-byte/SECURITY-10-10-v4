@@ -1,0 +1,85 @@
+name: Codacy Security Scan
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+jobs:
+  codacy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code (full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Codacy Analysis CLI (skip PMD)
+        run: |
+          docker run --rm \
+            -v "$PWD:/src" -w /src \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            codacy/codacy-analysis-cli:latest analyze \
+              --verbose \
+              --format sarif \
+              --output results.sarif \
+              --gh-code-scanning-compat \
+              \
+              # CHỈ chạy các tool dưới, KHÔNG có PMD
+              --tool semgrep \
+              --tool checkov \
+              --tool trivy \
+              --tool hadolint \
+              --tool eslint \
+              --tool pylint \
+              --tool ruff \
+              --tool markdownlint \
+              --tool spectral \
+              || true
+
+      # Tách SARIF thành từng run để tránh lỗi "multiple runs same category"
+      - name: Split SARIF to single-run files
+        run: |
+          mkdir -p sarif_split
+          i=0
+          jq -c '.runs | to_entries[]' results.sarif | while read -r entry; do
+            idx="$(jq -r '.key' <<<"$entry")"
+            run="$(jq -r '.value' <<<"$entry")"
+            tool="$(jq -r '.tool.driver.name // "unknown"' <<<"$run")"
+            catval="$(jq -r '.automationDetails.category // empty' <<<"$run")"
+            if [ -z "$catval" ] || [ "$catval" = "null" ]; then
+              catval="${tool}-run-${idx}"
+              run="$(jq --arg cat "$catval" '.automationDetails = (.automationDetails // {}) | .automationDetails.category = $cat' <<<"$run")"
+            fi
+            safe_cat="$(echo "$catval" | tr -cs '[:alnum:]_.+-' '_' )"
+            jq --argjson run "$run" '.runs = [$run]' results.sarif > "sarif_split/$((++i))-${safe_cat}.sarif"
+          done
+
+      # Upload từng file SARIF lên Code Scanning (dùng --input - để tránh "Danh sách đối số quá dài")
+      - name: Upload SARIF files to GitHub Code Scanning
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OWNER="${GITHUB_REPOSITORY%/*}"
+          REPO="${GITHUB_REPOSITORY#*/}"
+          REF="refs/heads/${GITHUB_REF_NAME}"
+          COMMIT_SHA="${GITHUB_SHA}"
+
+          upload_sarif() {
+            f="$1"
+            gz="$f.gz"; b64="$f.gz.b64"
+            gzip -c "$f" > "$gz"
+            base64 -w0 "$gz" > "$b64" 2>/dev/null || base64 "$gz" | tr -d '\n' > "$b64"
+            jq -n --arg sarif "$(cat "$b64")" \
+                  --arg commit "$COMMIT_SHA" \
+                  --arg ref "$REF" \
+                  --arg uri "file://$PWD" \
+                  --arg started "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+                  '{ sarif:$sarif, commit_sha:$commit, ref:$ref, checkout_uri:$uri, started_at:$started }' \
+            | gh api -X POST "repos/$OWNER/$REPO/code-scanning/sarifs" --input - --jq '{id,url}'
+          }
+
+          shopt -s nullglob
+          for f in sarif_split/*.sarif; do
+            echo "⬆️  Upload $f"
+            upload_sarif "$f" | tee "$f.id.json"
+          done
