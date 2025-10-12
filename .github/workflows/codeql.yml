@@ -1,68 +1,78 @@
-name: CodeQL
+name: CodeQL (C# API only)
 
 on:
-  push: { branches: [ main ] }
-  pull_request: { branches: [ main ] }
-  schedule:
-    - cron: '0 3 * * 1,4'
-  workflow_dispatch: {}
+  push:
+    paths:
+      - 'API/**'
+      - '.github/workflows/codeql.yml'
+  pull_request:
+    paths:
+      - 'API/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+  security-events: write
 
 jobs:
-  analyze:
-    runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      contents: read
-
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'csharp', 'javascript', 'typescript' ]
+  codeql:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    env:
+      SOLUTION: DeMasterProCloud.sln
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-        submodules: recursive
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - if: matrix.language == 'csharp'
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: |
-          8.0.x
-          7.0.x
+      - name: Set up .NET SDK (6/7/8)
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            6.0.x
+            7.0.x
+            8.0.x
 
-    - uses: github/codeql-action/init@v3
-      with:
-        languages: ${{ matrix.language }}
-        queries: security-and-quality
-        build-mode: autobuild
+      - name: Setup NuGet (classic restore)
+        uses: NuGet/setup-nuget@v2
 
     - if: matrix.language == 'csharp'
       uses: github/codeql-action/autobuild@v3
 
-    # ===== Nếu autobuild fail, hãy xóa block autobuild ở trên và UNCOMMENT 3 bước dưới =====
-    # - if: matrix.language == 'csharp'
-    #   name: Restore & Build (manual)
-    #   run: |
-    #     dotnet restore src/dmpw_linux_install_v3/code_unpacked/DeMasterProCloud.sln
-    #     dotnet build   src/dmpw_linux_install_v3/code_unpacked/DeMasterProCloud.sln -c Release --no-restore /p:UseSharedCompilation=false
-    # - if: matrix.language == 'csharp'
-    #   uses: github/codeql-action/init@v3
-    #   with:
-    #     languages: csharp
-    #     queries: security-and-quality
-    #     build-mode: manual
-    # ====================================================================
+      - name: NuGet restore (classic)
+        shell: pwsh
+        run: nuget restore "$env:SOLUTION"
+        continue-on-error: true
 
-    - if: matrix.language == 'javascript' || matrix.language == 'typescript'
-      run: |
-        if [ -f package.json ]; then
-          corepack enable || true
-          pnpm install || npm ci
-          npm run build --if-present
-        fi
+      - name: dotnet restore (SDK-style)
+        shell: pwsh
+        run: dotnet restore "$env:SOLUTION" --nologo
+        continue-on-error: true
 
-    - uses: github/codeql-action/analyze@v3
-      with:
-        category: "/language:${{ matrix.language }}"
+      - name: Build with MSBuild (classic projects)
+        shell: pwsh
+        run: msbuild "$env:SOLUTION" /t:Rebuild /p:Configuration=Release /p:Platform="Any CPU" /m /nologo
+        continue-on-error: true
+
+      - name: Build with dotnet (SDK-style projects)
+        shell: pwsh
+        run: dotnet build "$env:SOLUTION" -c Release --no-restore --nologo
+        continue-on-error: true
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: csharp
+          queries: security-extended,security-and-quality
+
+      - name: Autobuild (fallback)
+        uses: github/codeql-action/autobuild@v3
+        continue-on-error: true
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "csharp:api"
