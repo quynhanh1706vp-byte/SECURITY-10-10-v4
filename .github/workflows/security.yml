@@ -6,7 +6,7 @@ on:
     branches: [ main ]
   pull_request:
   schedule:
-    - cron: "0 2 * * 1"   # Thứ 2 02:00 UTC
+    - cron: "0 2 * * 1"
 
 permissions:
   contents: read
@@ -113,17 +113,27 @@ jobs:
   terrascan:
     name: Terrascan (IaC)
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - uses: tenable/terrascan-action@main
+      - name: Install Terrascan (pinned)
+        run: |
+          set -e
+          VERSION="1.18.1"
+          curl -sSL "https://github.com/tenable/terrascan/releases/download/v${VERSION}/terrascan_${VERSION}_Linux_x86_64.tar.gz" -o /tmp/ts.tgz
+          tar -xzf /tmp/ts.tgz -C /tmp
+          sudo mv /tmp/terrascan /usr/local/bin/terrascan
+          terrascan version
+      - name: Terrascan init
+        run: terrascan init
+      - name: Terrascan scan (Terraform)
+        run: |
+          terrascan scan -t terraform -i terraform -o sarif > terrascan.sarif || true
+      - name: Upload SARIF (Terrascan)
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
         with:
-          iac_type: terraform     # đổi sang k8s/helm nếu bạn dùng cái đó
-          iac_version: v14
-          policy_type: all
-          only_warn: true
-          sarif_upload: true
-        continue-on-error: true
+          sarif_file: terrascan.sarif
 
   sbom-cyclonedx:
     name: CycloneDX SBOM
@@ -145,19 +155,20 @@ jobs:
 
   checkmarx:
     name: Checkmarx One
+    # chỉ chạy khi bạn CHỦ ĐỘNG bật secret CX_ENABLED='true' và có đủ secrets Checkmarx
+    if: ${{ secrets.CX_ENABLED == 'true' && (secrets.CX_API_KEY != '' || (secrets.CX_CLIENT_ID != '' && secrets.CX_CLIENT_SECRET != '')) && secrets.CX_BASE_URI != '' && secrets.CX_TENANT != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      # Checkmarx One (yêu cầu secrets CxBaseURI / CxAPIKey / CxTeam)
       - name: Checkmarx Scan
         uses: checkmarx/ast-github-action@v2
         with:
-          base_uri: ${{ secrets.CX_BASE_URI }}          # ví dụ: https://ast.checkmarx.net
-          cx_tenant: ${{ secrets.CX_TENANT }}           # tenant ID/name
-          cx_client_id: ${{ secrets.CX_CLIENT_ID }}     # nếu dùng OAuth
+          base_uri: ${{ secrets.CX_BASE_URI }}
+          cx_tenant: ${{ secrets.CX_TENANT }}
+          cx_client_id: ${{ secrets.CX_CLIENT_ID }}
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
-          api_key: ${{ secrets.CX_API_KEY }}            # hoặc dùng API key (ưu tiên)
+          api_key: ${{ secrets.CX_API_KEY }}
           project_name: ${{ github.repository }}
           branch: ${{ github.ref_name }}
           additional_params: >
@@ -168,5 +179,3 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: checkmarx.sarif
-        # tránh fail toàn CI nếu Checkmarx lỗi quota/credential:
-        continue-on-error: true
