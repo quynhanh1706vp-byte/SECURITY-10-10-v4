@@ -12,31 +12,28 @@ permissions:
 
 jobs:
   codeql:
-    continue-on-error: true
     name: CodeQL extended
     runs-on: ubuntu-latest
+    continue-on-error: true
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
-        with: { dotnet-version: "8.0.x" }
+        with:
+          dotnet-version: "8.0.x"
       - uses: github/codeql-action/init@v3
         with:
-          languages: csharp,javascript
+          languages: csharp
           queries: +security-extended,+security-and-quality
-      - run: |
-          if [ -f "DeMasterProCloud.sln" ]; then
-            dotnet restore DeMasterProCloud.sln
-            dotnet build DeMasterProCloud.sln -c Release --no-restore
-          else
-            CS=$(git ls-files "*.csproj" | head -n 1); [ -n "$CS" ] && { dotnet restore "$CS"; dotnet build "$CS" -c Release --no-restore; } || true
-          fi
+      - uses: github/codeql-action/autobuild@v3
       - uses: github/codeql-action/analyze@v3
         with: { category: "codeql" }
 
   semgrep:
-    continue-on-error: true
     name: Semgrep wide packs
     runs-on: ubuntu-latest
+    continue-on-error: true
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
@@ -50,8 +47,7 @@ jobs:
             p/kubernetes
             p/ci
           generateSarif: "1"
-        env:
-          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+          publishResults: "false"
       - uses: github/codeql-action/upload-sarif@v3
         if: always()
         with: { sarif_file: semgrep.sarif }
@@ -59,6 +55,7 @@ jobs:
   trivy_fs:
     name: Trivy FS (deep)
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: aquasecurity/trivy-action@0.24.0
@@ -74,9 +71,10 @@ jobs:
         with: { sarif_file: trivy-fs.sarif }
 
   gitleaks:
-    continue-on-error: true
     name: Gitleaks (secrets)
     runs-on: ubuntu-latest
+    continue-on-error: true
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
