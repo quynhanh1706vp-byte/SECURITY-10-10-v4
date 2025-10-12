@@ -21,3 +21,20 @@ obj/
 packages/
 **/*.dll
 **/*.so
+# Secrets / Keys / Certificates
+*.pem
+*.key
+*.pfx
+
+# Build artifacts
+*.dll
+*.lib
+*.exp
+*.pdb
+bin/
+obj/
+dist/
+node_modules/
+*.tgz
+*.tar.gz
+*.zip
