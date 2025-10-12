@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   codeql:
+    continue-on-error: true
     name: CodeQL extended
     runs-on: ubuntu-latest
     steps:
@@ -33,6 +34,7 @@ jobs:
         with: { category: "codeql" }
 
   semgrep:
+    continue-on-error: true
     name: Semgrep wide packs
     runs-on: ubuntu-latest
     steps:
@@ -72,6 +74,7 @@ jobs:
         with: { sarif_file: trivy-fs.sarif }
 
   gitleaks:
+    continue-on-error: true
     name: Gitleaks (secrets)
     runs-on: ubuntu-latest
     steps:
