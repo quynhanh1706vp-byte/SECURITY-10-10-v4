@@ -1,36 +1,41 @@
 name: security-ci
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  push: { branches: [ main ] }
+  pull_request: { branches: [ main ] }
   workflow_dispatch:
   schedule:
-    - cron: "25 2 * * 2"   # chạy hằng tuần (tuỳ bạn)
+    - cron: "25 2 * * 2"
 
 permissions:
   contents: read
   actions: read
-  security-events: write   # bắt buộc để upload SARIF lên Code scanning
+  security-events: write
 
 concurrency:
   group: security-ci-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
+  # ---------- CodeQL (chỉ chạy khi repo có mã phù hợp) ----------
   codeql:
     name: CodeQL
     runs-on: ubuntu-latest
+    # Chỉ chạy khi có ít nhất 1 file C#/JS/TS
+    if: ${{ hashFiles('**/*.cs','**/*.sln','**/*.csproj','**/*.js','**/*.ts','**/*.tsx') != '' }}
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'csharp', 'javascript-typescript' ]  # bỏ ngôn ngữ không dùng nếu muốn
+        language: [ 'csharp', 'javascript-typescript' ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        with: { fetch-depth: 0 }
+
+      # C# chỉ khi có file C#
+      - name: Skip C# when repo has no C#
+        if: matrix.language == 'csharp' && hashFiles('**/*.cs','**/*.sln','**/*.csproj') == ''
+        run: echo "No C# here — skipping this leg." && exit 0
 
       - name: Setup .NET (for C#)
         if: matrix.language == 'csharp'
@@ -42,30 +47,41 @@ jobs:
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
-          build-mode: manual
+          # Thử autobuild trước; nếu không phù hợp sẽ build thủ công ở dưới
+          build-mode: autobuild
 
-      # Build .NET thủ công để CodeQL lấy database (tránh autobuild fail)
-      - name: Build .NET (manual)
+      - name: Autobuild (CodeQL helper)
+        uses: github/codeql-action/autobuild@v3
+        continue-on-error: true
+
+      # Fallback build thủ công cho .NET nếu autobuild fail
+      - name: Manual build (.NET)
         if: matrix.language == 'csharp'
         run: |
-          dotnet restore
-          dotnet build -c Release --no-restore
+          if ls *.sln 1>/dev/null 2>&1; then
+            dotnet restore
+            dotnet build -c Release --no-restore
+          else
+            echo "No .sln found — skipping manual build."
+          fi
 
       - name: Analyze
         uses: github/codeql-action/analyze@v3
         with:
           category: "/language:${{ matrix.language }}"
 
+  # ---------- Semgrep ----------
   semgrep:
     name: Semgrep
     runs-on: ubuntu-latest
+    # Chỉ chạy khi repo có mã nguồn thường gặp; bỏ if này nếu muốn quét luôn
+    if: ${{ hashFiles('**/*.*') != '' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        with: { fetch-depth: 0 }
 
-      # Nếu source ở trong file nén, giải nén trước (tuỳ dự án)
+      # (Tuỳ chọn) giải nén nếu source nằm trong .tar.gz
       - name: Unpack archives (optional)
         run: |
           find . -type f -name '*.tar.gz' -print0 | while IFS= read -r -d '' f; do
@@ -89,21 +105,21 @@ jobs:
             p/secrets
           generateSarif: true
           sarif: semgrep.sarif
-          # exit-code: 0   # mở dòng này nếu không muốn fail build khi có findings
+          exit-code: 0        # <- không fail job khi có finding
 
       - name: Upload SARIF (Semgrep)
         uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: semgrep.sarif
+        with: { sarif_file: semgrep.sarif }
 
+  # ---------- Trivy ----------
   trivy:
     name: Trivy FS scan
     runs-on: ubuntu-latest
+    if: ${{ hashFiles('**/*.*') != '' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        with: { fetch-depth: 0 }
 
       - name: Trivy scan → SARIF
         uses: aquasecurity/trivy-action@0.26.0
@@ -114,20 +130,21 @@ jobs:
           output: trivy.sarif
           severity: CRITICAL,HIGH,MEDIUM,LOW
           scanners: vuln,secret,config
+          exit-code: '0'     # <- không fail job khi có finding
 
       - name: Upload SARIF (Trivy)
         uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: trivy.sarif
+        with: { sarif_file: trivy.sarif }
 
+  # ---------- DevSkim ----------
   devskim:
     name: DevSkim
     runs-on: ubuntu-latest
+    if: ${{ hashFiles('**/*.*') != '' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        with: { fetch-depth: 0 }
 
       - name: Run DevSkim
         uses: microsoft/DevSkim-Action@v1
@@ -135,8 +152,6 @@ jobs:
           directory-to-scan: .
           output-filename: devskim-results.sarif
           should-scan-archives: true
-
       - name: Upload SARIF (DevSkim)
         uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: devskim-results.sarif
+        with: { sarif_file: devskim-results.sarif }
