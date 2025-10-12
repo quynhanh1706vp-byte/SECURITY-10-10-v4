@@ -6,11 +6,7 @@ on:
     branches: [ main ]
   pull_request:
   schedule:
-<<<<<<< HEAD
-    - cron: "0 2 * * 1"   # chạy mỗi Thứ 2 02:00 UTC
-=======
-    - cron: "0 2 * * 1"
->>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
+    - cron: "0 2 * * 1"   # Thứ 2 02:00 UTC
 
 permissions:
   contents: read
@@ -21,113 +17,122 @@ concurrency:
   group: security-${{ github.ref }}
   cancel-in-progress: false
 
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
 jobs:
+  codeql:
+    name: CodeQL (C# + optional JS/TS)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: CodeQL init
+        uses: github/codeql-action/init@v3
+        with:
+          languages: csharp,javascript
+
+      - name: Restore
+        run: |
+          if [ -f "DeMasterProCloud.sln" ]; then
+            dotnet restore DeMasterProCloud.sln
+          else
+            CS=$(git ls-files '*.csproj' | head -n 1)
+            [ -n "$CS" ] && dotnet restore "$CS" || true
+          fi
+
+      - name: Build (Release, no test)
+        run: |
+          if [ -f "DeMasterProCloud.sln" ]; then
+            dotnet build DeMasterProCloud.sln -c Release --no-restore
+          else
+            CS=$(git ls-files '*.csproj' | head -n 1)
+            [ -n "$CS" ] && dotnet build "$CS" -c Release --no-restore || true
+          fi
+
+      - name: Analyze
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "codeql"
+
   semgrep:
     name: Semgrep (SAST)
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-<<<<<<< HEAD
         with:
           fetch-depth: 0
-=======
-        with: { fetch-depth: 0 }
->>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
-      - uses: semgrep/semgrep-action@v1
+
+      - name: Semgrep CI
+        uses: semgrep/semgrep-action@v1
         with:
           config: p/ci
           generateSarif: "1"
-<<<<<<< HEAD
-          publishToken: ${{ secrets.SEMGREP_APP_TOKEN || '' }}
         env:
-          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN || '' }}
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+
       - name: Upload SARIF (Semgrep)
+        if: always()
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: semgrep.sarif
-        if: always()
-=======
-        env:
-          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
-      - uses: github/codeql-action/upload-sarif@v3
-        if: always()
-        with:
-          sarif_file: semgrep.sarif
->>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
-
-  codeql:
-    name: CodeQL (code scanning)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: github/codeql-action/init@v3
-<<<<<<< HEAD
-        with:
-          languages: csharp,javascript
-=======
-        with: { languages: csharp,javascript }
->>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
-      - uses: github/codeql-action/analyze@v3
 
   gitleaks:
-    name: Gitleaks (secrets)
+    name: Gitleaks (Secrets)
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: gitleaks/gitleaks-action@v2
         with:
           args: detect --source . --no-git --report-format sarif --report-path gitleaks.sarif
-      - uses: github/codeql-action/upload-sarif@v3
-<<<<<<< HEAD
+      - name: Upload SARIF (Gitleaks)
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: gitleaks.sarif
-        if: always()
-=======
-        if: always()
-        with:
-          sarif_file: gitleaks.sarif
->>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
 
-  trivy:
-    name: Trivy (deps & FS scan)
+  trivy-fs:
+    name: Trivy (FileSystem deps/CVEs)
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-<<<<<<< HEAD
-      - id: trivy-fs
+      - name: Trivy FS scan
         uses: aquasecurity/trivy-action@master
-=======
-      - uses: aquasecurity/trivy-action@master
->>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
         with:
           scan-type: fs
-          ignore-unfixed: true
           format: sarif
           output: trivy-fs.sarif
-      - uses: github/codeql-action/upload-sarif@v3
-<<<<<<< HEAD
+          ignore-unfixed: true
+          vuln-type: "os,library"
+      - name: Upload SARIF (Trivy FS)
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: trivy-fs.sarif
-        if: always()
-=======
-        if: always()
-        with:
-          sarif_file: trivy-fs.sarif
->>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
 
   terrascan:
     name: Terrascan (IaC)
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - uses: tenable/terrascan-action@main
+      - name: Terrascan scan
+        uses: tenable/terrascan-action@main
         with:
-<<<<<<< HEAD
-          iac_type: terraform     # đổi thành k8s/helm nếu bạn dùng cái đó
-          sarif_upload: true
-        continue-on-error: true   # tránh fail CI nếu có nhiều cảnh báo
-=======
           iac_type: terraform
+          iac_version: v14
+          policy_type: all
+          only_warn: true
           sarif_upload: true
         continue-on-error: true
->>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
