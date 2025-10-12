@@ -2,11 +2,9 @@
   "required_status_checks": {
     "strict": true,
     "contexts": [
-      "Security CI/CodeQL (C# + optional JS/TS)",
-      "Security CI/Semgrep (SAST)",
-      "Security CI/Trivy (deps/CVEs)",
-      "Security CI/Trivy (secrets scan)",
-      "Security CI/Terrascan (IaC)",
+      "CodeQL extended",
+      "Semgrep wide packs",
+      "Trivy FS (deep)",
       "semgrep-cloud-platform/scan"
     ]
   },

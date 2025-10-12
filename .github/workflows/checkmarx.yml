@@ -1,0 +1,40 @@
+name: Checkmarx Scan
+
+on:
+  workflow_dispatch: {}     # Cho phép chạy thủ công bằng gh workflow run
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  actions: read
+  security-events: write     # để xuất SARIF vào Code Scanning
+
+jobs:
+  checkmarx:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Ví dụ dùng Checkmarx One AST action (hãy đặt secrets phù hợp trong repo Settings -> Secrets and variables -> Actions)
+      - name: Checkmarx One Scan
+        uses: CheckmarxDev/ast-github-action@v2
+        with:
+          base_url: ${{ secrets.CX_BASE_URL }}          # vd: https://ast.checkmarx.net
+          tenant: ${{ secrets.CX_TENANT }}              # tên tenant
+          client_id: ${{ secrets.CX_CLIENT_ID }}
+          secret: ${{ secrets.CX_CLIENT_SECRET }}       # client secret
+          additional_params: >
+            --project-name "${{ github.repository }}"
+            --branch "${{ github.ref_name }}"
+            --scan-types "sast"
+            --async=false
+            --enable-mutual-auth=false
+            --debug=false
+            --incremental=true
+            --sca-reachable=false
+            --severity-threshold "High"                 # tùy chính sách
+            --output-path "./checkmarx-results"         # tùy chọn
