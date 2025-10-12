@@ -16,72 +16,111 @@ concurrency:
   group: security-ci-${{ github.ref }}
   cancel-in-progress: false
 
+# Job 0: phát hiện repo có gì để quyết định chạy các job khác
 jobs:
-  # ---------- CodeQL (chỉ chạy khi repo có mã phù hợp) ----------
-  codeql:
-    name: CodeQL
+  detect:
+    name: Detect project files
     runs-on: ubuntu-latest
-    # Chỉ chạy khi có ít nhất 1 file C#/JS/TS
-    if: ${{ hashFiles('**/*.cs','**/*.sln','**/*.csproj','**/*.js','**/*.ts','**/*.tsx') != '' }}
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'csharp', 'javascript-typescript' ]
+    outputs:
+      has_any:     ${{ steps.out.outputs.has_any }}
+      has_csharp:  ${{ steps.out.outputs.has_csharp }}
+      has_js_ts:   ${{ steps.out.outputs.has_js_ts }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with: { fetch-depth: 0 }
 
-      # C# chỉ khi có file C#
-      - name: Skip C# when repo has no C#
-        if: matrix.language == 'csharp' && hashFiles('**/*.cs','**/*.sln','**/*.csproj') == ''
-        run: echo "No C# here — skipping this leg." && exit 0
+      - id: out
+        name: Scan file types
+        run: |
+          shopt -s globstar nullglob
 
-      - name: Setup .NET (for C#)
-        if: matrix.language == 'csharp'
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
+          cs_count=$(ls **/*.cs **/*.csproj **/*.sln 2>/dev/null | wc -l || echo 0)
+          jsts_count=$(ls **/*.js **/*.ts **/*.tsx 2>/dev/null | wc -l || echo 0)
+          any_count=$(ls **/*.* 2>/dev/null | wc -l || echo 0)
+
+          echo "cs_count=$cs_count"
+          echo "jsts_count=$jsts_count"
+          echo "any_count=$any_count"
+
+          has_csharp=$([ "$cs_count" -gt 0 ] && echo true || echo false)
+          has_js_ts=$([ "$jsts_count" -gt 0 ] && echo true || echo false)
+          has_any=$([ "$any_count" -gt 0 ] && echo true || echo false)
+
+          {
+            echo "has_csharp=$has_csharp"
+            echo "has_js_ts=$has_js_ts"
+            echo "has_any=$has_any"
+          } >> "$GITHUB_OUTPUT"
+
+  # ---------- CodeQL C# ----------
+  codeql_csharp:
+    name: CodeQL (C#)
+    needs: detect
+    if: needs.detect.outputs.has_csharp == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+
+      - uses: actions/setup-dotnet@v4
+        with: { dotnet-version: '8.0.x' }
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: ${{ matrix.language }}
-          # Thử autobuild trước; nếu không phù hợp sẽ build thủ công ở dưới
+          languages: csharp
           build-mode: autobuild
 
-      - name: Autobuild (CodeQL helper)
+      - name: Autobuild
         uses: github/codeql-action/autobuild@v3
         continue-on-error: true
 
-      # Fallback build thủ công cho .NET nếu autobuild fail
-      - name: Manual build (.NET)
-        if: matrix.language == 'csharp'
+      - name: Manual build fallback
         run: |
           if ls *.sln 1>/dev/null 2>&1; then
             dotnet restore
             dotnet build -c Release --no-restore
           else
-            echo "No .sln found — skipping manual build."
+            echo "No .sln found — skip manual build."
           fi
 
       - name: Analyze
         uses: github/codeql-action/analyze@v3
         with:
-          category: "/language:${{ matrix.language }}"
+          category: "/language:csharp"
+
+  # ---------- CodeQL JS/TS ----------
+  codeql_js_ts:
+    name: CodeQL (JS/TS)
+    needs: detect
+    if: needs.detect.outputs.has_js_ts == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+          build-mode: autobuild
+
+      - name: Analyze
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:javascript-typescript"
 
   # ---------- Semgrep ----------
   semgrep:
     name: Semgrep
+    needs: detect
+    if: needs.detect.outputs.has_any == 'true'
     runs-on: ubuntu-latest
-    # Chỉ chạy khi repo có mã nguồn thường gặp; bỏ if này nếu muốn quét luôn
-    if: ${{ hashFiles('**/*.*') != '' }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
 
-      # (Tuỳ chọn) giải nén nếu source nằm trong .tar.gz
       - name: Unpack archives (optional)
         run: |
           find . -type f -name '*.tar.gz' -print0 | while IFS= read -r -d '' f; do
@@ -105,7 +144,7 @@ jobs:
             p/secrets
           generateSarif: true
           sarif: semgrep.sarif
-          exit-code: 0        # <- không fail job khi có finding
+          exit-code: 0   # không fail job khi có finding
 
       - name: Upload SARIF (Semgrep)
         uses: github/codeql-action/upload-sarif@v3
@@ -114,11 +153,11 @@ jobs:
   # ---------- Trivy ----------
   trivy:
     name: Trivy FS scan
+    needs: detect
+    if: needs.detect.outputs.has_any == 'true'
     runs-on: ubuntu-latest
-    if: ${{ hashFiles('**/*.*') != '' }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
 
       - name: Trivy scan → SARIF
@@ -130,7 +169,7 @@ jobs:
           output: trivy.sarif
           severity: CRITICAL,HIGH,MEDIUM,LOW
           scanners: vuln,secret,config
-          exit-code: '0'     # <- không fail job khi có finding
+          exit-code: '0'     # không fail job khi có finding
 
       - name: Upload SARIF (Trivy)
         uses: github/codeql-action/upload-sarif@v3
@@ -139,11 +178,11 @@ jobs:
   # ---------- DevSkim ----------
   devskim:
     name: DevSkim
+    needs: detect
+    if: needs.detect.outputs.has_any == 'true'
     runs-on: ubuntu-latest
-    if: ${{ hashFiles('**/*.*') != '' }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
 
       - name: Run DevSkim
@@ -152,6 +191,7 @@ jobs:
           directory-to-scan: .
           output-filename: devskim-results.sarif
           should-scan-archives: true
+
       - name: Upload SARIF (DevSkim)
         uses: github/codeql-action/upload-sarif@v3
         with: { sarif_file: devskim-results.sarif }
