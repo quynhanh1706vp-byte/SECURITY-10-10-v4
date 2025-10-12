@@ -1,0 +1,142 @@
+name: security-ci
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+  schedule:
+    - cron: "25 2 * * 2"   # chạy hằng tuần (tuỳ bạn)
+
+permissions:
+  contents: read
+  actions: read
+  security-events: write   # bắt buộc để upload SARIF lên Code scanning
+
+concurrency:
+  group: security-ci-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  codeql:
+    name: CodeQL
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'csharp', 'javascript-typescript' ]  # bỏ ngôn ngữ không dùng nếu muốn
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET (for C#)
+        if: matrix.language == 'csharp'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: manual
+
+      # Build .NET thủ công để CodeQL lấy database (tránh autobuild fail)
+      - name: Build .NET (manual)
+        if: matrix.language == 'csharp'
+        run: |
+          dotnet restore
+          dotnet build -c Release --no-restore
+
+      - name: Analyze
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"
+
+  semgrep:
+    name: Semgrep
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Nếu source ở trong file nén, giải nén trước (tuỳ dự án)
+      - name: Unpack archives (optional)
+        run: |
+          find . -type f -name '*.tar.gz' -print0 | while IFS= read -r -d '' f; do
+            d="${f%.tar.gz}"; mkdir -p "$d"; tar -xzf "$f" -C "$d";
+          done
+
+      - name: Run Semgrep
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: |
+            p/ci
+            p/security-audit
+            p/owasp-top-ten
+            p/csharp
+            p/javascript
+            p/typescript
+            p/react
+            p/docker
+            p/kubernetes
+            p/terraform
+            p/secrets
+          generateSarif: true
+          sarif: semgrep.sarif
+          # exit-code: 0   # mở dòng này nếu không muốn fail build khi có findings
+
+      - name: Upload SARIF (Semgrep)
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: semgrep.sarif
+
+  trivy:
+    name: Trivy FS scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Trivy scan → SARIF
+        uses: aquasecurity/trivy-action@0.26.0
+        with:
+          scan-type: fs
+          ignore-unfixed: true
+          format: sarif
+          output: trivy.sarif
+          severity: CRITICAL,HIGH,MEDIUM,LOW
+          scanners: vuln,secret,config
+
+      - name: Upload SARIF (Trivy)
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy.sarif
+
+  devskim:
+    name: DevSkim
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run DevSkim
+        uses: microsoft/DevSkim-Action@v1
+        with:
+          directory-to-scan: .
+          output-filename: devskim-results.sarif
+          should-scan-archives: true
+
+      - name: Upload SARIF (DevSkim)
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: devskim-results.sarif
