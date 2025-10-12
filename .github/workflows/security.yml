@@ -5,7 +5,11 @@ on:
     branches: [ main ]
   pull_request:
   schedule:
+<<<<<<< HEAD
     - cron: "0 2 * * 1"   # chạy mỗi Thứ 2 02:00 UTC
+=======
+    - cron: "0 2 * * 1"
+>>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
 
 permissions:
   contents: read
@@ -22,12 +26,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+<<<<<<< HEAD
         with:
           fetch-depth: 0
+=======
+        with: { fetch-depth: 0 }
+>>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
       - uses: semgrep/semgrep-action@v1
         with:
           config: p/ci
           generateSarif: "1"
+<<<<<<< HEAD
           publishToken: ${{ secrets.SEMGREP_APP_TOKEN || '' }}
         env:
           SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN || '' }}
@@ -36,6 +45,14 @@ jobs:
         with:
           sarif_file: semgrep.sarif
         if: always()
+=======
+        env:
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+      - uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: semgrep.sarif
+>>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
 
   codeql:
     name: CodeQL (code scanning)
@@ -43,8 +60,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: github/codeql-action/init@v3
+<<<<<<< HEAD
         with:
           languages: csharp,javascript
+=======
+        with: { languages: csharp,javascript }
+>>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
       - uses: github/codeql-action/analyze@v3
 
   gitleaks:
@@ -56,26 +77,42 @@ jobs:
         with:
           args: detect --source . --no-git --report-format sarif --report-path gitleaks.sarif
       - uses: github/codeql-action/upload-sarif@v3
+<<<<<<< HEAD
         with:
           sarif_file: gitleaks.sarif
         if: always()
+=======
+        if: always()
+        with:
+          sarif_file: gitleaks.sarif
+>>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
 
   trivy:
     name: Trivy (deps & FS scan)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+<<<<<<< HEAD
       - id: trivy-fs
         uses: aquasecurity/trivy-action@master
+=======
+      - uses: aquasecurity/trivy-action@master
+>>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
         with:
           scan-type: fs
           ignore-unfixed: true
           format: sarif
           output: trivy-fs.sarif
       - uses: github/codeql-action/upload-sarif@v3
+<<<<<<< HEAD
         with:
           sarif_file: trivy-fs.sarif
         if: always()
+=======
+        if: always()
+        with:
+          sarif_file: trivy-fs.sarif
+>>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
 
   terrascan:
     name: Terrascan (IaC)
@@ -84,6 +121,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: tenable/terrascan-action@main
         with:
+<<<<<<< HEAD
           iac_type: terraform     # đổi thành k8s/helm nếu bạn dùng cái đó
           sarif_upload: true
         continue-on-error: true   # tránh fail CI nếu có nhiều cảnh báo
+=======
+          iac_type: terraform
+          sarif_upload: true
+        continue-on-error: true
+>>>>>>> aac4c18 (chore(ci): add security scanning workflow (safe defaults))
