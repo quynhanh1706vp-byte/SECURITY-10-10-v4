@@ -1,0 +1,77 @@
+name: Multi Scanner (Semgrep/Checkov/Trivy)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write   # cần để upload SARIF
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history for blame/paths)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # ---------- Semgrep ----------
+      - name: Setup Semgrep
+        run: |
+          python3 -m pip install --upgrade pip
+          pip3 install semgrep
+      - name: Run Semgrep (auto rules)
+        run: |
+          mkdir -p sarif_out
+          semgrep ci \
+            --sarif --output sarif_out/semgrep.sarif \
+            || true
+      - name: Upload Semgrep SARIF
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: sarif_out/semgrep.sarif
+          category: semgrep
+
+      # ---------- Checkov ----------
+      - name: Setup Checkov
+        run: |
+          pip3 install checkov
+      - name: Run Checkov (IaC)
+        run: |
+          checkov -d . --framework terraform,kubernetes,cloudformation,arm,azure_resource_manager,serverless \
+                 --output-file-path sarif_out --output sarif || true
+          # Checkov sẽ tạo sarif_out/results_sarif.sarif nếu có findings
+          ls -l sarif_out || true
+      - name: Upload Checkov SARIF
+        if: exists('sarif_out/results_sarif.sarif')
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: sarif_out/results_sarif.sarif
+          category: checkov
+
+      # ---------- Trivy (deps + file system) ----------
+      - name: Setup Trivy
+        uses: aquasecurity/setup-trivy@v0.2.2
+      - name: Trivy FS (source code, secrets, misconfig)
+        run: |
+          trivy fs . --security-checks vuln,secret,misconfig \
+            --format sarif --output sarif_out/trivy-fs.sarif || true
+      - name: Trivy SBOM deps (lockfiles)
+        run: |
+          trivy fs . --scanners vuln --format sarif \
+            --output sarif_out/trivy-deps.sarif || true
+      - name: Upload Trivy SARIF (fs)
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: sarif_out/trivy-fs.sarif
+          category: trivy-fs
+      - name: Upload Trivy SARIF (deps)
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: sarif_out/trivy-deps.sarif
+          category: trivy-deps
