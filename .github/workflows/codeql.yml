@@ -3,6 +3,13 @@ name: CodeQL
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - "**/*.cs"
+      - "**/*.csproj"
+      - "**/*.sln"
+      - "**/*.js"
+      - "**/*.ts"
+      - "**/*.tsx"
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
@@ -32,7 +39,6 @@ jobs:
           languages: ${{ matrix.language }}
           queries: +security-extended
 
-      # Build cho C#
       - name: Setup .NET (only for C#)
         if: ${{ matrix.language == 'csharp' }}
         uses: actions/setup-dotnet@v4
@@ -45,7 +51,6 @@ jobs:
           dotnet restore
           dotnet build --no-restore -c Release
 
-      # Các ngôn ngữ khác dùng autobuild
       - name: Autobuild (non-C#)
         if: ${{ matrix.language != 'csharp' }}
         uses: github/codeql-action/autobuild@v3
@@ -54,7 +59,7 @@ jobs:
         uses: github/codeql-action/analyze@v3
         with:
           category: "/language:${{ matrix.language }}"
-          output: sarif # tạo file SARIF artifact cục bộ ngoài việc upload lên Security
+          output: sarif
 
       - name: Upload SARIF artifact
         uses: actions/upload-artifact@v4
