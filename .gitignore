@@ -1,32 +1,14 @@
-# scan outputs / logs
-_reports/
-scan_min.stdout
-*.log
-*.tmp
-
-# build / vendor
-node_modules/
-bin/
-obj/
-dist/
-out/
-
-# IDE / hệ thống
-.vscode/
-.idea/
-*.user
-.DS_Store
-Thumbs.db
 _reports/
 _artifacts/
+joblogs/
 *.sarif
 *.zip
 *.tgz
 *.tar.gz
 *.7z
+*.dll
 *.dylib
 *.so
-*.dll
 *.iso
 *.mp4
 *.png
