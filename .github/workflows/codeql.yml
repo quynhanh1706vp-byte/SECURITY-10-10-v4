@@ -3,13 +3,6 @@ name: CodeQL
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - "**/*.cs"
-      - "**/*.csproj"
-      - "**/*.sln"
-      - "**/*.js"
-      - "**/*.ts"
-      - "**/*.tsx"
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
