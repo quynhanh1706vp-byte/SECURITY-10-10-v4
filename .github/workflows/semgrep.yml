@@ -1,8 +1,9 @@
 name: Semgrep
-
 on:
   pull_request:
     branches: [ main ]
+  push:
+    branches: [ ci/add-semgrep-trivy ]   # đổi thành ['**'] nếu muốn chạy trên mọi nhánh
   workflow_dispatch:
 
 jobs:
@@ -16,17 +17,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Run Semgrep (JSON+SARIF)
-        uses: returntocorp/semgrep-action@v1
-        with:
-          config: semgrep.master.yml
-          generateSarif: "1"
-          sarifReportPath: _reports/semgrep_v5/semgrep.sarif
-          auditOn: never
-        env:
-          SEMGREP_TIMEOUT: "900"
+      # Chạy Semgrep thủ công để chủ động tạo thư mục report + sinh SARIF
+      - name: Install Semgrep
+        run: pipx install semgrep
 
-      - name: Upload SARIF to GitHub Code Scanning
+      - name: Run Semgrep (JSON + SARIF)
+        run: |
+          mkdir -p _reports/semgrep_v5
+          semgrep scan \
+            --config semgrep.master.yml \
+            --include "dmpw_linux_install_v5/**" \
+            --metrics=off --timeout 900 \
+            --json --output _reports/semgrep_v5/semgrep.json \
+            --sarif --output _reports/semgrep_v5/semgrep.sarif
+
+      - name: Upload SARIF to Code Scanning
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: _reports/semgrep_v5/semgrep.sarif
