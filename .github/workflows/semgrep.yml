@@ -1,31 +1,32 @@
 name: Semgrep
+
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
-  workflow_dispatch: {}
-permissions:
-  contents: read
-  security-events: write
+    branches: [ main ]
+  workflow_dispatch:
+
 jobs:
   semgrep:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
     steps:
-      - uses: actions/checkout@v4
-      - name: Install Semgrep
-        run: pipx install semgrep
-      - name: Semgrep scan (p/ci)
-        run: |
-          semgrep scan --config p/ci --metrics=off \
-            --timeout 600 \
-            --exclude '**/node_modules/**' --exclude '**/bin/**' --exclude '**/obj/**' --exclude '**/dist/**' \
-            --sarif --output semgrep.sarif || true
-      - name: Upload SARIF
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep (JSON+SARIF)
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: semgrep.master.yml
+          generateSarif: "1"
+          sarifReportPath: _reports/semgrep_v5/semgrep.sarif
+          auditOn: never
+        env:
+          SEMGREP_TIMEOUT: "900"
+
+      - name: Upload SARIF to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: semgrep.sarif
-      - uses: actions/upload-artifact@v4
-        with:
-          name: semgrep-sarif-${{ github.sha }}
-          path: semgrep.sarif
+          sarif_file: _reports/semgrep_v5/semgrep.sarif
