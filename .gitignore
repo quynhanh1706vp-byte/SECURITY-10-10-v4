@@ -17,3 +17,17 @@ out/
 *.user
 .DS_Store
 Thumbs.db
+_reports/
+_artifacts/
+*.sarif
+*.zip
+*.tgz
+*.tar.gz
+*.7z
+*.dylib
+*.so
+*.dll
+*.iso
+*.mp4
+*.png
+*.jpg
