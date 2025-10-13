@@ -16,3 +16,6 @@ joblogs/
 dmpw_linux_install_v5/install/*/images/
 *.tgz
 *.tar.gz
+dmpw_linux_install_v5/install/*/images/
+*.tgz
+*.tar.gz
