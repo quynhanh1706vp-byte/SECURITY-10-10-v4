@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [ main ]
   push:
-    branches: [ ci/add-semgrep-trivy ]   # đổi thành ['**'] nếu muốn chạy trên mọi nhánh
+    branches: [ ci/add-semgrep-trivy ]
   workflow_dispatch:
 
 jobs:
@@ -17,21 +17,77 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Chạy Semgrep thủ công để chủ động tạo thư mục report + sinh SARIF
+      - name: Sanity
+        continue-on-error: true
+        run: |
+          echo "== has semgrep.master.yml? =="; test -f semgrep.master.yml && head -n 20 semgrep.master.yml || echo "MISSING semgrep.master.yml"
+          echo "== sample tree =="; git ls-files | head -n 100
+
       - name: Install Semgrep
-        run: pipx install semgrep
+        continue-on-error: true
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install --upgrade semgrep
+          semgrep --version || true
 
       - name: Run Semgrep (JSON + SARIF)
+        id: run_semgrep
+        continue-on-error: true
+        shell: bash
         run: |
           mkdir -p _reports/semgrep_v5
+          if git ls-files | grep -q '^dmpw_linux_install_v5/'; then
+            INC='--include "dmpw_linux_install_v5/**"'
+          else
+            echo "WARN: no dmpw_linux_install_v5/ found; running full repo"
+            INC=''
+          fi
           semgrep scan \
             --config semgrep.master.yml \
-            --include "dmpw_linux_install_v5/**" \
+            ${INC} \
             --metrics=off --timeout 900 \
             --json --output _reports/semgrep_v5/semgrep.json \
             --sarif --output _reports/semgrep_v5/semgrep.sarif
+          echo "SEMGR_EXIT=$?" | tee semgrep_exit.txt
+
+      - name: Ensure artifacts exist
+        if: always()
+        run: |
+          mkdir -p _reports/semgrep_v5
+          test -s _reports/semgrep_v5/semgrep.json  || echo "{}"          > _reports/semgrep_v5/semgrep.json
+          test -s _reports/semgrep_v5/semgrep.sarif || echo '{"runs":[]}' > _reports/semgrep_v5/semgrep.sarif
+          test -f semgrep_exit.txt || echo "SEMGR_EXIT=1" > semgrep_exit.txt
 
       - name: Upload SARIF to Code Scanning
+        if: always()
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: _reports/semgrep_v5/semgrep.sarif
+
+      - name: Upload semgrep.json
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: semgrep_json
+          path: _reports/semgrep_v5/semgrep.json
+
+      - name: Upload semgrep.sarif
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: semgrep_sarif
+          path: _reports/semgrep_v5/semgrep.sarif
+
+      - name: Upload semgrep exit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: semgrep_exit
+          path: semgrep_exit.txt
+
+      - name: Fail if Semgrep failed
+        shell: bash
+        run: |
+          rc=$(sed 's/.*=//' semgrep_exit.txt || echo 1)
+          echo "Semgrep exit code: $rc"
+          test "$rc" -eq 0
