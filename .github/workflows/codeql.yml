@@ -1,0 +1,63 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+  security-events: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'csharp', 'javascript', 'typescript' ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Init CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: +security-extended
+
+      # Build cho C#
+      - name: Setup .NET (only for C#)
+        if: ${{ matrix.language == 'csharp' }}
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore & Build (C#)
+        if: ${{ matrix.language == 'csharp' }}
+        run: |
+          dotnet restore
+          dotnet build --no-restore -c Release
+
+      # Các ngôn ngữ khác dùng autobuild
+      - name: Autobuild (non-C#)
+        if: ${{ matrix.language != 'csharp' }}
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Analyze
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"
+          output: sarif # tạo file SARIF artifact cục bộ ngoài việc upload lên Security
+
+      - name: Upload SARIF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sarif-codeql-${{ matrix.language }}-${{ github.sha }}
+          path: '**/*.sarif'
