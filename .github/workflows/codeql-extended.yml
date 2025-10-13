@@ -1,0 +1,41 @@
+name: CodeQL Extended
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+jobs:
+  analyze:
+    continue-on-error: true   # tạm thời không làm đỏ PR
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'csharp', 'javascript-typescript' ]
+    steps:
+      - uses: actions/checkout@v4
+
+      # Build .NET để coverage sâu (khi fix xong có thể bỏ continue-on-error)
+      - if: matrix.language == 'csharp'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - if: matrix.language == 'csharp'
+        run: |
+          dotnet restore
+          dotnet build -c Release --no-restore
+
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: +security-extended,+security-and-quality
+
+      - uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"
