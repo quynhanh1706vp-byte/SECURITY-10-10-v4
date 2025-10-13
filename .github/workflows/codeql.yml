@@ -1,17 +1,14 @@
 name: CodeQL
-
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch:
-
+  workflow_dispatch: {}
 permissions:
   contents: read
   actions: read
   security-events: write
-
 jobs:
   analyze:
     runs-on: ubuntu-latest
@@ -19,43 +16,27 @@ jobs:
       fail-fast: false
       matrix:
         language: [ 'csharp', 'javascript', 'typescript' ]
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Init CodeQL
-        uses: github/codeql-action/init@v3
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
           queries: +security-extended
-
-      - name: Setup .NET (only for C#)
-        if: ${{ matrix.language == 'csharp' }}
+      - if: ${{ matrix.language == 'csharp' }}
         uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
-
-      - name: Restore & Build (C#)
-        if: ${{ matrix.language == 'csharp' }}
+        with: { dotnet-version: '8.0.x' }
+      - if: ${{ matrix.language == 'csharp' }}
         run: |
           dotnet restore
           dotnet build --no-restore -c Release
-
-      - name: Autobuild (non-C#)
-        if: ${{ matrix.language != 'csharp' }}
+      - if: ${{ matrix.language != 'csharp' }}
         uses: github/codeql-action/autobuild@v3
-
-      - name: Analyze
-        uses: github/codeql-action/analyze@v3
+      - uses: github/codeql-action/analyze@v3
         with:
           category: "/language:${{ matrix.language }}"
           output: sarif
-
-      - name: Upload SARIF artifact
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: sarif-codeql-${{ matrix.language }}-${{ github.sha }}
           path: '**/*.sarif'

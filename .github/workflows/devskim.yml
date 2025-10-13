@@ -1,20 +1,29 @@
 name: DevSkim
 on:
   push:
+    branches: [ "main" ]
   pull_request:
-  workflow_dispatch:
+    branches: [ "main" ]
+  workflow_dispatch: {}
 permissions:
   contents: read
   security-events: write
 jobs:
-  scan:
+  devskim:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: microsoft/DevSkim-Action@v1.0.10
+      - name: Run DevSkim
+        uses: microsoft/DevSkim-Action@v1
         with:
-          directory: .
+          directory-to-scan: .
           output-filename: devskim.sarif
-      - uses: github/codeql-action/upload-sarif@v3
+          enable-suppressions-file: true
+      - name: Upload SARIF
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: devskim.sarif
+      - uses: actions/upload-artifact@v4
+        with:
+          name: devskim-sarif-${{ github.sha }}
+          path: devskim.sarif
