@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [ main ]
   push:
-    branches: [ ci/add-semgrep-trivy ]   # đổi thành ['**'] nếu muốn chạy mọi nhánh
+    branches: [ ci/add-semgrep-trivy ]
   workflow_dispatch:
 
 jobs:
@@ -17,36 +17,72 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Quick repo sanity
+        run: |
+          echo "== top tree =="
+          ls -la | sed -n '1,200p'
+          echo "== has semgrep.master.yml? =="
+          test -f semgrep.master.yml && head -n 40 semgrep.master.yml || echo "MISSING semgrep.master.yml"
+          echo "== sample files =="
+          git ls-files | head -n 200
+
       - name: Install Semgrep (via pip)
         run: |
           python3 -m pip install --upgrade pip
           pip install --upgrade semgrep
 
-      - name: Run Semgrep (JSON + SARIF)
+      - name: Run Semgrep (JSON + SARIF) with diagnostics
+        id: run_semgrep
+        shell: bash
         run: |
+          set +e
           mkdir -p _reports/semgrep_v5
+          echo "== running semgrep =="
+          semgrep --version
           semgrep scan \
             --config semgrep.master.yml \
             --include "dmpw_linux_install_v5/**" \
             --metrics=off --timeout 900 \
             --json --output _reports/semgrep_v5/semgrep.json \
             --sarif --output _reports/semgrep_v5/semgrep.sarif
+          rc=$?
+          echo "SEMGR_EXIT=$rc" | tee semgrep_exit.txt
+          # Bảo đảm luôn có file để upload
+          test -s _reports/semgrep_v5/semgrep.json  || echo "{}"   > _reports/semgrep_v5/semgrep.json
+          test -s _reports/semgrep_v5/semgrep.sarif || echo '{"runs":[]}' > _reports/semgrep_v5/semgrep.sarif
+          exit 0
 
       - name: Upload SARIF to Code Scanning
+        if: always()
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: _reports/semgrep_v5/semgrep.sarif
 
-      - name: Upload semgrep.json as artifact
+      - name: Upload semgrep.json (artifact)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: semgrep_json
           path: _reports/semgrep_v5/semgrep.json
 
-      - name: Upload semgrep.sarif as artifact
+      - name: Upload semgrep.sarif (artifact)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: semgrep_sarif
           path: _reports/semgrep_v5/semgrep.sarif
+
+      - name: Upload semgrep exit code (artifact)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: semgrep_exit
+          path: semgrep_exit.txt
+
+      # Đánh fail job nếu Semgrep trả mã lỗi
+      - name: Fail if Semgrep failed
+        shell: bash
+        run: |
+          rc=$(cat semgrep_exit.txt | sed 's/.*=//')
+          echo "Semgrep exit code: $rc"
+          test "$rc" -eq 0
