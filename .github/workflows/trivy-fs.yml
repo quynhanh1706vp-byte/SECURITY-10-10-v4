@@ -1,0 +1,36 @@
+name: Trivy FS
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  security-events: write
+jobs:
+  trivy-fs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh \
+          | sudo sh -s -- -b /usr/local/bin
+      - name: Trivy FS → SARIF
+        run: |
+          trivy fs \
+            --severity CRITICAL,HIGH \
+            --scanners vuln,secret \
+            --ignore-unfixed \
+            --format sarif \
+            --output trivy_fs.sarif \
+            .
+      - name: Upload SARIF
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy_fs.sarif
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trivy-fs-sarif-${{ github.sha }}
+          path: trivy_fs.sarif
