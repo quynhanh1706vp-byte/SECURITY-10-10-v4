@@ -18,39 +18,41 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Quick repo sanity
+        continue-on-error: true
         run: |
-          echo "== top tree =="
-          ls -la | sed -n '1,200p'
-          echo "== has semgrep.master.yml? =="
-          test -f semgrep.master.yml && head -n 40 semgrep.master.yml || echo "MISSING semgrep.master.yml"
-          echo "== sample files =="
-          git ls-files | head -n 200
+          echo "== top tree =="; ls -la | sed -n '1,120p'
+          echo "== has semgrep.master.yml? =="; test -f semgrep.master.yml && head -n 40 semgrep.master.yml || echo "MISSING semgrep.master.yml"
+          echo "== sample files =="; git ls-files | head -n 200
 
       - name: Install Semgrep (via pip)
+        continue-on-error: true
         run: |
           python3 -m pip install --upgrade pip
           pip install --upgrade semgrep
+          semgrep --version || true
 
-      - name: Run Semgrep (JSON + SARIF) with diagnostics
+      - name: Run Semgrep (JSON + SARIF)
         id: run_semgrep
+        continue-on-error: true
         shell: bash
         run: |
-          set +e
           mkdir -p _reports/semgrep_v5
-          echo "== running semgrep =="
-          semgrep --version
           semgrep scan \
             --config semgrep.master.yml \
             --include "dmpw_linux_install_v5/**" \
             --metrics=off --timeout 900 \
             --json --output _reports/semgrep_v5/semgrep.json \
             --sarif --output _reports/semgrep_v5/semgrep.sarif
-          rc=$?
-          echo "SEMGR_EXIT=$rc" | tee semgrep_exit.txt
-          # Bảo đảm luôn có file để upload
-          test -s _reports/semgrep_v5/semgrep.json  || echo "{}"   > _reports/semgrep_v5/semgrep.json
+          echo "SEMGR_EXIT=$?" | tee semgrep_exit.txt
+
+      # ĐẢM BẢO LUÔN CÓ FILE ĐỂ UPLOAD
+      - name: Ensure artifacts exist
+        if: always()
+        run: |
+          mkdir -p _reports/semgrep_v5
+          test -s _reports/semgrep_v5/semgrep.json  || echo "{}"        > _reports/semgrep_v5/semgrep.json
           test -s _reports/semgrep_v5/semgrep.sarif || echo '{"runs":[]}' > _reports/semgrep_v5/semgrep.sarif
-          exit 0
+          test -f semgrep_exit.txt || echo "SEMGR_EXIT=1" > semgrep_exit.txt
 
       - name: Upload SARIF to Code Scanning
         if: always()
@@ -79,10 +81,10 @@ jobs:
           name: semgrep_exit
           path: semgrep_exit.txt
 
-      # Đánh fail job nếu Semgrep trả mã lỗi
+      # Fail cuối cùng nếu có lỗi thật
       - name: Fail if Semgrep failed
         shell: bash
         run: |
-          rc=$(cat semgrep_exit.txt | sed 's/.*=//')
+          rc=$(sed 's/.*=//' semgrep_exit.txt || echo 1)
           echo "Semgrep exit code: $rc"
           test "$rc" -eq 0
