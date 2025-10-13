@@ -13,3 +13,6 @@ joblogs/
 *.mp4
 *.png
 *.jpg
+dmpw_linux_install_v5/install/*/images/
+*.tgz
+*.tar.gz
