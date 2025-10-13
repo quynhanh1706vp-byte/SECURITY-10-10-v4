@@ -1,0 +1,15 @@
+{
+  "holidays": "Kỳ nghỉ",
+  "titles": {
+    "create": "Thêm kỳ nghỉ",
+    "edit": "Sửa kỳ nghỉ"
+  },
+  "deleteConfirm": {
+    "title": "Xóa kỳ nghỉ",
+    "message": "Bạn có chắc chắn muốn xóa kỳ nghỉ này? Hành động này không thể hoàn tác."
+  },
+  "multipleDeleteConfirm": {
+    "title": "Xóa nhiều kỳ nghỉ",
+    "message": "Bạn có chắc chắn muốn xóa {count} kỳ nghỉ? Hành động này không thể hoàn tác."
+  }
+}

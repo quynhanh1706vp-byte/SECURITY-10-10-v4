@@ -1,0 +1,10 @@
+{
+  "deleteConfirm": {
+    "title": "Xác nhận xoá khách mời",
+    "message": "Bạn có chắc muốn xoá khách mời này?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Xác nhận xoá khách mời",
+    "message": "Bạn có chắc muốn xoá {count} khách mời này?"
+  }
+}

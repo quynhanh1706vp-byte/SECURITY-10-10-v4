@@ -1,0 +1,13 @@
+{
+  "titles": {
+    "create": "Đồng bộ dữ liệu"
+  },
+  "buttons": {
+    "save": "Lưu",
+    "cancel": "Hủy"
+  },
+  "notifications": {
+    "success": "Đồng bộ dữ liệu thành công",
+    "error": "Đồng bộ dữ liệu thất bại"
+  }
+}

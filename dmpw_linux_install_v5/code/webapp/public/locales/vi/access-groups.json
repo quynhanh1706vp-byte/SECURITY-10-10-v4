@@ -1,0 +1,31 @@
+{
+  "titles": {
+    "create": "Thêm nhóm quyền truy cập",
+    "edit": "Sửa nhóm quyền truy cập"
+  },
+  "deleteConfirm": {
+    "title": "Xóa nhóm quyền truy cập",
+    "message": "Bạn có chắc chắn muốn xóa nhóm quyền truy cập này?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Xóa nhiều nhóm quyền truy cập",
+    "message": "Bạn có chắc chắn muốn xóa {count} nhóm quyền truy cập?"
+  },
+  "unassign-users": {
+    "multipleDeleteConfirm": {
+      "title": "Xoá nhân viên khỏi nhóm quyền truy cập",
+      "message": "Bạn có chắc chắn muốn xoá {count} nhân viên khỏi nhóm quyền truy cập này?"
+    }
+  },
+  "unassign-doors": {
+    "multipleDeleteConfirm": {
+      "title": "Xoá điểm kiểm soát khỏi nhóm quyền truy cập",
+      "message": "Bạn có chắc chắn muốn xoá {count} điểm kiểm soát khỏi nhóm quyền truy cập này?"
+    }
+  },
+  "form": {
+    "validation": {
+      "isDefault": "Nhóm quyền truy cập này được đặt làm mặc định"
+    }
+  }
+}

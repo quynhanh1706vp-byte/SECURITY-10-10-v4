@@ -1,0 +1,56 @@
+@layer theme, base, antd, antd-pro, components, utilities;
+
+@import 'tailwindcss';
+
+@import './_antd.css';
+
+@theme {
+  --color-background: #f0f2f5;
+  --color-foreground: #000000d9;
+
+  --color-primary: #028661;
+  --color-secondary: #006c47;
+  --color-border: #f0f0f0;
+  --color-accent: #b3c7be;
+  --color-error: #ff4d4f;
+  --color-warning: #fa8c16;
+  --color-success: #52C41A;
+  --font-roboto-sans: 'Roboto', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+}
+
+@theme inline {
+  --font-sans: var(--font-roboto-sans);
+}
+
+@layer base {
+  body {
+    background: #ffffff;
+    color: var(--color-foreground);
+    font-family: var(--font-roboto-sans), serif;
+    @apply text-sm;
+  }
+
+  * {
+    @apply border-border;
+  }
+}
+
+.ant-layout-sider {
+  overflow-y: auto;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(180, 180, 180, 0.3) transparent; /* Firefox */
+}
+
+/* WebKit (Chrome, Safari, Edge) */
+.ant-layout-sider::-webkit-scrollbar {
+  width: 2px !important;
+}
+
+.ant-layout-sider::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ant-layout-sider::-webkit-scrollbar-thumb {
+  background-color: rgba(180, 180, 180, 0.3);
+  border-radius: 2px;
+}

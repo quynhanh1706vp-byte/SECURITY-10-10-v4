@@ -1,0 +1,46 @@
+{
+  "accounts": "Tài khoản",
+  "titles": {
+    "create": "Thêm người dùng",
+    "edit": "Sửa người dùng"
+  },
+  "list": {
+    "title": "Quản lý người dùng",
+    "add": "Thêm người dùng",
+    "search": "Tìm kiếm",
+    "columns": {
+      "email": "Tài khoản",
+      "userName": "Tên người dùng",
+      "role": "Nhóm quyền",
+      "actions": "Hành động",
+      "edit": "Sửa"
+    }
+  },
+  "form": {
+    "username": {
+      "label": "Tài khoản",
+      "placeholder": "Nhập email..."
+    },
+    "password": {
+      "label": "Mật khẩu",
+      "placeholder": "Nhập mật khẩu"
+    },
+    "newPassword": {
+      "label": "Mật khẩu mới",
+      "placeholder": "Nhập mật khẩu mới..."
+    },
+    "role": {
+      "label": "Nhóm quyền",
+      "placeholder": "Chọn nhóm quyền"
+    },
+    "password_rules": "Mật khẩu phải bao gồm ít nhất 8 ký tự, chữ hoa, chữ thường và ký tự đặc biệt"
+  },
+  "deleteConfirm": {
+    "title": "Xác nhận xóa",
+    "message": "Bạn có chắc chắn muốn xóa người dùng này không?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Xác nhận xóa nhiều người dùng",
+    "message": "Bạn có chắc chắn muốn xóa {count} người dùng? Hành động này không thể hoàn tác."
+  }
+}

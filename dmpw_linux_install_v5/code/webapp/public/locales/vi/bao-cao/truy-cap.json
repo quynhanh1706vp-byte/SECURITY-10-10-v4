@@ -1,0 +1,35 @@
+{
+  "employeeAccessReport": {
+    "title": "Báo cáo truy cập của nhân viên",
+    "export": {
+      "title": "Xuất dữ liệu",
+      "okText": "Tải xuống",
+      "fileFormat": "Định dạng tệp"
+    },
+    "columns": {
+      "accessTime": "Thời gian truy cập",
+      "accessPoint": "Điểm truy cập",
+      "inOut": "Ra/vào",
+      "userName": "Tên nhân viên",
+      "departmentName": "Phòng ban",
+      "cardType": "Định danh",
+      "cardId": "Mã định danh",
+      "eventDetail": "Chi tiết sự kiện",
+      "eventType": "Loại sự kiện",
+      "building": "Đơn vị"
+    },
+    "filters": {
+      "search": "Tìm kiếm tên nhân viên / mã định danh",
+      "startTime": "Thời gian bắt đầu",
+      "endTime": "Thời gian kết thúc",
+      "unit": "Đơn vị",
+      "inOut": "Ra/vào"
+    },
+    "buttons": {
+      "export": "Xuất dữ liệu"
+    },
+    "notifications": {
+      "exportError": "Lỗi khi xuất dữ liệu"
+    }
+  }
+}

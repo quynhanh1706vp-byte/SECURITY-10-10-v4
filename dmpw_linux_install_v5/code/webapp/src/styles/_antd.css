@@ -1,0 +1,127 @@
+/* Layout */
+main.ant-layout-content > div {
+  @apply p-0!;
+}
+
+/* Page Header */
+.ant-page-header .ant-breadcrumb {
+  @apply mt-0.5 bg-white px-6 pt-4 pb-2;
+}
+
+.ant-page-header .ant-page-header-heading {
+  @apply bg-white px-6 pb-2;
+}
+.ant-page-header .ant-page-header-content {
+  @apply p-2;
+}
+
+.ant-page-header .ant-page-header-content > div {
+  @apply bg-white p-3;
+}
+
+/* Sider */
+.ant-layout-sider {
+  @apply overflow-hidden;
+}
+
+.ant-layout-sider-trigger button {
+  @apply bg-[#169976]! text-white!;
+}
+
+.ant-layout-sider-trigger button .anticon {
+  @apply text-white!;
+}
+
+/* Menu */
+.ant-menu-root {
+  @apply pt-0!;
+}
+
+.ant-menu-root:not(.ant-menu-inline-collapsed) > .ant-menu-item,
+.ant-menu-root:not(.ant-menu-inline-collapsed) > .ant-menu-submenu > .ant-menu-submenu-title {
+  @apply pl-4!;
+}
+
+.ant-menu-root:not(.ant-menu-inline-collapsed) .ant-menu-sub .ant-menu-item {
+  @apply pr-0! pl-10!;
+}
+
+/* Modal */
+.ant-modal-content {
+  @apply p-0;
+}
+
+.ant-modal-header {
+  @apply mb-0 border-b border-[#F0F0F0] px-6 py-4;
+}
+
+.ant-modal-body {
+  @apply p-6;
+}
+
+.ant-modal-footer {
+  @apply mt-0 border-t border-[#F0F0F0] px-6 py-4;
+}
+
+/* Checkbox */
+.ant-checkbox-label {
+  @apply pr-0;
+}
+
+/* Tree */
+.ant-tree {
+  @apply rounded-lg bg-[#F7F9FC] p-2 text-base;
+}
+
+.ant-tree-treenode {
+  @apply mb-0 transition-colors not-first:mt-4;
+}
+
+.ant-tree-treenode-selected {
+  /* @apply bg-accent; */
+}
+
+.ant-tree-node-content-wrapper {
+  @apply hover:bg-accent min-w-0 flex-1;
+}
+
+.ant-select-tree-node-content-wrapper {
+  @apply min-w-0 flex-1 truncate;
+}
+
+/* Button */
+.ant-btn {
+  @apply shadow-none focus-visible:outline-none;
+}
+
+.ant-btn-primary:not(:disabled) {
+  @apply border-secondary;
+}
+
+.ant-btn-color-primary.ant-btn-variant-outlined {
+  @apply border-secondary text-secondary;
+}
+
+.ant-btn-variant-link {
+  @apply text-[#169976] hover:text-[#0f6b5c] focus:text-[#0f6b5c] active:text-[#0f6b5c];
+}
+
+/* Sider */
+.ant-layout-sider-children .ant-menu-item-selected {
+  @apply bg-secondary;
+}
+
+.ant-layout-sider-children .ant-menu-item:not(.ant-menu-item-selected):hover {
+  @apply bg-secondary text-white;
+}
+
+/* Table */
+.ant-table-thead > tr > th {
+  @apply text-nowrap;
+}
+
+/* Pagination */
+.ant-pagination-item:not(.ant-pagination-item-active),
+.ant-pagination-item-link {
+  @apply border-border;
+}

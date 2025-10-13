@@ -1,0 +1,30 @@
+{
+  "refine": {
+    "dashboard": "Dashboard",
+    "monitoring": "Giám sát",
+    "accessManagement": "Quản lý ra/vào",
+    "unit": "Đơn vị",
+    "accessPoint": "Điểm kiểm soát",
+    "device": "Thiết bị",
+    "accessObject": "Đối tượng ra/vào",
+    "staff": "Nhân viên",
+    "guest": "Khách mời",
+    "vehicle": "Phương tiện",
+    "settings": "Cấu hình",
+    "accessGroup": "Nhóm quyền truy cập",
+    "accessConfig": "Cấu hình truy cập",
+    "department": "Phòng ban",
+    "shift": "Ca trực",
+    "security": "Cấu hình bảo mật",
+    "account": "Tài khoản người dùng",
+    "userManagement": "Quản lý người dùng",
+    "userPermission": "Phân quyền người dùng",
+    "report": "Báo cáo",
+    "accessReport": "Báo cáo truy cập",
+    "guestReport": "Báo cáo khách mời",
+    "vehicleReport": "Báo cáo phương tiện",
+    "logReport": "Báo cáo log",
+    "notifications": "Thông báo",
+    "firmware": "Firmware"
+  }
+}

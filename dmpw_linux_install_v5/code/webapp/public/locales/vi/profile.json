@@ -1,0 +1,30 @@
+{
+  "title": "Hồ sơ cá nhân",
+  "sections": {
+    "info": "Thông tin người dùng",
+    "password": "Đổi mật khẩu"
+  },
+  "fields": {
+    "username": "Tên đăng nhập",
+    "fullName": "Tên người dùng",
+    "role": "Vai trò",
+    "accountId": "Mã tài khoản"
+  },
+  "passwordChange": {
+    "info": "Thay đổi mật khẩu định kỳ để duy trì bảo mật tài khoản",
+    "currentPassword": "Mật khẩu hiện tại",
+    "currentPasswordPlaceholder": "Nhập mật khẩu hiện tại",
+    "currentPasswordRequired": "Vui lòng nhập mật khẩu hiện tại",
+    "newPassword": "Mật khẩu mới",
+    "newPasswordPlaceholder": "Nhập mật khẩu mới",
+    "newPasswordRequired": "Vui lòng nhập mật khẩu mới",
+    "confirmPassword": "Xác nhận mật khẩu mới",
+    "confirmPasswordPlaceholder": "Xác nhận mật khẩu mới",
+    "confirmPasswordRequired": "Vui lòng xác nhận mật khẩu",
+    "passwordMismatch": "Mật khẩu không khớp",
+    "submit": "Đổi mật khẩu",
+    "cancel": "Hủy",
+    "success": "Đổi mật khẩu thành công",
+    "error": "Đổi mật khẩu thất bại"
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "title": "Thông báo",
+  "types": {
+    "success": "Thành công",
+    "error": "Lỗi",
+    "warning": "Cảnh báo",
+    "info": "Thông tin",
+    "security": "Bảo mật",
+    "system": "Hệ thống",
+    "access": "Truy cập",
+    "device": "Thiết bị"
+  },
+  "titles": {
+    "systemAlert": "Cảnh báo hệ thống",
+    "securityAlert": "Cảnh báo bảo mật",
+    "deviceAlert": "Cảnh báo thiết bị",
+    "accessAlert": "Cảnh báo truy cập",
+    "maintenanceAlert": "Cảnh báo bảo trì",
+    "notification": "Thông báo"
+  },
+  "messages": {
+    "success": {
+      "loginSuccess": "Đăng nhập thành công",
+      "logoutSuccess": "Đăng xuất thành công",
+      "dataSaved": "Dữ liệu đã được lưu thành công",
+      "dataUpdated": "Cập nhật dữ liệu thành công",
+      "dataDeleted": "Xóa dữ liệu thành công",
+      "uploadSuccess": "Tải lên thành công",
+      "exportSuccess": "Xuất dữ liệu thành công",
+      "importSuccess": "Nhập dữ liệu thành công",
+      "emailSent": "Email đã được gửi thành công",
+      "configurationSaved": "Cấu hình đã được lưu",
+      "deviceConnected": "Thiết bị đã kết nối",
+      "reportGenerated": "Báo cáo đã được tạo thành công"
+    },
+    "error": {
+      "loginFailed": "Đăng nhập thất bại",
+      "networkError": "Lỗi kết nối mạng",
+      "serverError": "Lỗi máy chủ",
+      "validationError": "Lỗi xác thực dữ liệu",
+      "permissionDenied": "Không có quyền truy cập",
+      "fileUploadFailed": "Tải lên file thất bại",
+      "fileDownloadFailed": "Tải xuống file thất bại",
+      "deviceConnectionFailed": "Kết nối thiết bị thất bại",
+      "configurationError": "Lỗi cấu hình",
+      "dataCorrupted": "Dữ liệu bị hỏng",
+      "operationFailed": "Thao tác thất bại",
+      "timeoutError": "Hết thời gian chờ",
+      "unknownError": "Lỗi không xác định"
+    },
+    "warning": {
+      "unsavedChanges": "Có thay đổi chưa được lưu",
+      "lowBattery": "Pin yếu",
+      "diskSpaceLow": "Dung lượng đĩa thấp",
+      "maintenanceRequired": "Cần bảo trì",
+      "certificateExpiring": "Chứng chỉ sắp hết hạn",
+      "passwordExpiring": "Mật khẩu sắp hết hạn",
+      "deviceOffline": "Thiết bị mất kết nối",
+      "suspiciousActivity": "Hoạt động đáng nghi",
+      "accessDenied": "Truy cập bị từ chối",
+      "multipleFailedAttempts": "Nhiều lần thất bại"
+    },
+    "info": {
+      "welcomeMessage": "Chào mừng đến với hệ thống kiểm soát truy cập",
+      "systemMaintenance": "Hệ thống đang bảo trì",
+      "updateAvailable": "Có bản cập nhật mới",
+      "reportScheduled": "Báo cáo đã được lên lịch",
+      "backupCompleted": "Sao lưu dữ liệu hoàn tất",
+      "dataProcessing": "Đang xử lý dữ liệu",
+      "operationInProgress": "Thao tác đang được thực hiện"
+    },
+    "security": {
+      "unauthorizedAccess": "Truy cập trái phép",
+      "cardCloned": "Phát hiện thẻ nhân bản",
+      "tailgating": "Phát hiện đi theo sau",
+      "forcedEntry": "Phát hiện xâm nhập cưỡng chế",
+      "antiPassbackViolation": "Vi phạm quy tắc Anti-Passback",
+      "duressAlarm": "Báo động ép buộc",
+      "emergencyAccess": "Truy cập khẩn cấp",
+      "securityBreach": "Vi phạm bảo mật",
+      "suspiciousCard": "Thẻ đáng nghi"
+    },
+    "device": {
+      "deviceOnline": "Thiết bị trực tuyến",
+      "deviceOffline": "Thiết bị ngoại tuyến",
+      "doorOpen": "Cửa đang mở",
+      "doorClosed": "Cửa đã đóng",
+      "readerError": "Lỗi đầu đọc thẻ",
+      "lowBattery": "Pin yếu",
+      "tamperDetected": "Phát hiện can thiệp",
+      "communicationError": "Lỗi giao tiếp",
+      "firmwareUpdate": "Cập nhật firmware",
+      "deviceReset": "Khởi động lại thiết bị"
+    }
+  },
+  "buttons": {
+    "acknowledge": "Xác nhận",
+    "dismiss": "Bỏ qua",
+    "details": "Chi tiết",
+    "retry": "Thử lại",
+    "close": "Đóng",
+    "viewAll": "Xem tất cả",
+    "markAsRead": "Đánh dấu đã đọc",
+    "clearAll": "Xóa tất cả",
+    "configure": "Cấu hình",
+    "resolve": "Giải quyết",
+    "deleteRead": "Xoá các tin đã đọc"
+  },
+  "settings": {
+    "notificationPreferences": "Tùy chọn thông báo",
+    "emailNotifications": "Thông báo email",
+    "pushNotifications": "Thông báo đẩy",
+    "smsNotifications": "Thông báo SMS",
+    "soundAlerts": "Cảnh báo âm thanh",
+    "priorityLevels": "Mức độ ưu tiên",
+    "autoAcknowledge": "Tự động xác nhận",
+    "notificationHistory": "Lịch sử thông báo"
+  },
+  "dayAgo": "{count} ngày trước",
+  "deleteConfirm": {
+    "title": "Xóa thông báo",
+    "message": "Bạn có chắc chắn muốn xóa thông báo này không?"
+  },
+  "columns": {
+    "type": "Loại",
+    "content": "Nội dung",
+    "createdTime": "Thời gian tạo"
+  }
+}

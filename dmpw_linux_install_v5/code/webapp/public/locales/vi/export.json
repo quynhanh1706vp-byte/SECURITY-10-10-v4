@@ -1,0 +1,14 @@
+{
+  "modal": {
+    "title": "Xuất dữ liệu",
+    "okText": "Tải xuống"
+  },
+  "form": {
+    "label": {
+      "fileFormat": "Định dạng tệp"
+    }
+  },
+  "errors": {
+    "exportFailed": "Lỗi khi xuất dữ liệu"
+  }
+}

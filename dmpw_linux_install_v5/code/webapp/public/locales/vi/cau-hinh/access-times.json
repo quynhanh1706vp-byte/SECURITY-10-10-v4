@@ -1,0 +1,133 @@
+{
+    "accessTimes": {
+        "title": "Cấu hình truy cập",
+        "add": "Thêm thời gian truy cập",
+        "edit": "Chỉnh sửa thời gian truy cập",
+        "name": "Tên thời gian truy cập",
+        "note": "Ghi chú",
+        "searchPlaceholder": "Tìm kiếm",
+        "assignTitle": "Gán thời gian truy cập",
+        "tabs": {
+            "access-time": "Khung giờ kiểm soát của điểm kiểm soát",
+            "holiday": "Kỳ nghỉ",
+            "guest": "Khách mời",
+            "approver": "Tài khoản phê duyệt khách mời"
+        },
+        "fields": {
+            "name": "Tên thời gian truy cập",
+            "remark": "Ghi chú",
+            "days": "Ngày áp dụng",
+            "timeRanges": "Khung giờ áp dụng"
+        },
+        "validation": {
+            "nameRequired": "Vui lòng nhập tên thời gian truy cập",
+            "timeRangeRequired": "Vui lòng chọn ít nhất một khung giờ"
+        },
+        "days": {
+            "monday": "Thứ Hai",
+            "tuesday": "Thứ Ba",
+            "wednesday": "Thứ Tư",
+            "thursday": "Thứ Năm",
+            "friday": "Thứ Sáu",
+            "saturday": "Thứ Bảy",
+            "sunday": "Chủ Nhật",
+            "holidayType1": "Kỳ nghỉ 1",
+            "holidayType2": "Kỳ nghỉ 2",
+            "holidayType3": "Kỳ nghỉ 3"
+        },
+        "form": {
+            "name": "Tên thời gian truy cập",
+            "namePlaceholder": "Nhập tên thời gian truy cập",
+            "remark": "Ghi chú",
+            "selectDays": "Chọn ngày truy cập",
+            "workdays": "Ngày làm việc",
+            "holidays": "Kỳ nghỉ",
+            "selectAll": "Chọn tất cả",
+            "clearAll": "Bỏ chọn tất cả",
+            "noAccessNote": "Nếu bỏ trống tất cả 4 khoảng thì ngày hôm đó sẽ không thể truy cập được vào bất cứ khoảng thời gian nào",
+            "rangeLabel": "Khoảng {index}",
+            "invalidRange": "Khoảng thời gian không hợp lệ",
+            "overlapError": "Khoảng thời gian {i} và {j} bị trùng lặp"
+        },
+        "placeholders": {
+            "name": "Nhập tên thời gian truy cập",
+            "remark": "Nhập ghi chú"
+        }
+    },
+    "buttons": {
+        "save": "Lưu",
+        "cancel": "Hủy",
+        "edit": "Sửa",
+        "delete": "Xóa"
+    },
+    "common": {
+        "action": "Thao tác",
+        "search": "Tìm kiếm"
+    },
+    "holidays": {
+        "title": "Cấu hình kỳ nghỉ",
+        "create": "Thêm kỳ nghỉ",
+        "name": "Tên kỳ nghỉ",
+        "type": "Loại kỳ nghỉ",
+        "startDate": "Ngày bắt đầu",
+        "endDate": "Ngày kết thúc",
+        "recursion": "Lặp lại",
+        "remarks": "Ghi chú",
+        "search": "Tìm kiếm",
+        "form": {
+            "type": "Loại kỳ nghỉ",
+            "name": "Tên kỳ nghỉ",
+            "namePlaceholder": "Nhập tên",
+            "nameRequired": "Vui lòng nhập tên kỳ nghỉ",
+            "date": "Ngày bắt đầu",
+            "remarks": "Ghi chú",
+            "recursive": "Lặp lại"
+        }
+    },
+    "guests": {
+        "title": "Cấu hình khách mời",
+        "save": "Lưu dữ liệu",
+        "searchPlaceholder": "Tìm kiếm thông tin cấu hình khách mời",
+        "accessGroupLabel": "Nhóm truy cập mặc định",
+        "accessGroupPlaceholder": "Chọn nhóm truy cập",
+        "visitPurposeLabel": "Danh sách mục đích chuyến thăm",
+        "visitPurposePlaceholder": "Nhập danh sách mục đích chuyến thăm",
+        "switchOptions": {
+            "enableAutoApproval": "Cho phép tự động phê duyệt",
+            "allowEditRecord": "Cho phép chỉnh sửa thông tin khách mời",
+            "allowGetUserTarget": "Cho phép tìm kiếm danh sách người dùng",
+            "allowSelectDoorWhenCreateNew": "Cho phép chọn danh sách điểm kiểm soát khi thêm mới khách",
+            "allowDeleteRecord": "Cho phép xóa bản ghi khách mời",
+            "approvalStepNumber": "Xét duyệt 1 lần"
+        }
+    },
+    "settings": {
+        "visit": {
+            "check-manager": {
+                "titles": {
+                    "create": "Thêm tài khoản duyệt"
+                },
+                "buttons": {
+                    "add": "Thêm tài khoản duyệt",
+                    "save": "Lưu",
+                    "cancel": "Hủy"
+                },
+                "columns": {
+                    "email": "Tài khoản",
+                    "userName": "Tên",
+                    "departmentName": "Phòng ban",
+                    "position": "Chức vụ"
+                },
+                "search": "Tìm kiếm",
+                "deleteConfirm": {
+                    "title": "Xóa tài khoản duyệt",
+                    "message": "Bạn có chắc chắn muốn xóa tài khoản này?"
+                },
+                "multipleDeleteConfirm": {
+                    "title": "Xóa nhiều tài khoản duyệt",
+                    "message": "Bạn có chắc chắn muốn xóa {count} tài khoản duyệt?"
+                }
+            }
+        }
+    }
+}

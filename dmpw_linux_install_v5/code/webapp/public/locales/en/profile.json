@@ -1,0 +1,30 @@
+{
+  "title": "Profile",
+  "sections": {
+    "info": "User Information",
+    "password": "Change Password"
+  },
+  "fields": {
+    "username": "Username",
+    "fullName": "Full Name",
+    "role": "Role",
+    "accountId": "Account ID"
+  },
+  "passwordChange": {
+    "info": "Change your password regularly to maintain account security",
+    "currentPassword": "Current Password",
+    "currentPasswordPlaceholder": "Enter current password",
+    "currentPasswordRequired": "Please enter current password",
+    "newPassword": "New Password",
+    "newPasswordPlaceholder": "Enter new password",
+    "newPasswordRequired": "Please enter new password",
+    "confirmPassword": "Confirm New Password",
+    "confirmPasswordPlaceholder": "Confirm new password",
+    "confirmPasswordRequired": "Please confirm your password",
+    "passwordMismatch": "Passwords do not match",
+    "submit": "Change Password",
+    "cancel": "Cancel",
+    "success": "Password changed successfully",
+    "error": "Failed to change password"
+  }
+}

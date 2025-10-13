@@ -1,0 +1,15 @@
+{
+  "work-shifts": "Work Shifts",
+  "titles": {
+    "create": "Add Work Shift",
+    "edit": "Edit Work Shift"
+  },
+  "deleteConfirm": {
+    "title": "Delete Work Shift",
+    "message": "Are you sure you want to delete this work shift?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Delete Multiple Work Shifts",
+    "message": "Are you sure you want to delete {count} work shifts?"
+  }
+}

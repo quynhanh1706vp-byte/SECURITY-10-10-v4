@@ -1,0 +1,84 @@
+{
+  "firmware-version": "Quản lý Firmware",
+  "titles": {
+    "list": "Danh sách Firmware",
+    "create": "Thêm Firmware",
+    "edit": "Chỉnh sửa Firmware",
+    "show": "Chi tiết Firmware",
+    "updateModal": "Cập nhật Firmware: {fileName} - Loại thiết bị: {deviceType}"
+  },
+  "fields": {
+    "id": "ID",
+    "fileName": "Tên file",
+    "version": "Phiên bản",
+    "deviceType": "Loại thiết bị",
+    "note": "Ghi chú",
+    "linkFile": "Link file",
+    "createdOn": "Ngày tạo",
+    "building": "Đơn vị",
+    "doorName": "Điểm kiểm soát",
+    "deviceAddress": "Mã thiết bị",
+    "connectionStatus": "Trạng thái kết nối",
+    "fwVersion": "F/W Version",
+    "process": "Tiến trình",
+    "operationType": "Chế độ vận hành"
+  },
+  "deleteConfirm": {
+    "title": "Xác nhận xóa",
+    "message": "Bạn có chắc chắn muốn xóa firmware này?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Xác nhận xóa",
+    "message": "Bạn có chắc chắn muốn xóa {count} firmware đã chọn?"
+  },
+  "actions": {
+    "upload": "Upload Firmware",
+    "download": "Tải xuống",
+    "update": "Cập nhật",
+    "delete": "Xóa",
+    "cancel": "Hủy"
+  },
+  "messages": {
+    "uploadSuccess": "Upload firmware thành công",
+    "uploadError": "Upload firmware thất bại",
+    "deleteSuccess": "Xóa firmware thành công",
+    "deleteError": "Xóa firmware thất bại",
+    "updateSuccess": "Đã gửi yêu cầu cập nhật firmware cho {count} thiết bị",
+    "updateError": "Không thể cập nhật firmware. Vui lòng thử lại.",
+    "selectDevices": "Chọn các thiết bị để cập nhật firmware"
+  },
+  "placeholders": {
+    "search": "Tìm kiếm thiết bị",
+    "unit": "Đơn vị",
+    "connectionStatus": "Trạng thái kết nối",
+    "deviceType": "Kiểu thiết bị",
+    "operationMode": "Chế độ vận hành"
+  },
+  "connectionStatus": {
+    "inactive": "Không hoạt động",
+    "active": "Hoạt động",
+    "warning": "Cảnh báo"
+  },
+  "tooltips": {
+    "deviceInactive": "Thiết bị không hoạt động. Không thể cập nhật firmware.",
+    "deviceWarning": "Thiết bị đang có cảnh báo. Không thể cập nhật firmware."
+  },
+  "form": {
+    "fileLabel": "File Firmware",
+    "versionLabel": "Version",
+    "deviceTypeLabel": "Kiểu thiết bị",
+    "noteLabel": "Ghi chú",
+    "versionPlaceholder": "Nhập version",
+    "deviceTypePlaceholder": "Chọn kiểu thiết bị",
+    "notePlaceholder": "Nhập ghi chú",
+    "uploadText": "Nhấn hoặc kéo file vào đây để tải lên",
+    "uploadHint": "Hỗ trợ các định dạng firmware",
+    "validation": {
+      "fileRequired": "Vui lòng chọn file firmware",
+      "versionRequired": "Vui lòng nhập version",
+      "versionMaxLength": "Version tối đa {max} ký tự",
+      "deviceTypeRequired": "Vui lòng chọn kiểu thiết bị",
+      "noteMaxLength": "Ghi chú tối đa {max} ký tự"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "titles": {
+    "create": "Add Identification",
+    "edit": "Edit Identification"
+  },
+  "deleteConfirm": {
+    "title": "Delete Identification",
+    "message": "Are you sure you want to delete this identification?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Delete Multiple Identifications",
+    "message": "Are you sure you want to delete {count} selected identifications?"
+  }
+}

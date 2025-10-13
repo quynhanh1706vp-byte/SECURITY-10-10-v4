@@ -1,0 +1,72 @@
+{
+    "departments": {
+        "title": "Quản lý phòng ban",
+        "add": "Thêm phòng ban",
+        "search": "Tìm kiếm phòng ban",
+        "total": "Tổng: {count} bản ghi",
+        "selected": "Đã chọn: {count} bản ghi",
+        "deleteConfirm": {
+            "title": "Gỡ nhân viên khỏi phòng ban",
+            "message": "Bạn có chắc chắn muốn gỡ nhân viên này khỏi phòng ban?"
+        },
+        "multipleDeleteConfirm": {
+            "title": "Gỡ nhiều nhân viên khỏi phòng ban",
+            "message": "Bạn có chắc chắn muốn gỡ {count} nhân viên đã chọn khỏi phòng ban?"
+        },
+        "assignModalTitle": "Gán nhân viên vào phòng ban",
+        "tabs": {
+            "employees": "Nhân viên"
+        },
+        "columns": {
+            "name": "Tên",
+            "employeeNo": "Mã nhân viên",
+            "departmentName": "Phòng ban",
+            "effectiveDate": "Ngày có hiệu lực",
+            "expiredDate": "Ngày hết hạn",
+            "actions": "Thao tác"
+        },
+        "buttons": {
+            "assign": "Gán nhân viên",
+            "edit": "Sửa",
+            "delete": "Xóa",
+            "add": "Thêm",
+            "reload": "Tải lại"
+        }
+    },
+    "buttons": {
+        "save": "Lưu",
+        "cancel": "Hủy",
+        "delete": "Xóa",
+        "reload": "Tải lại"
+    },
+    "common": {
+        "search": "Tìm kiếm",
+        "select": "Chọn",
+        "input": "Nhập"
+    },
+    "form": {
+        "fields": {
+            "code": "Mã phòng ban",
+            "name": "Tên phòng ban",
+            "manager": "Người quản lý",
+            "parent": "Phòng ban chủ quản",
+            "percentOutside": "% tối đa nhân viên được phép ra ngoài",
+            "maxEmployeesOutside": "Số lượng tối đa nhân viên được phép ra ngoài"
+        },
+        "placeholders": {
+            "code": "Nhập mã phòng ban",
+            "name": "Nhập tên phòng ban",
+            "parent": "Chọn phòng chủ quản",
+            "percentOutside": "Nhập %",
+            "maxEmployeesOutside": "Nhập số lượng"
+        },
+        "messages": {
+            "requiredCode": "Vui lòng nhập mã phòng ban",
+            "requiredName": "Vui lòng nhập tên phòng ban"
+        },
+        "tips": {
+            "parentEmpty": "Để trống nếu là phòng ban cha",
+            "percentOutsideEmpty": "Nếu để trống là không giới hạn tổng số người được phép ra ngoài trong giờ hành chính"
+        }
+    }
+}

@@ -1,0 +1,35 @@
+{
+    "employeeAccessReport": {
+        "title": "Employee Access Report",
+        "export": {
+            "title": "Export Data",
+            "okText": "Download",
+            "fileFormat": "File format"
+        },
+        "columns": {
+            "accessTime": "Access Time",
+            "accessPoint": "Access Point",
+            "inOut": "Direction",
+            "userName": "Employee Name",
+            "departmentName": "Department",
+            "cardType": "Identifier Type",
+            "cardId": "Identifier Code",
+            "eventDetail": "Event Details",
+            "eventType": "Event Type",
+            "building": "Unit"
+        },
+        "filters": {
+            "search": "Search by employee name / identifier code",
+            "startTime": "Start Time",
+            "endTime": "End Time",
+            "unit": "Unit",
+            "inOut": "Direction"
+        },
+        "buttons": {
+            "export": "Export Data"
+        },
+        "notifications": {
+            "exportError": "An error occurred while exporting data"
+        }
+    }
+}

@@ -1,0 +1,80 @@
+{
+    "accessGroups": {
+        "title": "Nhóm quyền truy cập",
+        "edit": "Chỉnh sửa nhóm quyền truy cập",
+        "create": {
+            "button": "Thêm nhóm quyền truy cập"
+        },
+        "columns": {
+            "name": "Tên nhóm",
+            "totalUsers": "Số lượng nhân viên",
+            "totalDoors": "Số lượng điểm kiểm soát",
+            "updatedAt": "Thời gian cập nhật",
+            "actions": "Thao tác"
+        },
+        "placeholders": {
+            "search": "Tìm kiếm",
+            "door": "Điểm kiểm soát",
+            "user": "Nhân viên"
+        },
+        "notifications": {
+            "deleteSuccess": "Xóa thành công"
+        },
+        "form": {
+            "label": {
+                "name": "Tên nhóm quyền truy cập",
+                "isDefault": "Nhóm truy cập mặc định"
+            },
+            "placeholder": {
+                "name": "Nhập tên nhóm quyền truy cập"
+            },
+            "validation": {
+                "nameRequired": "Vui lòng nhập tên nhóm quyền truy cập",
+                "isDefault": "Bắt buộc chọn mặc định",
+                "noSpecialCharsTooltip": "Không được phép nhập ký tự đặc biệt",
+                "maxLength100": "Tối đa 100 ký tự"
+            },
+            "switch": {
+                "on": "BẬT",
+                "off": "TẮT"
+            }
+        },
+        "tabs": {
+            "general": "Thông tin chung",
+            "assignDoors": "Gán điểm kiểm soát",
+            "assignUsers": "Gán nhân viên"
+        },
+        "assign": {
+            "addDoor": "Thêm điểm kiểm soát",
+            "addUser": "Gán nhân viên",
+            "modal": {
+                "assignUserTitle": "Gán nhân viên cho nhóm truy cập",
+                "assignDoorTitle": "Gán điểm kiểm soát cho nhóm truy cập"
+            }
+        },
+        "unassign-users": {
+            "multipleDeleteConfirm": {
+                "title": "Xóa nhân viên khỏi nhóm",
+                "message": "Bạn có chắc chắn muốn xóa {{count}} nhân viên khỏi nhóm quyền truy cập?"
+            }
+        },
+        "buttons": {
+            "save": "Lưu",
+            "cancel": "Hủy",
+            "delete": "Xóa",
+            "search": "Tìm kiếm",
+            "multipleDelete": "Xóa nhiều"
+        },
+        "table": {
+            "name": "Tên",
+            "employeeNo": "Mã nhân viên",
+            "departmentName": "Phòng ban",
+            "workTypeName": "Hình thức làm việc",
+            "doorName": "Tên điểm kiểm soát",
+            "donVi": "Đơn vị",
+            "cheDoVanHanh": "Chế độ vận hành",
+            "cheDoKiemTra": "Chế độ kiểm tra",
+            "khungGioKiemSoat": "Khung giờ kiểm soát"
+        }
+    }
+}

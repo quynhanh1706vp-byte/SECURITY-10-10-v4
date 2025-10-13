@@ -1,0 +1,32 @@
+{
+  "title": "Device Management",
+  "columns": {
+    "controlName": "Control Name",
+    "deviceType": "Device Type",
+    "accessPointName": "Access Point Name",
+    "unit": "Unit",
+    "connectionStatus": "Connection Status",
+    "actions": "Actions"
+  },
+  "status": {
+    "connected": "Connected",
+    "disconnected": "Disconnected"
+  },
+  "buttons": {
+    "exportExcel": "Export Excel",
+    "history": "History",
+    "edit": "Edit"
+  },
+  "placeholders": {
+    "search": "Search devices",
+    "unit": "Unit",
+    "accessPoint": "Access Point",
+    "connectionStatus": "Connection Status"
+  },
+  "modal": {
+    "historyTitle": "Device History"
+  },
+  "export": {
+    "error": "Error exporting data"
+  }
+}

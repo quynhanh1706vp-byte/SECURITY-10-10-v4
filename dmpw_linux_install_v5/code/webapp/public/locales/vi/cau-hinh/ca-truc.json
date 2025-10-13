@@ -1,0 +1,91 @@
+{
+  "title": "Cấu hình lịch trực",
+  "tabs": {
+    "schedule": "Lịch trực",
+    "shifts": "Ca trực"
+  },
+  "buttons": {
+    "createSchedule": "Tạo lịch trực",
+    "addShift": "Thêm ca"
+  },
+  "modal": {
+    "addShiftTitle": "Thêm ca trực"
+  },
+  "schedule": {
+    "columns": {
+      "content": "Nội dung",
+      "employeeCount": "Số lượng nhân viên",
+      "actions": "Thao tác"
+    },
+    "buttons": {
+      "edit": "Sửa"
+    },
+    "placeholders": {
+      "search": "Tìm kiếm lịch trực",
+      "employee": "Nhân viên"
+    }
+  },
+  "shifts": {
+    "columns": {
+      "shift": "Ca trực",
+      "shiftName": "Tên ca",
+      "actions": "Thao tác"
+    },
+    "buttons": {
+      "edit": "Sửa"
+    },
+    "placeholders": {
+      "search": "Tìm kiếm ca trực"
+    },
+    "modal": {
+      "editTitle": "Sửa ca trực"
+    }
+  },
+  "form": {
+    "shift": {
+      "fields": {
+        "name": "Tên ca",
+        "startTime": "Thời gian bắt đầu",
+        "endTime": "Thời gian kết thúc"
+      },
+      "placeholders": {
+        "name": "Nhập tên ca"
+      },
+      "validation": {
+        "nameRequired": "Vui lòng nhập tên ca",
+        "startTimeRequired": "Vui lòng chọn thời gian bắt đầu",
+        "endTimeRequired": "Vui lòng chọn thời gian kết thúc",
+        "endTimeAfterStart": "Thời gian kết thúc phải lớn hơn thời gian bắt đầu"
+      }
+    },
+    "schedule": {
+      "types": {
+        "department": "Lịch trực theo phòng",
+        "event": "Lịch trực sự vụ"
+      },
+      "fields": {
+        "department": "Phòng ban",
+        "content": "Nội dung trực",
+        "dateRange": "Thời gian trực",
+        "shifts": "Ca trực",
+        "employees": "Nhân viên trực"
+      },
+      "placeholders": {
+        "department": "Chọn phòng ban",
+        "content": "Nhập nội dung trực",
+        "shifts": "Chọn 1 hoặc nhiều ca",
+        "employees": "Chọn nhân viên"
+      },
+      "validation": {
+        "departmentRequired": "Vui lòng chọn phòng ban",
+        "contentRequired": "Vui lòng nhập nội dung trực",
+        "dateRangeRequired": "Vui lòng chọn thời gian trực",
+        "shiftsRequired": "Vui lòng chọn ca trực",
+        "employeesRequired": "Vui lòng chọn nhân viên"
+      },
+      "notes": {
+        "dateRange": "Nếu chọn thời gian lịch trực dài hơn 1 ngày thì các ca và người trực sẽ được lặp lại giống nhau ở các ngày trong thời gian trực."
+      }
+    }
+  }
+}

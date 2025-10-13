@@ -1,0 +1,175 @@
+{
+  "settings/password": {
+    "settings/password": "Cài đặt mật khẩu"
+  },
+  "titles": {
+    "systemSettings": "Cài đặt hệ thống",
+    "userSettings": "Cài đặt người dùng",
+    "securitySettings": "Cài đặt bảo mật",
+    "deviceSettings": "Cài đặt thiết bị",
+    "notificationSettings": "Cài đặt thông báo",
+    "backupSettings": "Cài đặt sao lưu",
+    "integrationSettings": "Cài đặt tích hợp",
+    "generalSettings": "Cài đặt chung"
+  },
+  "categories": {
+    "general": "Chung",
+    "security": "Bảo mật",
+    "notifications": "Thông báo",
+    "devices": "Thiết bị",
+    "users": "Người dùng",
+    "system": "Hệ thống",
+    "backup": "Sao lưu",
+    "integration": "Tích hợp",
+    "appearance": "Giao diện",
+    "performance": "Hiệu suất"
+  },
+  "general": {
+    "siteName": "Tên hệ thống",
+    "siteDescription": "Mô tả hệ thống",
+    "defaultLanguage": "Ngôn ngữ mặc định",
+    "timezone": "Múi giờ",
+    "dateFormat": "Định dạng ngày",
+    "timeFormat": "Định dạng giờ",
+    "currency": "Đơn vị tiền tệ",
+    "defaultPageSize": "Số dòng mặc định",
+    "logoUpload": "Tải lên logo",
+    "maintenanceMode": "Chế độ bảo trì",
+    "debugMode": "Chế độ debug"
+  },
+  "security": {
+    "passwordPolicy": "Chính sách mật khẩu",
+    "minPasswordLength": "Độ dài mật khẩu tối thiểu",
+    "requireUppercase": "Yêu cầu chữ hoa",
+    "requireNumbers": "Yêu cầu số",
+    "requireSpecialChars": "Yêu cầu ký tự đặc biệt",
+    "passwordExpiration": "Thời gian hết hạn mật khẩu",
+    "loginAttempts": "Số lần đăng nhập thất bại tối đa",
+    "sessionTimeout": "Thời gian hết hạn phiên",
+    "twoFactorAuth": "Xác thực hai yếu tố",
+    "ipWhitelist": "Danh sách IP cho phép",
+    "auditLogging": "Ghi log kiểm toán",
+    "encryptionLevel": "Mức độ mã hóa",
+    "certificateManagement": "Quản lý chứng chỉ"
+  },
+  "passwordSettings": {
+    "title": "Cấu hình bảo mật",
+    "sections": {
+      "passwordPolicy": "Chính sách mật khẩu",
+      "timeConfiguration": "Cấu hình thời gian",
+      "loginConfiguration": "Cấu hình đăng nhập"
+    },
+    "fields": {
+      "changeInFirstTime": "Yêu cầu thay đổi mật khẩu cho lần đăng nhập đầu tiên",
+      "haveUpperCase": "Mật khẩu phải chứa chữ cái viết hoa",
+      "haveNumber": "Mật khẩu phải chứa số (1, 2..)",
+      "haveSpecial": "Mật khẩu phải chứa kí tự đặc biệt (@, #,...)",
+      "timeNeedToChange": "Thời gian cần thay đổi mật khẩu (phút)",
+      "maximumTimeUsePassword": "Thời gian sử dụng tối đa với mật khẩu hợp lệ (phút)",
+      "maximumEnterWrongPassword": "Số lần đăng nhập sai tối đa",
+      "timeoutWhenWrongPassword": "Thời gian chờ ứng với đăng nhập sai (phút)"
+    },
+    "placeholders": {
+      "enterMinutes": "Nhập số phút",
+      "enterTimes": "Nhập số lần"
+    },
+    "validation": {
+      "timeRequired": "Vui lòng nhập thời gian",
+      "timesRequired": "Vui lòng nhập số lần"
+    },
+    "buttons": {
+      "save": "Lưu cấu hình",
+      "cancel": "Hủy"
+    }
+  },
+  "notifications": {
+    "enableEmailNotifications": "Bật thông báo email",
+    "enableSmsNotifications": "Bật thông báo SMS",
+    "enablePushNotifications": "Bật thông báo đẩy",
+    "smtpServer": "Máy chủ SMTP",
+    "smtpPort": "Cổng SMTP",
+    "smtpUsername": "Tên đăng nhập SMTP",
+    "smtpPassword": "Mật khẩu SMTP",
+    "smsProvider": "Nhà cung cấp SMS",
+    "smsApiKey": "API Key SMS",
+    "notificationFrequency": "Tần suất thông báo",
+    "alertPriority": "Mức độ ưu tiên cảnh báo",
+    "recipientGroups": "Nhóm người nhận"
+  },
+  "devices": {
+    "autoDiscovery": "Tự động phát hiện thiết bị",
+    "connectionTimeout": "Thời gian chờ kết nối",
+    "retryAttempts": "Số lần thử lại",
+    "keepAliveInterval": "Khoảng thời gian keep-alive",
+    "heartbeatInterval": "Khoảng thời gian heartbeat",
+    "devicePolling": "Polling thiết bị",
+    "logLevel": "Mức độ log",
+    "backupConfiguration": "Sao lưu cấu hình",
+    "firmwareUpdate": "Cập nhật firmware",
+    "deviceSynchronization": "Đồng bộ thiết bị"
+  },
+  "backup": {
+    "enableAutoBackup": "Bật sao lưu tự động",
+    "backupSchedule": "Lịch sao lưu",
+    "backupLocation": "Vị trí sao lưu",
+    "retentionPeriod": "Thời gian lưu trữ",
+    "encryptBackup": "Mã hóa sao lưu",
+    "backupNotifications": "Thông báo sao lưu",
+    "maxBackupSize": "Kích thước sao lưu tối đa",
+    "compressionLevel": "Mức độ nén",
+    "backupVerification": "Kiểm tra sao lưu",
+    "cloudBackup": "Sao lưu đám mây"
+  },
+  "integration": {
+    "apiEndpoints": "Điểm cuối API",
+    "webhooks": "Webhooks",
+    "ssoConfiguration": "Cấu hình SSO",
+    "ldapIntegration": "Tích hợp LDAP",
+    "activeDirectory": "Active Directory",
+    "thirdPartyServices": "Dịch vụ bên thứ ba",
+    "dataExportFormats": "Định dạng xuất dữ liệu",
+    "importSchedule": "Lịch nhập dữ liệu",
+    "syncConfiguration": "Cấu hình đồng bộ",
+    "apiRateLimit": "Giới hạn tốc độ API"
+  },
+  "buttons": {
+    "save": "Lưu cài đặt",
+    "cancel": "Hủy",
+    "reset": "Đặt lại",
+    "restore": "Khôi phục",
+    "test": "Kiểm tra",
+    "apply": "Áp dụng",
+    "export": "Xuất cài đặt",
+    "import": "Nhập cài đặt",
+    "backup": "Sao lưu",
+    "restoreDefaults": "Khôi phục mặc định"
+  },
+  "messages": {
+    "settingsSaved": "Cài đặt đã được lưu thành công",
+    "settingsRestored": "Cài đặt đã được khôi phục",
+    "testSuccessful": "Kiểm tra thành công",
+    "testFailed": "Kiểm tra thất bại",
+    "invalidConfiguration": "Cấu hình không hợp lệ",
+    "restartRequired": "Cần khởi động lại hệ thống",
+    "backupCreated": "Sao lưu đã được tạo",
+    "configurationExported": "Cấu hình đã được xuất",
+    "configurationImported": "Cấu hình đã được nhập"
+  },
+  "placeholders": {
+    "enterValue": "Nhập giá trị",
+    "selectOption": "Chọn tùy chọn",
+    "enterUrl": "Nhập URL",
+    "enterEmail": "Nhập email",
+    "selectFile": "Chọn file",
+    "enterPath": "Nhập đường dẫn"
+  },
+  "validation": {
+    "required": "Trường này là bắt buộc",
+    "invalidEmail": "Email không hợp lệ",
+    "invalidUrl": "URL không hợp lệ",
+    "invalidNumber": "Số không hợp lệ",
+    "minLength": "Tối thiểu {min} ký tự",
+    "maxLength": "Tối đa {max} ký tự",
+    "invalidFormat": "Định dạng không hợp lệ"
+  }
+}

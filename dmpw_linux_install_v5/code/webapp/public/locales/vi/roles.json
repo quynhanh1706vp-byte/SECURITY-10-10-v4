@@ -1,0 +1,44 @@
+{
+  "roles": "Nhóm quyền",
+  "titles": {
+    "create": "Thêm nhóm quyền",
+    "edit": "Sửa nhóm quyền"
+  },
+  "title": "Phân quyền người dùng",
+  "create": "Thêm nhóm quyền",
+  "search": "Tìm kiếm",
+  "table": {
+    "roleName": "Tên nhóm quyền",
+    "description": "Mô tả",
+    "totalUsers": "Số người dùng",
+    "actions": "Thao tác",
+    "edit": "Sửa"
+  },
+  "columns": {
+    "name": "Tên tính năng",
+    "all": "Toàn quyền",
+    "permissions": "Quyền"
+  },
+  "form": {
+    "title": {
+      "label": "Tên nhóm quyền",
+      "placeholder": "Nhập tên nhóm quyền"
+    },
+    "description": {
+      "label": "Mô tả",
+      "placeholder": "Nhập mô tả"
+    },
+    "permissionList": "Danh sách tính năng",
+    "hint": "Cấu hình quyền để truy cập và quản lý các tính năng trong hệ thống",
+    "enableDepartmentLevel": "Phân quyền tới phòng ban",
+    "isDefault": "Làm mặc định"
+  },
+  "deleteConfirm": {
+    "title": "Xác nhận xóa",
+    "message": "Bạn có chắc chắn muốn xóa nhóm quyền này không?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Xác nhận xóa nhiều nhóm quyền",
+    "message": "Bạn có chắc chắn muốn xóa {count} nhóm quyền? Hành động này không thể hoàn tác."
+  }
+}

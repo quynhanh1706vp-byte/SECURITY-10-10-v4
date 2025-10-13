@@ -1,0 +1,84 @@
+{
+    "don-vi": {
+        "pageTitle": "Unit Management",
+        "modal": {
+            "assignTitle": "Assign access points to unit"
+        },
+        "columns": {
+            "doorName": "Access Point Name",
+            "unit": "Unit",
+            "operationMode": "Operation Mode"
+        },
+        "selectedCount": "Selected {count} records",
+        "buildings": {
+            "buttons": {
+                "add": "Add unit",
+                "edit": "Edit",
+                "delete": "Delete"
+            },
+            "search": {
+                "placeholder": "Search units"
+            },
+            "selectedCount": "Selected: {count} records",
+            "totalCount": "Total: {count} records",
+            "actions": {
+                "assignAccessPoint": "Assign access point"
+            },
+            "deleteConfirm": {
+                "title": "Confirm unit deletion",
+                "message": "Are you sure you want to delete this unit? This action cannot be undone."
+            }
+        },
+        "form": {
+            "name": {
+                "label": "Unit name",
+                "required": "Please enter unit name",
+                "placeholder": "Enter unit name"
+            },
+            "parent": {
+                "label": "Parent unit",
+                "placeholder": "Select parent unit",
+                "note": "Leave empty if parent unit"
+            },
+            "address": {
+                "label": "Address",
+                "placeholder": "Enter unit address"
+            },
+            "timezone": {
+                "label": "Timezone",
+                "placeholder": "Select timezone"
+            }
+        }
+    },
+    "buildings": {
+        "tabs": {
+            "controlPoints": "Control Points"
+        },
+        "fields": {
+            "doorName": "Access Point Name",
+            "cheDoKiemTra": "Control Mode",
+            "cheDoVanHanh": "Operation Mode",
+            "activeTz": "Control Time Frame",
+            "passageTz": "Uncontrolled Time Frame"
+        },
+        "assignDoors": {
+            "button": "Assign access points"
+        },
+        "unassignDoors": {
+            "multipleDeleteConfirm": {
+                "title": "Remove multiple access points",
+                "message": "Are you sure you want to remove {count} access points?"
+            }
+        }
+    },
+    "buttons": {
+        "edit": "Edit",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "save": "Save"
+    },
+    "common": {
+        "search": "Search",
+        "selectedCount": "Selected: {count} records"
+    }
+}

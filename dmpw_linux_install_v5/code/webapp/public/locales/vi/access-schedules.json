@@ -1,0 +1,14 @@
+{
+  "titles": {
+    "create": "Thêm lịch trực",
+    "edit": "Sửa lịch trực"
+  },
+  "deleteConfirm": {
+    "title": "Xoá lịch trực",
+    "message": "Bạn có chắc chắn muốn xoá lịch trực này không?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Xoá nhiều lịch trực",
+    "message": "Bạn có chắc chắn muốn xoá {count} lịch trực này không?"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "firmware-version": "Firmware Management",
+  "titles": {
+    "list": "Firmware List",
+    "create": "Add Firmware",
+    "edit": "Edit Firmware",
+    "show": "Firmware Details",
+    "updateModal": "Update Firmware: {fileName} - Device Type: {deviceType}"
+  },
+  "fields": {
+    "id": "ID",
+    "fileName": "File Name",
+    "version": "Version",
+    "deviceType": "Device Type",
+    "note": "Note",
+    "linkFile": "File Link",
+    "createdOn": "Created On",
+    "building": "Unit",
+    "doorName": "Access Point",
+    "deviceAddress": "Device ID",
+    "connectionStatus": "Connection Status",
+    "fwVersion": "F/W Version",
+    "process": "Process",
+    "operationType": "Operation Mode"
+  },
+  "deleteConfirm": {
+    "title": "Confirm Delete",
+    "message": "Are you sure you want to delete this firmware?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Confirm Delete",
+    "message": "Are you sure you want to delete {count} selected firmware?"
+  },
+  "actions": {
+    "upload": "Upload Firmware",
+    "download": "Download",
+    "update": "Update",
+    "delete": "Delete",
+    "cancel": "Cancel"
+  },
+  "messages": {
+    "uploadSuccess": "Firmware uploaded successfully",
+    "uploadError": "Failed to upload firmware",
+    "deleteSuccess": "Firmware deleted successfully",
+    "deleteError": "Failed to delete firmware",
+    "updateSuccess": "Firmware update request sent to {count} device(s)",
+    "updateError": "Unable to update firmware. Please try again.",
+    "selectDevices": "Select devices to update firmware"
+  },
+  "placeholders": {
+    "search": "Search devices",
+    "unit": "Unit",
+    "connectionStatus": "Connection Status",
+    "deviceType": "Device Type",
+    "operationMode": "Operation Mode"
+  },
+  "connectionStatus": {
+    "inactive": "Inactive",
+    "active": "Active",
+    "warning": "Warning"
+  },
+  "tooltips": {
+    "deviceInactive": "Device is inactive. Cannot update firmware.",
+    "deviceWarning": "Device has warning status. Cannot update firmware."
+  },
+  "form": {
+    "fileLabel": "Firmware File",
+    "versionLabel": "Version",
+    "deviceTypeLabel": "Device Type",
+    "noteLabel": "Note",
+    "versionPlaceholder": "Enter version",
+    "deviceTypePlaceholder": "Select device type",
+    "notePlaceholder": "Enter note",
+    "uploadText": "Click or drag file to this area to upload",
+    "uploadHint": "Support for firmware file formats",
+    "validation": {
+      "fileRequired": "Please select firmware file",
+      "versionRequired": "Please enter version",
+      "versionMaxLength": "Version maximum {max} characters",
+      "deviceTypeRequired": "Please select device type",
+      "noteMaxLength": "Note maximum {max} characters"
+    }
+  }
+}

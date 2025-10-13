@@ -1,0 +1,17 @@
+{
+  "monitoring": {
+    "tabs": {
+      "access": "TRUY CẬP",
+      "accessPoint": "ĐIỂM KIỂM SOÁT",
+      "vehicle": "PHƯƠNG TIỆN"
+    },
+    "intervals": {
+      "30s": "30 giây",
+      "1m": "1 phút",
+      "5m": "5 phút",
+      "15m": "15 phút",
+      "off": "Tắt"
+    },
+    "registerGuest": "Đăng ký khách"
+  }
+}

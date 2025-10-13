@@ -1,0 +1,43 @@
+{
+  "titles": {
+    "create": "Thêm phương tiện",
+    "edit": "Sửa phương tiện"
+  },
+  "confirmDelete": {
+    "title": "Xóa phương tiện",
+    "message": "Bạn có chắc chắn muốn xóa phương tiện này không?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Xóa nhiều phương tiện",
+    "message": "Bạn có chắc chắn muốn xóa {count} phương tiện này không?"
+  },
+  "form": {
+    "vehicleType": "Loại xe",
+    "model": "Hãng xe",
+    "plateNumber": "Biển số xe",
+    "color": "Màu xe",
+    "objectType": "Đối tượng",
+    "user": "Nhân viên",
+    "visitor": "Khách mời"
+  },
+  "vehicleType": {
+    "car": "Ô tô",
+    "motorbike": "Xe máy"
+  },
+  "placeholder": {
+    "selectUser": "Chọn nhân viên",
+    "selectVisitor": "Chọn khách mời",
+    "model": "Nhập hãng xe",
+    "plateNumber": "Nhập biển số xe",
+    "color": "Nhập màu xe",
+    "vehicleType": "Chọn loại xe"
+  },
+  "validation": {
+    "modelRequired": "Vui lòng nhập hãng xe",
+    "plateNumberRequired": "Vui lòng nhập biển số xe",
+    "colorRequired": "Vui lòng nhập màu xe",
+    "userRequired": "Vui lòng chọn nhân viên",
+    "visitorRequired": "Vui lòng chọn khách mời",
+    "noSpecialCharsTooltip": "Không được phép nhập ký tự đặc biệt"
+  }
+}

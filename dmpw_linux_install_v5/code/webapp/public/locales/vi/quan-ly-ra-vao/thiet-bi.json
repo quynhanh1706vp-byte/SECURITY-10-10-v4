@@ -1,0 +1,32 @@
+{
+  "title": "Quản lý thiết bị",
+  "columns": {
+    "controlName": "Tên kiểm soát",
+    "deviceType": "Loại thiết bị",
+    "accessPointName": "Tên điểm kiểm soát",
+    "unit": "Đơn vị",
+    "connectionStatus": "Trạng thái kết nối",
+    "actions": "Thao tác"
+  },
+  "status": {
+    "connected": "Kết nối",
+    "disconnected": "Mất kết nối"
+  },
+  "buttons": {
+    "exportExcel": "Xuất excel",
+    "history": "Lịch sử",
+    "edit": "Sửa"
+  },
+  "placeholders": {
+    "search": "Tìm kiếm thiết bị",
+    "unit": "Đơn vị",
+    "accessPoint": "Điểm kiểm soát",
+    "connectionStatus": "Trạng thái kết nối"
+  },
+  "modal": {
+    "historyTitle": "Lịch sử thiết bị"
+  },
+  "export": {
+    "error": "Lỗi khi xuất dữ liệu"
+  }
+}

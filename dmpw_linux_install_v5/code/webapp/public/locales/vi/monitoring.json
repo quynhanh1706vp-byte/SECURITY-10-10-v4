@@ -1,0 +1,66 @@
+{
+  "titles": {
+    "accessMonitoring": "Giám sát truy cập",
+    "realTimeAccess": "Truy cập thời gian thực",
+    "doorControl": "Điều khiển cửa"
+  },
+  "table": {
+    "columns": {
+      "image": "Hình ảnh",
+      "time": "Thời gian", 
+      "subject": "Đối tượng",
+      "identifier": "Định danh",
+      "accessPoint": "Điểm kiểm soát",
+      "unit": "Đơn vị",
+      "eventDetails": "Chi tiết sự kiện",
+      "direction": "Hướng",
+      "status": "Trạng thái",
+      "cardNumber": "Số thẻ",
+      "temperature": "Nhiệt độ"
+    }
+  },
+  "filters": {
+    "dateRange": "Khoảng thời gian",
+    "accessPoint": "Điểm kiểm soát",
+    "unit": "Đơn vị",
+    "eventType": "Loại sự kiện",
+    "subject": "Đối tượng"
+  },
+  "modal": {
+    "openDoor": {
+      "title": "Mở cửa",
+      "openTimeLabel": "Thời gian mở cửa theo giây (1~254)",
+      "openUntilLabel": "Mở cửa cho đến thời điểm",
+      "emergencyModeLabel": "Tắt chế độ khẩn cấp",
+      "normalModeLabel": "Chế độ bình thường",
+      "emergencyModeLabel2": "Chế độ khẩn cấp"
+    },
+    "restart": {
+      "title": "Khởi động lại thiết bị",
+      "message": "Bạn có chắc chắn muốn khởi động lại thiết bị này?",
+      "confirmButton": "Khởi động lại",
+      "cancelButton": "Hủy"
+    }
+  },
+  "buttons": {
+    "openDoor": "Mở cửa",
+    "restart": "Khởi động lại",
+    "refresh": "Làm mới",
+    "export": "Xuất dữ liệu",
+    "search": "Tìm kiếm"
+  },
+  "status": {
+    "success": "Thành công",
+    "failed": "Thất bại",
+    "pending": "Đang chờ",
+    "online": "Trực tuyến",
+    "offline": "Ngoại tuyến"
+  },
+  "events": {
+    "access": "Truy cập",
+    "denied": "Từ chối",
+    "alarm": "Báo động",
+    "doorOpen": "Mở cửa",
+    "doorClose": "Đóng cửa"
+  }
+}

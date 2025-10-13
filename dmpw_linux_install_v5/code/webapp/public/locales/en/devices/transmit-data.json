@@ -1,0 +1,13 @@
+{
+  "titles": {
+    "create": "Sync Data"
+  },
+  "buttons": {
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "notifications": {
+    "success": "Data synchronization successful",
+    "error": "Data synchronization failed"
+  }
+}

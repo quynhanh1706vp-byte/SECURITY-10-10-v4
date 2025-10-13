@@ -1,0 +1,17 @@
+{
+  "monitoring": {
+    "tabs": {
+      "access": "ACCECSS",
+      "accessPoint": "ACCECSS POINTS",
+      "vehicle": "VEHICLES"
+    },
+    "intervals": {
+      "30s": "30 seconds",
+      "1m": "1 minute",
+      "5m": "5 minutes",
+      "15m": "15 minutes",
+      "off": "Off"
+    },
+    "registerGuest": "Register Guest"
+  }
+}

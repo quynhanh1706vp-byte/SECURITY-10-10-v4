@@ -1,40 +1,19 @@
-<<<<<<< HEAD
-node_modules/
-dist/
-build/
+# scan outputs / logs
+_reports/
+scan_min.stdout
 *.log
-.env*
-*.tar
-*.tar.gz
-=======
-*.tar.gz
-*.zip
-*.7z
-*.iso
->>>>>>> 50d9c1f (feat(v4): add extracted v4 sources (exclude archives))
-*.zip
-*.tar
-*.tar.gz
-*.7z
-bin/
-obj/
-packages/
-**/*.dll
-**/*.so
-# Secrets / Keys / Certificates
-*.pem
-*.key
-*.pfx
+*.tmp
 
-# Build artifacts
-*.dll
-*.lib
-*.exp
-*.pdb
+# build / vendor
+node_modules/
 bin/
 obj/
 dist/
-node_modules/
-*.tgz
-*.tar.gz
-*.zip
+out/
+
+# IDE / hệ thống
+.vscode/
+.idea/
+*.user
+.DS_Store
+Thumbs.db

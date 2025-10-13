@@ -1,0 +1,33 @@
+{
+  "title": "Vehicle list",
+  "columns": {
+    "owner": "Vehicle owner",
+    "model": "Vehicle model",
+    "plateNumber": "License plate",
+    "vehicleType": "Vehicle type",
+    "color": "Color",
+    "actions": "Actions"
+  },
+  "buttons": {
+    "addVehicle": "Add vehicle",
+    "addFromForm": "Add from form",
+    "importExcel": "Import from Excel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "export": "Export data"
+  },
+  "tabs": {
+    "employee": "Employee",
+    "visitor": "Visitor"
+  },
+  "placeholders": {
+    "search": "Search"
+  },
+  "confirmDelete": {
+    "title": "Confirm vehicle deletion",
+    "message": "Are you sure you want to delete this vehicle?"
+  },
+  "modal": {
+    "importTitle": "Import vehicles"
+  }
+}

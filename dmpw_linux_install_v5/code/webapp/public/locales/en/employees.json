@@ -1,0 +1,78 @@
+{
+  "titles": {
+    "management": "Employee Management",
+    "create": "Add Employee",
+    "edit": "Edit Employee",
+    "import": "Import Employees"
+  },
+  "buttons": {
+    "addEmployee": "Add Employee",
+    "importCard": "Import Employee Cards",
+    "addFromForm": "Add from Form",
+    "importExcel": "Import Excel",
+    "export": "Export Data",
+    "search": "Search"
+  },
+  "table": {
+    "columns": {
+      "name": "Name",
+      "employeeCode": "Employee Code",
+      "department": "Department",
+      "workType": "Work Type",
+      "status": "Active Status",
+      "position": "Position",
+      "phone": "Phone Number",
+      "email": "Email",
+      "cardNumber": "Card Number",
+      "joinDate": "Join Date",
+      "actions": "Actions"
+    }
+  },
+  "search": {
+    "placeholder": "Search employees",
+    "filters": {
+      "department": "Department",
+      "status": "Status",
+      "workType": "Work Type"
+    }
+  },
+  "form": {
+    "labels": {
+      "fullName": "Full Name",
+      "employeeCode": "Employee Code",
+      "department": "Department",
+      "position": "Position",
+      "workType": "Work Type",
+      "phone": "Phone Number",
+      "email": "Email",
+      "cardNumber": "Card Number",
+      "joinDate": "Join Date",
+      "status": "Status"
+    },
+    "placeholders": {
+      "enterFullName": "Enter full name",
+      "enterEmployeeCode": "Enter employee code",
+      "selectDepartment": "Select department",
+      "selectPosition": "Select position",
+      "selectWorkType": "Select work type",
+      "enterPhone": "Enter phone number",
+      "enterEmail": "Enter email",
+      "enterCardNumber": "Enter card number",
+      "selectJoinDate": "Select join date"
+    },
+    "validation": {
+      "nameRequired": "Please enter full name",
+      "employeeCodeRequired": "Please enter employee code",
+      "departmentRequired": "Please select department",
+      "phoneRequired": "Please enter phone number",
+      "emailRequired": "Please enter email",
+      "emailInvalid": "Invalid email format",
+      "phoneInvalid": "Invalid phone number"
+    }
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "suspended": "Suspended"
+  }
+}

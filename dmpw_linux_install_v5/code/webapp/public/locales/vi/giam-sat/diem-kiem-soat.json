@@ -1,0 +1,36 @@
+{
+  "title": "Điểm kiểm soát",
+  "stats": {
+    "totalPoints": "Số điểm kiểm soát",
+    "offlinePoints": "Điểm mất kết nối"
+  },
+  "tabs": {
+    "connected": "Đang kết nối",
+    "warning": "Cảnh báo điểm kiểm soát",
+    "all": "Tất cả"
+  },
+  "columns": {
+    "accessPoint": "Điểm kiểm soát",
+    "unit": "Đơn vị",
+    "operationMode": "Chế độ vận hành",
+    "timeFrame": "Khung giờ kiểm soát",
+    "eventDetails": "Chi tiết sự kiện",
+    "eventStatus": "Trạng thái của điểm kiểm soát",
+    "actions": "Thao tác"
+  },
+  "buttons": {
+    "openDoor": "Mở cửa",
+    "restart": "Khởi động lại",
+    "sync": "Đồng bộ"
+  },
+  "placeholders": {
+    "search": "Tìm kiếm",
+    "unit": "Đơn vị",
+    "operationMode": "Chế độ vận hành"
+  },
+  "menu": {
+    "sync": "Đồng bộ",
+    "deviceLog": "Log thiết bị",
+    "restart": "Khởi động lại"
+  }
+}

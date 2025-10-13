@@ -1,0 +1,15 @@
+{
+  "success": "Thành công",
+  "error": "Lỗi",
+  "warning": "Cảnh báo",
+  "ok": "Ok",
+  "cancel": "Hủy bỏ",
+  "search": "Tìm kiếm",
+  "action": "Thao tác",
+  "selected": "Đã chọn",
+  "records": "bản ghi",
+  "loadingData": "Đang tải dữ liệu...",
+  "appName": "Quản lý ra vào",
+  "appDescription": "Hệ thống quản lý ra vào",
+  "unknown": "Không xác định"
+}

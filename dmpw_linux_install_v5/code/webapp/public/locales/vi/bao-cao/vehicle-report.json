@@ -1,0 +1,31 @@
+{
+  "title": "Báo cáo phương tiện",
+  "columns": {
+    "accessTime": "Thời gian truy cập",
+    "accessPoint": "Điểm truy cập",
+    "inOut": "Ra/vào",
+    "vehicleOwner": "Chủ phương tiện",
+    "object": "Phòng ban",
+    "licensePlate": "Biển số",
+    "vehicleType": "Loại xe",
+    "model": "Hãng xe",
+    "color": "Màu",
+    "eventDetail": "Chi tiết sự kiện",
+    "eventType": "Loại sự kiện",
+    "exitTime": "Thời gian ra"
+  },
+  "placeholders": {
+    "search": "Tìm kiếm chủ phương tiện / biển số",
+    "startTime": "Thời gian bắt đầu",
+    "endTime": "Thời gian kết thúc",
+    "building": "Đơn vị",
+    "inOut": "Ra/vào"
+  },
+  "export": {
+    "button": "Xuất dữ liệu",
+    "title": "Xuất dữ liệu",
+    "download": "Tải xuống",
+    "fileFormat": "Định dạng tệp",
+    "error": "Lỗi khi xuất dữ liệu"
+  }
+}

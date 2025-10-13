@@ -1,0 +1,133 @@
+{
+  "accessTimes": {
+    "title": "Access Configuration",
+    "add": "Add Access Time",
+    "edit": "Edit Access Time",
+    "name": "Access Time Name",
+    "note": "Note",
+    "searchPlaceholder": "Search",
+    "assignTitle": "Assign Access Time",
+    "tabs": {
+      "access-time": "Access time schedule of control points",
+      "holiday": "Holidays",
+      "guest": "Guests",
+      "approver": "Guest approval accounts"
+    },
+    "fields": {
+      "name": "Access Time Name",
+      "remark": "Note",
+      "days": "Applied Days",
+      "timeRanges": "Applied Time Ranges"
+    },
+    "validation": {
+      "nameRequired": "Please enter access time name",
+      "timeRangeRequired": "Please select at least one time range"
+    },
+    "days": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "holidayType1": "Holiday 1",
+      "holidayType2": "Holiday 2",
+      "holidayType3": "Holiday 3"
+    },
+    "form": {
+      "name": "Access Time Name",
+      "namePlaceholder": "Enter access time name",
+      "remark": "Remark",
+      "selectDays": "Select Access Days",
+      "workdays": "Workdays",
+      "holidays": "Holidays",
+      "selectAll": "Select All",
+      "clearAll": "Clear All",
+      "noAccessNote": "If all 4 time ranges are empty, access will not be allowed for that day",
+      "rangeLabel": "Range {index}",
+      "invalidRange": "Invalid time range",
+      "overlapError": "Time range {i} and {j} overlap"
+    },
+    "placeholders": {
+      "name": "Enter access time name",
+      "remark": "Enter remarks"
+    }
+  },
+  "buttons": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "common": {
+    "action": "Action",
+    "search": "Search"
+  },
+  "holidays": {
+    "title": "Holiday Configuration",
+    "create": "Add Holiday",
+    "name": "Holiday Name",
+    "type": "Holiday Type",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "recursion": "Repeat",
+    "remarks": "Remarks",
+    "search": "Search",
+    "form": {
+      "type": "Holiday Type",
+      "name": "Holiday Name",
+      "namePlaceholder": "Enter name",
+      "nameRequired": "Please enter holiday name",
+      "date": "Start Date",
+      "remarks": "Remarks",
+      "recursive": "Repeat"
+    }
+  },
+  "guests": {
+    "title": "Guest Configuration",
+    "save": "Save Data",
+    "searchPlaceholder": "Search guest configuration information",
+    "accessGroupLabel": "Default Access Group",
+    "accessGroupPlaceholder": "Select access group",
+    "visitPurposeLabel": "Visit Purpose List",
+    "visitPurposePlaceholder": "Enter visit purposes",
+    "switchOptions": {
+      "enableAutoApproval": "Allow auto approval",
+      "allowEditRecord": "Allow editing guest information",
+      "allowGetUserTarget": "Allow searching user list",
+      "allowSelectDoorWhenCreateNew": "Allow selecting doors when creating new guest",
+      "allowDeleteRecord": "Allow deleting guest records",
+      "approvalStepNumber": "Approval 1 time"
+    }
+  },
+  "settings": {
+    "visit": {
+      "check-manager": {
+        "titles": {
+          "create": "Add Approval Account"
+        },
+        "buttons": {
+          "add": "Add Approval Account",
+          "save": "Save",
+          "cancel": "Cancel"
+        },
+        "columns": {
+          "email": "Account",
+          "userName": "Name",
+          "departmentName": "Department",
+          "position": "Position"
+        },
+        "search": "Search",
+        "deleteConfirm": {
+          "title": "Delete Approval Account",
+          "message": "Are you sure you want to delete this approval account?"
+        },
+        "multipleDeleteConfirm": {
+          "title": "Delete Multiple Approval Accounts",
+          "message": "Are you sure you want to delete {count} approval accounts?"
+        }
+      }
+    }
+  }
+}

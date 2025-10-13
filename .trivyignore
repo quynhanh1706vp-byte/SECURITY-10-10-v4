@@ -1,0 +1,9 @@
+**/node_modules/**
+**/bin/**
+**/obj/**
+**/dist/**
+**/*.min.js
+**/*.map
+**/*.tgz
+**/*.tar.gz
+**/*.zip

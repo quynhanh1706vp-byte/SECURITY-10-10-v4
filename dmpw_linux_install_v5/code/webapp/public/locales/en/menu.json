@@ -1,0 +1,30 @@
+{
+  "refine": {
+    "dashboard": "Dashboard",
+    "monitoring": "Monitoring",
+    "accessManagement": "Access Management",
+    "unit": "Units",
+    "accessPoint": "Access Points",
+    "device": "Devices",
+    "accessObject": "Access Subjects",
+    "staff": "Staff",
+    "guest": "Visitors",
+    "vehicle": "Vehicles",
+    "settings": "Configuration",
+    "accessGroup": "Access Groups",
+    "accessConfig": "Access Settings",
+    "department": "Departments",
+    "shift": "Shifts",
+    "security": "Security Configuration",
+    "account": "User Accounts",
+    "userManagement": "User Management",
+    "userPermission": "User Permissions",
+    "report": "Reports",
+    "accessReport": "Access Reports",
+    "guestReport": "Visitor Reports",
+    "vehicleReport": "Vehicle Reports",
+    "logReport": "Log Reports",
+    "notifications": "Notifications",
+    "firmware": "Firmware"
+  }
+}

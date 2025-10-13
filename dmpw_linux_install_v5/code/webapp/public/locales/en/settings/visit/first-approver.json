@@ -1,0 +1,9 @@
+{
+  "titles": {
+    "create": "Add Approval Account"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Delete Multiple Approval Accounts",
+    "message": "Are you sure you want to delete {count} approval accounts? This action cannot be undone."
+  }
+}

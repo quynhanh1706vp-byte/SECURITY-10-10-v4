@@ -1,0 +1,15 @@
+{
+  "holidays": "Holidays",
+  "titles": {
+    "create": "Add Holiday",
+    "edit": "Edit Holiday"
+  },
+  "deleteConfirm": {
+    "title": "Delete Holiday",
+    "message": "Are you sure you want to delete this holiday? This action cannot be undone."
+  },
+  "multipleDeleteConfirm": {
+    "title": "Delete Multiple Holidays",
+    "message": "Are you sure you want to delete {count} holidays? This action cannot be undone."
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "titles": {
+    "accessMonitoring": "Access Monitoring",
+    "realTimeAccess": "Real-time Access",
+    "doorControl": "Door Control"
+  },
+  "table": {
+    "columns": {
+      "image": "Image",
+      "time": "Time",
+      "subject": "Subject",
+      "identifier": "Identifier", 
+      "accessPoint": "Access Point",
+      "unit": "Unit",
+      "eventDetails": "Event Details",
+      "direction": "Direction",
+      "status": "Status",
+      "cardNumber": "Card Number",
+      "temperature": "Temperature"
+    }
+  },
+  "filters": {
+    "dateRange": "Date Range",
+    "accessPoint": "Access Point",
+    "unit": "Unit",
+    "eventType": "Event Type",
+    "subject": "Subject"
+  },
+  "modal": {
+    "openDoor": {
+      "title": "Open Door",
+      "openTimeLabel": "Door open time in seconds (1~254)",
+      "openUntilLabel": "Open door until time",
+      "emergencyModeLabel": "Turn off emergency mode",
+      "normalModeLabel": "Normal mode",
+      "emergencyModeLabel2": "Emergency mode"
+    },
+    "restart": {
+      "title": "Restart Device",
+      "message": "Are you sure you want to restart this device?",
+      "confirmButton": "Restart",
+      "cancelButton": "Cancel"
+    }
+  },
+  "buttons": {
+    "openDoor": "Open Door",
+    "restart": "Restart",
+    "refresh": "Refresh",
+    "export": "Export Data",
+    "search": "Search"
+  },
+  "status": {
+    "success": "Success",
+    "failed": "Failed",
+    "pending": "Pending",
+    "online": "Online",
+    "offline": "Offline"
+  },
+  "events": {
+    "access": "Access",
+    "denied": "Denied",
+    "alarm": "Alarm",
+    "doorOpen": "Door Open",
+    "doorClose": "Door Close"
+  }
+}

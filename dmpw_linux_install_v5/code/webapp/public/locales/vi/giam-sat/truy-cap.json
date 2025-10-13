@@ -1,0 +1,41 @@
+{
+  "title": "Lượt truy cập",
+  "stats": {
+    "todayAccess": "Lượt ra/vào hôm nay",
+    "employeeInOut": "Nhân viên/vào/ra",
+    "guestInOut": "Khách mời/vào/ra",
+    "abnormalEvents": "Sự kiện bất thường"
+  },
+  "tabs": {
+    "all": "Tất cả",
+    "abnormal": "Cảnh báo bất thường",
+    "department": "Cảnh báo phòng ban",
+    "employee": "Nhân viên",
+    "guest": "Khách"
+  },
+  "tags": {
+    "warning": "Cảnh báo",
+    "employee": "Nhân viên",
+    "guest": "Khách"
+  },
+  "columns": {
+    "image": "Hình ảnh",
+    "time": "Thời gian",
+    "object": "Đối tượng",
+    "identification": "Định danh",
+    "accessPoint": "Điểm kiểm soát",
+    "unit": "Đơn vị",
+    "eventDetails": "Chi tiết sự kiện"
+  },
+  "placeholders": {
+    "accessPoint": "Điểm kiểm soát",
+    "eventType": "Loại sự kiện"
+  },
+  "fields": {
+    "contact": "Đầu mối",
+    "event": "Sự kiện"
+  },
+  "buttons": {
+    "viewAll": "Xem tất cả"
+  }
+}

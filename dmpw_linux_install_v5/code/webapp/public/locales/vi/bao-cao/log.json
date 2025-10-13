@@ -1,0 +1,31 @@
+{
+  "systemLogs": {
+    "title": "Báo cáo log",
+    "export": {
+      "title": "Xuất dữ liệu",
+      "okText": "Tải xuống",
+      "fileFormat": "Định dạng tệp"
+    },
+    "columns": {
+      "operationTime": "Thời gian",
+      "userAccount": "Tài khoản người dùng",
+      "operationType": "Loại hoạt động",
+      "action": "Hành động",
+      "message": "Thông báo",
+      "details": "Chi tiết"
+    },
+    "filters": {
+      "search": "Tìm kiếm tài khoản người dùng",
+      "startTime": "Thời gian bắt đầu",
+      "endTime": "Thời gian kết thúc",
+      "operationType": "Loại hoạt động",
+      "actionType": "Hoạt động"
+    },
+    "buttons": {
+      "export": "Xuất dữ liệu"
+    },
+    "notifications": {
+      "exportError": "Lỗi khi xuất dữ liệu"
+    }
+  }
+}

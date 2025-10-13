@@ -1,0 +1,15 @@
+{
+  "access-times": "Thời gian truy cập",
+  "titles": {
+    "create": "Thêm mới thời gian truy cập",
+    "edit": "Sửa thời gian truy cập"
+  },
+  "deleteConfirm": {
+    "title": "Xác nhận xóa",
+    "message": "Bạn có chắc chắn muốn xóa thời gian truy cập này không?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Xác nhận xóa",
+    "message": "Bạn có chắc chắn muốn xóa {count} thời gian truy cập đã chọn không?"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "access-times": "Access Times",
+  "titles": {
+    "create": "Add Access Time",
+    "edit": "Edit Access Time"
+  },
+  "deleteConfirm": {
+    "title": "Delete Confirmation",
+    "message": "Are you sure you want to delete this access time?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Delete Confirmation",
+    "message": "Are you sure you want to delete {count} access times?"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "titles": {
+    "create": "Add User",
+    "edit": "Edit User"
+  },
+  "deleteConfirm": {
+    "title": "Delete Employee",
+    "message": "Are you sure you want to delete this employee?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Delete Multiple Employees",
+    "message": "Are you sure you want to delete {count} employees? This action cannot be undone."
+  },
+  "validation": {
+    "password": {
+      "minLength": "Password must have at least 8 characters",
+      "hasUpperCase": "contain uppercase letters",
+      "hasNumber": "contain numbers",
+      "hasSpecial": "contain special characters",
+      "noSpaces": "Password cannot contain spaces"
+    }
+  }
+}

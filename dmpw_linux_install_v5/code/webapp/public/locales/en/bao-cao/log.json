@@ -1,0 +1,31 @@
+{
+  "systemLogs": {
+    "title": "System Logs Report",
+    "export": {
+      "title": "Export Data",
+      "okText": "Download",
+      "fileFormat": "File format"
+    },
+    "columns": {
+      "operationTime": "Timestamp",
+      "userAccount": "User Account",
+      "operationType": "Operation Type",
+      "action": "Action",
+      "message": "Message",
+      "details": "Details"
+    },
+    "filters": {
+      "search": "Search by user account",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "operationType": "Operation Type",
+      "actionType": "Action"
+    },
+    "buttons": {
+      "export": "Export Data"
+    },
+    "notifications": {
+      "exportError": "Error while exporting data"
+    }
+  }
+}

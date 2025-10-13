@@ -1,0 +1,10 @@
+.dockerignore
+**/node_modules
+.env
+.git
+.gitignore
+.vs
+.vscode
+**/bin
+**/obj
+**/.toolstarget

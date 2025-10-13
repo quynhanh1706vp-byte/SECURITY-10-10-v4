@@ -1,0 +1,84 @@
+{
+    "don-vi": {
+        "pageTitle": "Quản lý đơn vị",
+        "modal": {
+            "assignTitle": "Gán điểm kiểm soát cho đơn vị"
+        },
+        "columns": {
+            "doorName": "Tên điểm kiểm soát",
+            "unit": "Đơn vị",
+            "operationMode": "Chế độ vận hành"
+        },
+        "selectedCount": "Đã chọn {count} bản ghi",
+        "buildings": {
+            "buttons": {
+                "add": "Thêm đơn vị",
+                "edit": "Sửa",
+                "delete": "Xóa"
+            },
+            "search": {
+                "placeholder": "Tìm kiếm đơn vị"
+            },
+            "selectedCount": "Đã chọn: {count} bản ghi",
+            "totalCount": "Tổng: {count} bản ghi",
+            "actions": {
+                "assignAccessPoint": "Gán điểm kiểm soát"
+            },
+            "deleteConfirm": {
+                "title": "Xác nhận xóa đơn vị",
+                "message": "Bạn có chắc chắn muốn xóa đơn vị này? Hành động này không thể hoàn tác."
+            }
+        },
+        "form": {
+            "name": {
+                "label": "Tên đơn vị",
+                "required": "Vui lòng nhập tên đơn vị",
+                "placeholder": "Nhập tên đơn vị"
+            },
+            "parent": {
+                "label": "Đơn vị chủ quản",
+                "placeholder": "Chọn đơn vị chủ quản",
+                "note": "Để trống nếu là đơn vị cha"
+            },
+            "address": {
+                "label": "Địa chỉ",
+                "placeholder": "Nhập địa chỉ đơn vị"
+            },
+            "timezone": {
+                "label": "Múi giờ",
+                "placeholder": "Chọn múi giờ"
+            }
+        }
+    },
+    "buildings": {
+        "tabs": {
+            "controlPoints": "Điểm kiểm soát"
+        },
+        "fields": {
+            "doorName": "Tên điểm kiểm soát",
+            "cheDoKiemTra": "Chế độ kiểm soát",
+            "cheDoVanHanh": "Chế độ vận hành",
+            "activeTz": "Khung giờ kiểm soát",
+            "passageTz": "Khung giờ không kiểm soát"
+        },
+        "assignDoors": {
+            "button": "Gán điểm kiểm soát"
+        },
+        "unassignDoors": {
+            "multipleDeleteConfirm": {
+                "title": "Gỡ nhiều điểm kiểm soát",
+                "message": "Bạn có chắc muốn gỡ {count} điểm kiểm soát?"
+            }
+        }
+    },
+    "buttons": {
+        "edit": "Sửa",
+        "delete": "Xóa",
+        "cancel": "Hủy",
+        "save": "Lưu"
+    },
+    "common": {
+        "search": "Tìm kiếm",
+        "selectedCount": "Đã chọn: {count} bản ghi"
+    }
+}

@@ -1,0 +1,129 @@
+{
+  "title": "Notifications",
+  "types": {
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Information",
+    "security": "Security",
+    "system": "System",
+    "access": "Access",
+    "device": "Device"
+  },
+  "titles": {
+    "systemAlert": "System Alert",
+    "securityAlert": "Security Alert",
+    "deviceAlert": "Device Alert",
+    "accessAlert": "Access Alert",
+    "maintenanceAlert": "Maintenance Alert",
+    "notification": "Notification"
+  },
+  "messages": {
+    "success": {
+      "loginSuccess": "Login successful",
+      "logoutSuccess": "Logout successful",
+      "dataSaved": "Data saved successfully",
+      "dataUpdated": "Data updated successfully",
+      "dataDeleted": "Data deleted successfully",
+      "uploadSuccess": "Upload successful",
+      "exportSuccess": "Data exported successfully",
+      "importSuccess": "Data imported successfully",
+      "emailSent": "Email sent successfully",
+      "configurationSaved": "Configuration saved",
+      "deviceConnected": "Device connected",
+      "reportGenerated": "Report generated successfully"
+    },
+    "error": {
+      "loginFailed": "Login failed",
+      "networkError": "Network connection error",
+      "serverError": "Server error",
+      "validationError": "Data validation error",
+      "permissionDenied": "Permission denied",
+      "fileUploadFailed": "File upload failed",
+      "fileDownloadFailed": "File download failed",
+      "deviceConnectionFailed": "Device connection failed",
+      "configurationError": "Configuration error",
+      "dataCorrupted": "Data corrupted",
+      "operationFailed": "Operation failed",
+      "timeoutError": "Operation timed out",
+      "unknownError": "Unknown error"
+    },
+    "warning": {
+      "unsavedChanges": "You have unsaved changes",
+      "lowBattery": "Low battery",
+      "diskSpaceLow": "Disk space low",
+      "maintenanceRequired": "Maintenance required",
+      "certificateExpiring": "Certificate expiring soon",
+      "passwordExpiring": "Password expiring soon",
+      "deviceOffline": "Device offline",
+      "suspiciousActivity": "Suspicious activity detected",
+      "accessDenied": "Access denied",
+      "multipleFailedAttempts": "Multiple failed attempts"
+    },
+    "info": {
+      "welcomeMessage": "Welcome to the Access Control System",
+      "systemMaintenance": "System under maintenance",
+      "updateAvailable": "Update available",
+      "reportScheduled": "Report scheduled",
+      "backupCompleted": "Backup completed",
+      "dataProcessing": "Processing data",
+      "operationInProgress": "Operation in progress"
+    },
+    "security": {
+      "unauthorizedAccess": "Unauthorized access attempt",
+      "cardCloned": "Cloned card detected",
+      "tailgating": "Tailgating detected",
+      "forcedEntry": "Forced entry detected",
+      "antiPassbackViolation": "Anti-Passback violation",
+      "duressAlarm": "Duress alarm activated",
+      "emergencyAccess": "Emergency access granted",
+      "securityBreach": "Security breach detected",
+      "suspiciousCard": "Suspicious card activity"
+    },
+    "device": {
+      "deviceOnline": "Device online",
+      "deviceOffline": "Device offline",
+      "doorOpen": "Door open",
+      "doorClosed": "Door closed",
+      "readerError": "Card reader error",
+      "lowBattery": "Low battery warning",
+      "tamperDetected": "Tamper detected",
+      "communicationError": "Communication error",
+      "firmwareUpdate": "Firmware update available",
+      "deviceReset": "Device reset required"
+    }
+  },
+  "buttons": {
+    "acknowledge": "Acknowledge",
+    "dismiss": "Dismiss",
+    "details": "Details",
+    "retry": "Retry",
+    "close": "Close",
+    "viewAll": "View All",
+    "markAsRead": "Mark as Read",
+    "clearAll": "Clear All",
+    "configure": "Configure",
+    "resolve": "Resolve",
+    "deleteRead": "Delete read messages"
+  },
+  "settings": {
+    "notificationPreferences": "Notification Preferences",
+    "emailNotifications": "Email Notifications",
+    "pushNotifications": "Push Notifications",
+    "smsNotifications": "SMS Notifications",
+    "soundAlerts": "Sound Alerts",
+    "priorityLevels": "Priority Levels",
+    "autoAcknowledge": "Auto Acknowledge",
+    "notificationHistory": "Notification History"
+  },
+  "dayAgo": "{count} days ago",
+  "deleteConfirm": {
+    "title": "Delete notification",
+    "message": "Are you sure you want to delete this notification?"
+  },
+  "columns": {
+    "type": "Type",
+    "content": "Content",
+    "createdTime": "Created Time"
+  }
+}

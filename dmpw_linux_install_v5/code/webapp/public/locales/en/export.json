@@ -1,0 +1,14 @@
+{
+  "modal": {
+    "title": "Export Data",
+    "okText": "Download"
+  },
+  "form": {
+    "label": {
+      "fileFormat": "File format"
+    }
+  },
+  "errors": {
+    "exportFailed": "Error exporting data"
+  }
+}

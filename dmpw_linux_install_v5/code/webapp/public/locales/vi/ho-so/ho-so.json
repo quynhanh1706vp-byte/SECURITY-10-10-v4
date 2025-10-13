@@ -1,0 +1,17 @@
+{
+  "title": {
+    "config": "Tuỳ chọn",
+    "change_password": "Đổi mật khẩu"
+  },
+  "formFieldLabel": {
+    "preferredSystem": "Giao diện",
+    "language": "Ngôn ngữ",
+    "timezone": "Múi giờ",
+    "password": "Mật khẩu",
+    "rePassword": "Nhập lại mật khẩu"
+  },
+  "image_not_allow": "Chỉ được phép upload file ảnh",
+  "image_size_error": "Kích thước file không được vượt quá 5MB",
+  "image_upload_success": "Upload ảnh thành công",
+  "image_upload_error": "Upload ảnh không thành công"
+}
