@@ -24,5 +24,11 @@ jobs:
           TRIVY_SKIP_DIRS: "**/node_modules/**,**/bin/**,**/obj/**,**/dist/**"
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v3
+      - name: Save SARIF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sarif-trivy-fs-${{ github.sha }}
+          path: trivy_fs.sarif
+          if-no-files-found: error
         with:
           sarif_file: trivy_fs.sarif

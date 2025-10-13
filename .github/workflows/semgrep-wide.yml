@@ -26,5 +26,11 @@ jobs:
           SEMGREP_SEVERITY: "ERROR"   # chỉ lấy ERROR → vào nhóm HIGH
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v3
+      - name: Save SARIF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sarif-semgrep-${{ github.sha }}
+          path: semgrep.sarif
+          if-no-files-found: error
         with:
           sarif_file: semgrep.sarif
