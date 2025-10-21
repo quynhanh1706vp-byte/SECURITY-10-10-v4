@@ -2,9 +2,9 @@ name: AutoScan
 
 on:
   push:
-    branches: [ "**" ]
+    branches: ['**']
   pull_request:
-    branches: [ "**" ]
+    branches: ['**']
   workflow_dispatch: {}
 
 permissions:
@@ -20,7 +20,7 @@ jobs:
 
       - name: Prepare reports dir
         run: |
-          mkdir -p _reports/{kics,gitleaks,trivy-fs,syft,grype,trufflehog,semgrep}
+          mkdir -p _reports/kics _reports/gitleaks _reports/trivy-fs _reports/syft _reports/grype _reports/trufflehog _reports/semgrep
 
       # ---- KICS (IaC) ----
       - name: KICS scan (IaC)
@@ -31,9 +31,8 @@ jobs:
             --report-formats json,html,sarif --no-progress --log-level INFO || true
 
       # ---- Gitleaks ----
-      - name: Gitleaks (auto --no-git on weird remotes)
+      - name: Gitleaks
         run: |
-          set -e
           GL_OUT="./_reports/gitleaks/results.json"
           USE_NOGIT=1
           if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
@@ -71,7 +70,7 @@ jobs:
       # ---- TruffleHog (only verified + exclude binaries/archives) ----
       - name: TruffleHog (filesystem)
         run: |
-          EX_RE="(\.git|_reports|_unpack_all|\.pkg_online_.*|\.pkg_offline_.*|dist|vendor|node_modules|\.tar(\.gz)?__dir|\.tgz$|\.tar$|\.gz$|\.zip$|\.7z$|\.bz2$|\.xz$|\.pyc$|\.class$|\.dylib$|\.so$|\.dll$|\.bin$)"
+          EX_RE='(\.git|_reports|_unpack_all|\.pkg_online_.*|\.pkg_offline_.*|dist|vendor|node_modules|\.tar(\.gz)?__dir|\.tgz$|\.tar$|\.gz$|\.zip$|\.7z$|\.bz2$|\.xz$|\.pyc$|\.class$|\.dylib$|\.so$|\.dll$|\.bin$)'
           docker run --rm -v "$PWD":/repo trufflesecurity/trufflehog:latest filesystem /repo \
             --only-verified --no-update --exclude "$EX_RE" --json > _reports/trufflehog/results.json 2> _reports/trufflehog/stderr.log || true
 
@@ -86,8 +85,9 @@ jobs:
               semgrep scan --config p/ci --json -o /src/_reports/semgrep/results.json || true
           fi
 
-      # ---- Upload artifacts ----
+      # ---- Upload artifacts (luôn chạy) ----
       - name: Upload reports artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: autoscan-reports
