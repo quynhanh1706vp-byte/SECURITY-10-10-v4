@@ -2,10 +2,12 @@ name: AutoScan
 
 on:
   push:
-    branches: ['**']
+    branches:
+      - '**'
   pull_request:
-    branches: ['**']
-  workflow_dispatch: {}
+    branches:
+      - '**'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -20,7 +22,13 @@ jobs:
 
       - name: Prepare reports dir
         run: |
-          mkdir -p _reports/kics _reports/gitleaks _reports/trivy-fs _reports/syft _reports/grype _reports/trufflehog _reports/semgrep
+          mkdir -p _reports/kics \
+                   _reports/gitleaks \
+                   _reports/trivy-fs \
+                   _reports/syft \
+                   _reports/grype \
+                   _reports/trufflehog \
+                   _reports/semgrep
 
       # ---- KICS (IaC) ----
       - name: KICS scan (IaC)
@@ -70,7 +78,7 @@ jobs:
       # ---- TruffleHog (only verified + exclude binaries/archives) ----
       - name: TruffleHog (filesystem)
         run: |
-          EX_RE='(\.git|_reports|_unpack_all|\.pkg_online_.*|\.pkg_offline_.*|dist|vendor|node_modules|\.tar(\.gz)?__dir|\.tgz$|\.tar$|\.gz$|\.zip$|\.7z$|\.bz2$|\.xz$|\.pyc$|\.class$|\.dylib$|\.so$|\.dll$|\.bin$)'
+          EX_RE="(\.git|_reports|_unpack_all|\.pkg_online_.*|\.pkg_offline_.*|dist|vendor|node_modules|\.tar(\.gz)?__dir|\.tgz$|\.tar$|\.gz$|\.zip$|\.7z$|\.bz2$|\.xz$|\.pyc$|\.class$|\.dylib$|\.so$|\.dll$|\.bin$)"
           docker run --rm -v "$PWD":/repo trufflesecurity/trufflehog:latest filesystem /repo \
             --only-verified --no-update --exclude "$EX_RE" --json > _reports/trufflehog/results.json 2> _reports/trufflehog/stderr.log || true
 
