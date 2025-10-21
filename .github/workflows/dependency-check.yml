@@ -1,0 +1,32 @@
+name: OWASP Dependency-Check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  dc:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache DC Data
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository/org/owasp/dependency-check-data
+          key: dc-data-${{ runner.os }}-v8
+      - name: Run Dependency-Check (CLI)
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          format: 'SARIF'
+          project: '${{ github.repository }}'
+          path: '.'
+          out: 'reports'
+          args: >
+            --failOnCVSS 0
+      - name: Upload SARIF
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: reports/dependency-check-report.sarif

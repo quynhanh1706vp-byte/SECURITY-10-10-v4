@@ -1,0 +1,95 @@
+name: AutoScan
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare reports dir
+        run: |
+          mkdir -p _reports/{kics,gitleaks,trivy-fs,syft,grype,trufflehog,semgrep}
+
+      # ---- KICS (IaC) ----
+      - name: KICS scan (IaC)
+        run: |
+          docker run --rm -v "$PWD":/src -w /src checkmarx/kics:latest \
+            scan -p . -o ./_reports/kics \
+            -e "_reports,.pkg_online_*,.pkg_offline_*,**/_unpack_all/**,**/*.tar.gz__dir/**,**/layer.tar__dir/**,dist,vendor,node_modules" \
+            --report-formats json,html,sarif --no-progress --log-level INFO || true
+
+      # ---- Gitleaks ----
+      - name: Gitleaks (auto --no-git on weird remotes)
+        run: |
+          set -e
+          GL_OUT="./_reports/gitleaks/results.json"
+          USE_NOGIT=1
+          if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+            RURL="$(git config --get remote.origin.url || true)"
+            echo "$RURL" | grep -qiE '^(https?|ssh)://|^[^/:]+@[^:]+:' && USE_NOGIT=0
+          fi
+          if [ "$USE_NOGIT" = "1" ]; then
+            docker run --rm -v "$PWD":/repo zricethezav/gitleaks:latest detect \
+              --no-git -s /repo --no-banner --report-format json --report-path /repo/$GL_OUT || true
+          else
+            docker run --rm -v "$PWD":/repo zricethezav/gitleaks:latest detect \
+              -s /repo --no-banner --report-format json --report-path /repo/$GL_OUT || true
+          fi
+
+      # ---- Trivy FS ----
+      - name: Trivy (fs: secrets)
+        run: |
+          docker run --rm -v "$PWD":/repo aquasec/trivy:latest fs /repo \
+            --security-checks secret -q -f json -o /repo/_reports/trivy-fs/secrets.json || true
+
+      - name: Trivy (fs: vuln+config)
+        run: |
+          docker run --rm -v "$PWD":/repo aquasec/trivy:latest fs /repo \
+            --security-checks vuln,config -q -f json -o /repo/_reports/trivy-fs/vuln_config.json || true
+
+      # ---- Syft + Grype ----
+      - name: Syft SBOM (CycloneDX)
+        run: |
+          docker run --rm -v "$PWD":/repo anchore/syft:latest dir:/repo -o cyclonedx-json > _reports/syft/sbom.cdx.json || true
+
+      - name: Grype (CVE on SBOM)
+        run: |
+          docker run --rm -v "$PWD":/repo anchore/grype:latest sbom:/repo/_reports/syft/sbom.cdx.json -o json > _reports/grype/results.json || true
+
+      # ---- TruffleHog (only verified + exclude binaries/archives) ----
+      - name: TruffleHog (filesystem)
+        run: |
+          EX_RE="(\.git|_reports|_unpack_all|\.pkg_online_.*|\.pkg_offline_.*|dist|vendor|node_modules|\.tar(\.gz)?__dir|\.tgz$|\.tar$|\.gz$|\.zip$|\.7z$|\.bz2$|\.xz$|\.pyc$|\.class$|\.dylib$|\.so$|\.dll$|\.bin$)"
+          docker run --rm -v "$PWD":/repo trufflesecurity/trufflehog:latest filesystem /repo \
+            --only-verified --no-update --exclude "$EX_RE" --json > _reports/trufflehog/results.json 2> _reports/trufflehog/stderr.log || true
+
+      # ---- Semgrep ----
+      - name: Semgrep (prefer local rules if exist)
+        run: |
+          if [ -d rules/semgrep ]; then
+            docker run --rm -v "$PWD":/src returntocorp/semgrep:latest \
+              semgrep scan --config /src/rules/semgrep --json -o /src/_reports/semgrep/results.json || true
+          else
+            docker run --rm -v "$PWD":/src returntocorp/semgrep:latest \
+              semgrep scan --config p/ci --json -o /src/_reports/semgrep/results.json || true
+          fi
+
+      # ---- Upload artifacts ----
+      - name: Upload reports artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: autoscan-reports
+          path: _reports/
+          if-no-files-found: warn

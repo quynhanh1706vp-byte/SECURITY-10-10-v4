@@ -1,25 +1,20 @@
-name: Gitleaks (secrets)
+name: Gitleaks
+
 on:
-  push:
   pull_request:
+  push:
   workflow_dispatch:
-permissions:
-  contents: read
-  security-events: write
 
 jobs:
-  gitleaks:
-    continue-on-error: true
+  scan:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Run Gitleaks
-        uses: gitleaks/gitleaks-action@v2
-        with:
-          args: detect --redact --report-format sarif --report-path gitleaks.sarif --exit-code 0
-      - name: Upload SARIF
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: gitleaks.sarif
+        with: { fetch-depth: 0 }
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }} # nếu org có license
