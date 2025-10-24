@@ -1,0 +1,15 @@
+{
+  "success": "Success",
+  "error": "Error",
+  "warning": "Warning",
+  "ok": "Ok",
+  "cancel": "Cancel",
+  "search": "Search",
+  "action": "Action",
+  "selected": "Selected",
+  "records": "records",
+  "loadingData": "Loading data...",
+  "appName": "Quản lý ra vào",
+  "appDescription": "Access Control Management System",
+  "unknown": "Unknown"
+}

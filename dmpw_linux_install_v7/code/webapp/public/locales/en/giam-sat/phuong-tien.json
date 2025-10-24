@@ -1,0 +1,42 @@
+{
+  "title": "Vehicles",
+  "stats": {
+    "totalVehicles": "Total Vehicles",
+    "vehiclesIn": "Vehicles In",
+    "vehiclesOut": "Vehicles Out",
+    "employeeVehicles": "Employee Vehicles",
+    "guestVehicles": "Guest Vehicles"
+  },
+  "tabs": {
+    "all": "All",
+    "abnormal": "Abnormal Warning",
+    "employee": "Employee",
+    "guest": "Guest"
+  },
+  "tags": {
+    "warning": "Warning",
+    "employee": "Employee",
+    "guest": "Guest"
+  },
+  "columns": {
+    "image": "Image",
+    "time": "Time",
+    "plateNumber": "Plate Number",
+    "vehicleOwner": "Vehicle Owner",
+    "object": "Object",
+    "accessPoint": "Access Point",
+    "unit": "Unit",
+    "eventDetails": "Event Details"
+  },
+  "placeholders": {
+    "accessPoint": "Access Point",
+    "eventType": "Event Type"
+  },
+  "fields": {
+    "plateNumber": "Plate Number",
+    "event": "Event"
+  },
+  "buttons": {
+    "viewAll": "View All"
+  }
+}

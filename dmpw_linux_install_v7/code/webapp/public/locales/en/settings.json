@@ -1,0 +1,175 @@
+{
+  "settings/password": {
+    "settings/password": "Password Settings"
+  },
+  "titles": {
+    "systemSettings": "System Settings",
+    "userSettings": "User Settings",
+    "securitySettings": "Security Settings",
+    "deviceSettings": "Device Settings",
+    "notificationSettings": "Notification Settings",
+    "backupSettings": "Backup Settings",
+    "integrationSettings": "Integration Settings",
+    "generalSettings": "General Settings"
+  },
+  "categories": {
+    "general": "General",
+    "security": "Security",
+    "notifications": "Notifications",
+    "devices": "Devices",
+    "users": "Users",
+    "system": "System",
+    "backup": "Backup",
+    "integration": "Integration",
+    "appearance": "Appearance",
+    "performance": "Performance"
+  },
+  "general": {
+    "siteName": "System Name",
+    "siteDescription": "System Description",
+    "defaultLanguage": "Default Language",
+    "timezone": "Time Zone",
+    "dateFormat": "Date Format",
+    "timeFormat": "Time Format",
+    "currency": "Currency",
+    "defaultPageSize": "Default Page Size",
+    "logoUpload": "Upload Logo",
+    "maintenanceMode": "Maintenance Mode",
+    "debugMode": "Debug Mode"
+  },
+  "security": {
+    "passwordPolicy": "Password Policy",
+    "minPasswordLength": "Minimum Password Length",
+    "requireUppercase": "Require Uppercase",
+    "requireNumbers": "Require Numbers",
+    "requireSpecialChars": "Require Special Characters",
+    "passwordExpiration": "Password Expiration",
+    "loginAttempts": "Max Login Attempts",
+    "sessionTimeout": "Session Timeout",
+    "twoFactorAuth": "Two-Factor Authentication",
+    "ipWhitelist": "IP Whitelist",
+    "auditLogging": "Audit Logging",
+    "encryptionLevel": "Encryption Level",
+    "certificateManagement": "Certificate Management"
+  },
+  "passwordSettings": {
+    "title": "Security Configuration",
+    "sections": {
+      "passwordPolicy": "Password Policy",
+      "timeConfiguration": "Time Configuration",
+      "loginConfiguration": "Login Configuration"
+    },
+    "fields": {
+      "changeInFirstTime": "Require password change on first login",
+      "haveUpperCase": "Password must contain uppercase letters",
+      "haveNumber": "Password must contain numbers (1, 2..)",
+      "haveSpecial": "Password must contain special characters (@, #,...)",
+      "timeNeedToChange": "Time to change password (minutes)",
+      "maximumTimeUsePassword": "Maximum time using valid password (minutes)",
+      "maximumEnterWrongPassword": "Maximum wrong login attempts",
+      "timeoutWhenWrongPassword": "Timeout duration for wrong password (minutes)"
+    },
+    "placeholders": {
+      "enterMinutes": "Enter minutes",
+      "enterTimes": "Enter times"
+    },
+    "validation": {
+      "timeRequired": "Please enter time",
+      "timesRequired": "Please enter times"
+    },
+    "buttons": {
+      "save": "Save Configuration",
+      "cancel": "Cancel"
+    }
+  },
+  "notifications": {
+    "enableEmailNotifications": "Enable Email Notifications",
+    "enableSmsNotifications": "Enable SMS Notifications",
+    "enablePushNotifications": "Enable Push Notifications",
+    "smtpServer": "SMTP Server",
+    "smtpPort": "SMTP Port",
+    "smtpUsername": "SMTP Username",
+    "smtpPassword": "SMTP Password",
+    "smsProvider": "SMS Provider",
+    "smsApiKey": "SMS API Key",
+    "notificationFrequency": "Notification Frequency",
+    "alertPriority": "Alert Priority",
+    "recipientGroups": "Recipient Groups"
+  },
+  "devices": {
+    "autoDiscovery": "Auto Discovery",
+    "connectionTimeout": "Connection Timeout",
+    "retryAttempts": "Retry Attempts",
+    "keepAliveInterval": "Keep-Alive Interval",
+    "heartbeatInterval": "Heartbeat Interval",
+    "devicePolling": "Device Polling",
+    "logLevel": "Log Level",
+    "backupConfiguration": "Backup Configuration",
+    "firmwareUpdate": "Firmware Update",
+    "deviceSynchronization": "Device Synchronization"
+  },
+  "backup": {
+    "enableAutoBackup": "Enable Auto Backup",
+    "backupSchedule": "Backup Schedule",
+    "backupLocation": "Backup Location",
+    "retentionPeriod": "Retention Period",
+    "encryptBackup": "Encrypt Backup",
+    "backupNotifications": "Backup Notifications",
+    "maxBackupSize": "Max Backup Size",
+    "compressionLevel": "Compression Level",
+    "backupVerification": "Backup Verification",
+    "cloudBackup": "Cloud Backup"
+  },
+  "integration": {
+    "apiEndpoints": "API Endpoints",
+    "webhooks": "Webhooks",
+    "ssoConfiguration": "SSO Configuration",
+    "ldapIntegration": "LDAP Integration",
+    "activeDirectory": "Active Directory",
+    "thirdPartyServices": "Third-party Services",
+    "dataExportFormats": "Data Export Formats",
+    "importSchedule": "Import Schedule",
+    "syncConfiguration": "Sync Configuration",
+    "apiRateLimit": "API Rate Limit"
+  },
+  "buttons": {
+    "save": "Save Settings",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "restore": "Restore",
+    "test": "Test",
+    "apply": "Apply",
+    "export": "Export Settings",
+    "import": "Import Settings",
+    "backup": "Backup",
+    "restoreDefaults": "Restore Defaults"
+  },
+  "messages": {
+    "settingsSaved": "Settings saved successfully",
+    "settingsRestored": "Settings restored successfully",
+    "testSuccessful": "Test successful",
+    "testFailed": "Test failed",
+    "invalidConfiguration": "Invalid configuration",
+    "restartRequired": "System restart required",
+    "backupCreated": "Backup created successfully",
+    "configurationExported": "Configuration exported successfully",
+    "configurationImported": "Configuration imported successfully"
+  },
+  "placeholders": {
+    "enterValue": "Enter value",
+    "selectOption": "Select option",
+    "enterUrl": "Enter URL",
+    "enterEmail": "Enter email",
+    "selectFile": "Select file",
+    "enterPath": "Enter path"
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email format",
+    "invalidUrl": "Invalid URL format",
+    "invalidNumber": "Invalid number",
+    "minLength": "Minimum {min} characters",
+    "maxLength": "Maximum {max} characters",
+    "invalidFormat": "Invalid format"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "title": "Danh sách phương tiện",
+  "columns": {
+    "owner": "Chủ phương tiện",
+    "model": "Hãng xe",
+    "plateNumber": "Biển số",
+    "vehicleType": "Loại xe",
+    "color": "Màu",
+    "actions": "Thao tác"
+  },
+  "buttons": {
+    "addVehicle": "Thêm phương tiện",
+    "addFromForm": "Thêm từ form",
+    "importExcel": "Thêm từ file excel",
+    "edit": "Sửa",
+    "delete": "Xóa",
+    "export": "Xuất dữ liệu"
+  },
+  "tabs": {
+    "employee": "Nhân viên",
+    "visitor": "Khách mời"
+  },
+  "placeholders": {
+    "search": "Tìm kiếm"
+  },
+  "confirmDelete": {
+    "title": "Xác nhận xóa phương tiện",
+    "message": "Bạn có chắc chắn muốn xóa phương tiện này không?"
+  },
+  "modal": {
+    "importTitle": "Nhập phương tiện"
+  }
+}

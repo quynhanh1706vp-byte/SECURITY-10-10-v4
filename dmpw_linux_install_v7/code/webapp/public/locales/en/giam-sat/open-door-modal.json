@@ -1,0 +1,10 @@
+{
+  "labels": {
+    "openPeriod": "Door open time in seconds (1~254)",
+    "openUntilTime": "Open door until time",
+    "releaseEmergency": "Turn off emergency mode"
+  },
+  "validation": {
+    "enterOpenTime": "Please enter door open time"
+  }
+}

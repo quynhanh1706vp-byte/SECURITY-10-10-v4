@@ -1,0 +1,51 @@
+{
+  "modal": {
+    "titles": {
+      "importExcel": "Import from Excel",
+      "importCard": "Import Employee Cards",
+      "importEmployees": "Import Employees"
+    },
+    "buttons": {
+      "save": "Save Data",
+      "close": "Close",
+      "cancel": "Cancel",
+      "upload": "Upload",
+      "download": "Download",
+      "downloadTemplate": "Download Template"
+    }
+  },
+  "messages": {
+    "selectFile": "Please select a file to upload",
+    "fileInvalid": "Invalid file",
+    "fileSizeExceeded": "File must not exceed 10MB",
+    "fileTypeNotAllowed": "Only XLSX files are accepted",
+    "uploadSuccess": "Upload successful",
+    "uploadError": "Error uploading file",
+    "downloadError": "Error downloading file",
+    "downloadTemplateError": "Error downloading template",
+    "processingFile": "Processing file...",
+    "fileEmpty": "File is empty",
+    "invalidData": "Invalid data"
+  },
+  "form": {
+    "labels": {
+      "selectFile": "Select File",
+      "fileSize": "File Size",
+      "fileType": "File Type"
+    },
+    "placeholders": {
+      "chooseFile": "Choose file to upload",
+      "dragDropFile": "Drag and drop file here"
+    },
+    "text": {
+      "dragDropArea": "Click or drag file to this area to upload",
+      "downloadTemplate": "Download template",
+      "here": "here"
+    }
+  },
+  "validation": {
+    "fileRequired": "Please select a file",
+    "fileTypeInvalid": "File type not supported",
+    "fileSizeInvalid": "File size too large"
+  }
+}

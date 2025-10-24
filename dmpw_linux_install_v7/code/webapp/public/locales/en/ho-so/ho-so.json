@@ -1,0 +1,17 @@
+{
+  "title": {
+    "config": "Optional",
+    "change_password": "Change Password"
+  },
+  "formFieldLabel": {
+    "preferredSystem": "Interface",
+    "language": "Language",
+    "timezone": "Time Zone",
+    "password": "Password",
+    "rePassword": "Re-enter The Password"
+  },
+  "image_not_allow": "Only image files can be uploaded",
+  "image_size_error": "File size must not exceed 5MB",
+  "image_upload_success": "Upload image successfully",
+  "image_upload_error": "Upload image failed"
+}

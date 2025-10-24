@@ -1,0 +1,15 @@
+{
+  "work-shifts": "Ca trực",
+  "titles": {
+    "create": "Thêm ca trực",
+    "edit": "Sửa ca trực"
+  },
+  "deleteConfirm": {
+    "title": "Xoá ca trực",
+    "message": "Bạn có chắc chắn muốn xoá ca trực này không?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Xoá nhiều ca trực",
+    "message": "Bạn có chắc chắn muốn xoá {count} ca trực này không?"
+  }
+}

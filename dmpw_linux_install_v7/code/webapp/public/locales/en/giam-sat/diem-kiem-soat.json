@@ -1,0 +1,36 @@
+{
+  "title": "Access Points",
+  "stats": {
+    "totalPoints": "Total Access Points",
+    "offlinePoints": "Offline Points"
+  },
+  "tabs": {
+    "connected": "Connected",
+    "warning": "Access Point Warning",
+    "all": "All"
+  },
+  "columns": {
+    "accessPoint": "Access Point",
+    "unit": "Unit",
+    "operationMode": "Operation Mode",
+    "timeFrame": "Control Time Frame",
+    "eventDetails": "Event Details",
+    "eventStatus": "Access Point Status",
+    "actions": "Actions"
+  },
+  "buttons": {
+    "openDoor": "Open Door",
+    "restart": "Restart",
+    "sync": "Sync"
+  },
+  "placeholders": {
+    "search": "Search",
+    "unit": "Unit",
+    "operationMode": "Operation Mode"
+  },
+  "menu": {
+    "sync": "Sync",
+    "deviceLog": "Device Log",
+    "restart": "Restart"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "titles": {
+    "create": "Add New Unit",
+    "edit": "Edit Unit"
+  },
+  "deleteConfirm": {
+    "title": "Delete Unit",
+    "message": "Are you sure you want to delete this unit?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Delete Multiple Units",
+    "message": "Are you sure you want to delete {count} units?"
+  },
+  "unassignDoors": {
+    "multipleDeleteConfirm": {
+      "title": "Remove Access Points from Unit",
+      "message": "Are you sure you want to remove {count} access points from this unit?"
+    }
+  }
+}

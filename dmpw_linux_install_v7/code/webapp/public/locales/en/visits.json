@@ -1,0 +1,10 @@
+{
+  "deleteConfirm": {
+    "title": "Confirm Delete Guest",
+    "message": "Are you sure you want to delete this guest?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Confirm Delete Guest",
+    "message": "Are you sure you want to delete {count} guests?"
+  }
+}

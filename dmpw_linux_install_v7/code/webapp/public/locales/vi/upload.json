@@ -1,0 +1,52 @@
+{
+  "modal": {
+    "title": "Nhập từ Excel",
+    "titles": {
+      "importExcel": "Nhập từ Excel",
+      "importCard": "Nhập thẻ nhân viên",
+      "importEmployees": "Nhập nhân viên"
+    },
+    "buttons": {
+      "save": "Lưu dữ liệu",
+      "close": "Đóng",
+      "cancel": "Hủy",
+      "upload": "Tải lên",
+      "download": "Tải xuống",
+      "downloadTemplate": "Tải file mẫu"
+    }
+  },
+  "messages": {
+    "selectFile": "Vui lòng chọn file để tải lên",
+    "fileInvalid": "File không hợp lệ",
+    "fileSizeExceeded": "File không được vượt quá 10MB",
+    "fileTypeNotAllowed": "Chỉ chấp nhận file XLSX",
+    "uploadSuccess": "Tải lên thành công",
+    "uploadError": "Lỗi khi tải lên file",
+    "downloadError": "Lỗi khi tải file mẫu",
+    "downloadTemplateError": "Lỗi khi tải file mẫu",
+    "processingFile": "Đang xử lý file...",
+    "fileEmpty": "File trống",
+    "invalidData": "Dữ liệu không hợp lệ"
+  },
+  "form": {
+    "labels": {
+      "selectFile": "Chọn file",
+      "fileSize": "Kích thước file",
+      "fileType": "Loại file"
+    },
+    "placeholders": {
+      "chooseFile": "Chọn file để tải lên",
+      "dragDropFile": "Kéo thả file vào đây"
+    },
+    "text": {
+      "dragDropArea": "Click hoặc kéo thả file vào vùng tải",
+      "downloadTemplate": "Tải file mẫu",
+      "here": "tại đây"
+    }
+  },
+  "validation": {
+    "fileRequired": "Vui lòng chọn file",
+    "fileTypeInvalid": "Loại file không được hỗ trợ",
+    "fileSizeInvalid": "Kích thước file quá lớn"
+  }
+}

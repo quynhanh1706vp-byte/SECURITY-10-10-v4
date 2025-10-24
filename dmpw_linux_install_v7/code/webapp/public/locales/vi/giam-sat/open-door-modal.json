@@ -1,0 +1,10 @@
+{
+  "labels": {
+    "openPeriod": "Thời gian mở cửa theo giây (1~254)",
+    "openUntilTime": "Mở cửa cho đến thời điểm",
+    "releaseEmergency": "Tắt chế độ khẩn cấp"
+  },
+  "validation": {
+    "enterOpenTime": "Vui lòng nhập thời gian mở cửa"
+  }
+}

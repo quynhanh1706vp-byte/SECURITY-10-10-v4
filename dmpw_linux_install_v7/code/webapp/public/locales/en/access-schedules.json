@@ -1,0 +1,14 @@
+{
+  "titles": {
+    "create": "Add Work Schedule",
+    "edit": "Edit Work Schedule"
+  },
+  "deleteConfirm": {
+    "title": "Delete Work Schedule",
+    "message": "Are you sure you want to delete this work schedule?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Delete Multiple Work Schedules",
+    "message": "Are you sure you want to delete {count} work schedules?"
+  }
+}

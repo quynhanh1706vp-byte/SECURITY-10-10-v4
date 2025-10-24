@@ -1,0 +1,52 @@
+{
+  "titles": {
+    "create": "Add Camera",
+    "edit": "Edit Camera"
+  },
+  "form": {
+    "labels": {
+      "cameraType": "Camera Type",
+      "cameraName": "Camera Name",
+      "direction": "In/Out Direction",
+      "directionIn": "In",
+      "directionOut": "Out",
+      "videoLength": "Video Length",
+      "accessPoint": "Access Point",
+      "ipAddress": "IP Address",
+      "port": "Port",
+      "username": "Username",
+      "password": "Password",
+      "cameraId": "Camera ID",
+      "saveEventUnknownFace": "Save event unknown face",
+      "checkEventFromWebHook": "Check event from webhook to open access point"
+    },
+    "placeholders": {
+      "selectCameraType": "Select camera type",
+      "enterCameraName": "Enter camera name",
+      "selectDirection": "Select",
+      "enterVideoLength": "Enter video length",
+      "selectAccessPoint": "Select access point",
+      "enterIpAddress": "Enter IP address",
+      "enterPort": "Enter port",
+      "enterUsername": "Enter username",
+      "enterPassword": "Enter password",
+      "enterCameraId": "Enter camera ID"
+    },
+    "validation": {
+      "cameraTypeRequired": "Please select camera type",
+      "cameraNameRequired": "Please enter camera name",
+      "directionRequired": "Please select direction",
+      "videoLengthRequired": "Please enter video length",
+      "accessPointRequired": "Please select access point",
+      "ipAddressRequired": "Please enter IP address",
+      "portRequired": "Please enter port",
+      "cameraIdRequired": "Please enter camera ID",
+      "cameraIdOnlyNumbers": "Camera ID must contain only numbers",
+      "cameraNameNoSpecialChars": "Camera name cannot contain special characters"
+    }
+  },
+  "deleteConfirm": {
+    "title": "Delete camera",
+    "message": "Are you sure you want to delete this camera?"
+  }
+}

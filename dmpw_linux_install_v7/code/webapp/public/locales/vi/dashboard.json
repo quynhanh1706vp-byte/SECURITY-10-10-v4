@@ -1,0 +1,36 @@
+{
+  "datePicker": {
+    "placeholder": "Chọn ngày"
+  },
+  "metric": {
+    "access": {
+      "total": "Lượt ra/vào",
+      "abnormal": "Sự kiện bất thường",
+      "offlineDevices": "Thiết bị mất kết nối"
+    },
+    "staff": {
+      "total": "Tổng số nhân viên",
+      "accessed": "Nhân viên ra/vào"
+    },
+    "visitor": {
+      "total": "Khách tham quan",
+      "entered": "Khách đã vào",
+      "left": "Khách đã ra",
+      "registered": "Khách đăng ký",
+      "awaiting": "Khách đang chờ duyệt"
+    },
+    "vehicle": {
+      "total": "Số phương tiện",
+      "entered": "Phương tiện đã vào",
+      "left": "Phương tiện đã ra",
+      "staff": "Phương tiện của nhân viên",
+      "visitor": "Phương tiện của khách"
+    }
+  },
+  "chart": {
+    "title": "Ra/vào theo dòng thời gian",
+    "deviceFilterPlaceholder": "Tất cả các điểm kiểm soát",
+    "nameIn": "Vào",
+    "nameOut": "Ra"
+  }
+}

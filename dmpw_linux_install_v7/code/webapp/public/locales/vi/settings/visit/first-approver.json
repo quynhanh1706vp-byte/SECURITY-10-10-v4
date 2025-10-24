@@ -1,0 +1,9 @@
+{
+  "titles": {
+    "create": "Thêm tài khoản phê duyệt"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Xóa nhiều tài khoản phê duyệt",
+    "message": "Bạn có chắc chắn muốn xóa {count} tài khoản phê duyệt? Hành động này không thể hoàn tác."
+  }
+}

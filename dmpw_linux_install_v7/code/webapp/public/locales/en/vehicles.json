@@ -1,0 +1,43 @@
+{
+  "titles": {
+    "create": "Add Vehicle",
+    "edit": "Edit Vehicle"
+  },
+  "confirmDelete": {
+    "title": "Delete Vehicle",
+    "message": "Are you sure you want to delete this vehicle?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Delete Multiple Vehicles",
+    "message": "Are you sure you want to delete {count} vehicles?"
+  },
+  "form": {
+    "vehicleType": "Vehicle Type",
+    "model": "Vehicle Model",
+    "plateNumber": "License Plate",
+    "color": "Vehicle Color",
+    "objectType": "Object Type",
+    "user": "Employee",
+    "visitor": "Guest"
+  },
+  "vehicleType": {
+    "car": "Car",
+    "motorbike": "Motorbike"
+  },
+  "placeholder": {
+    "selectUser": "Select Employee",
+    "selectVisitor": "Select Guest",
+    "model": "Enter vehicle model",
+    "plateNumber": "Enter license plate",
+    "color": "Enter vehicle color",
+    "vehicleType": "Select vehicle type"
+  },
+  "validation": {
+    "modelRequired": "Please enter vehicle model",
+    "plateNumberRequired": "Please enter license plate",
+    "colorRequired": "Please enter vehicle color",
+    "userRequired": "Please select an employee",
+    "visitorRequired": "Please select a guest",
+    "noSpecialCharsTooltip": "Special characters are not allowed"
+  }
+}

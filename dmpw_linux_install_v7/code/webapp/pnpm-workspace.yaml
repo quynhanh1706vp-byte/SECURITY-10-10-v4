@@ -1,0 +1,6 @@
+ignoredBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - bufferutil
+  - es5-ext
+  - unrs-resolver
+  - utf-8-validate

@@ -1,0 +1,71 @@
+{
+    "departments": {
+        "title": "Department Management",
+        "add": "Add department",
+        "search": "Search department",
+        "total": "Total: {count} record(s)",
+        "selected": "Selected: {count} record(s)",
+        "deleteConfirm": {
+            "title": "Remove Employee from Department",
+            "message": "Are you sure you want to remove this employee from the department?"
+        },
+        "multipleDeleteConfirm": {
+            "title": "Remove Multiple Employees from Department",
+            "message": "Are you sure you want to remove {count} selected employees from the department?"
+        },
+        "assignModalTitle": "Assign Employees to Department",
+        "tabs": {
+            "employees": "Employees"
+        },
+        "columns": {
+            "name": "Name",
+            "employeeNo": "Employee ID",
+            "departmentName": "Department",
+            "effectiveDate": "Effective Date",
+            "expiredDate": "Expiry Date",
+            "actions": "Actions"
+        },
+        "buttons": {
+            "assign": "Assign Employees",
+            "edit": "Edit",
+            "delete": "Delete",
+            "reload": "Reload"
+        }
+    },
+    "buttons": {
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "reload": "Reload"
+    },
+    "common": {
+        "search": "Search",
+        "select": "Select",
+        "input": "Enter"
+    },
+    "form": {
+        "fields": {
+            "code": "Department code",
+            "name": "Department name",
+            "manager": "Manager",
+            "parent": "Parent department",
+            "percentOutside": "Max percentage of employees allowed outside",
+            "maxEmployeesOutside": "Max number of employees allowed outside"
+        },
+        "placeholders": {
+            "code": "Enter department code",
+            "name": "Enter department name",
+            "parent": "Select parent department",
+            "percentOutside": "Enter %",
+            "maxEmployeesOutside": "Enter quantity"
+        },
+        "messages": {
+            "requiredCode": "Please enter the department code",
+            "requiredName": "Please enter the department name"
+        },
+        "tips": {
+            "parentEmpty": "Leave blank if this is a parent department",
+            "percentOutsideEmpty": "Leave blank to allow unlimited employees to go outside during working hours"
+        }
+    }
+}

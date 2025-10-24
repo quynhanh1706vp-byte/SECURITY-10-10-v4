@@ -1,0 +1,207 @@
+{
+  "title": "Employees",
+  "titles": {
+    "create": "Add employee",
+    "edit": "Edit employee"
+  },
+  "columns": {
+    "name": "Name",
+    "employeeCode": "Employee code",
+    "department": "Department",
+    "workType": "Work type",
+    "status": "Status",
+    "effectiveDate": "Effective date",
+    "expiredDate": "Expiry date",
+    "actions": "Actions"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "buttons": {
+    "addEmployee": "Add employee",
+    "addFromForm": "Add from form",
+    "importExcel": "Import excel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "assignAccessPoints": "Assign access points",
+    "addVehicle": "Add vehicle",
+    "addCard": "Add card",
+    "returnCard": "Return card",
+    "close": "Close",
+    "save": "Save"
+  },
+  "placeholders": {
+    "search": "Search employees",
+    "building": "Unit",
+    "department": "Department",
+    "status": "Status"
+  },
+  "modal": {
+    "importTitle": "Import employees"
+  },
+  "tabs": {
+    "generalInfo": "General information",
+    "identification": "Identification",
+    "accessPoints": "Access points",
+    "vehicles": "Vehicles",
+    "accountFeatures": "Account features"
+  },
+  "import": {
+    "errors": {
+      "fileType": "Only Excel or CSV files are supported"
+    },
+    "upload": {
+      "text": "Click or drag file to this area to upload",
+      "hint": "Support for Excel or CSV files"
+    }
+  },
+  "form": {
+    "uploadImage": "Upload employee photo",
+    "fields": {
+      "employeeCode": "Employee code",
+      "employeeName": "Employee name",
+      "department": "Department",
+      "gender": "Gender",
+      "birthDate": "Birth date",
+      "position": "Position",
+      "phone": "Phone number",
+      "email": "Email",
+      "active": "Active",
+      "workType": "Work type",
+      "effectiveDate": "Effective date",
+      "expiredDate": "Expiry date"
+    },
+    "placeholders": {
+      "employeeCode": "Enter employee code",
+      "employeeName": "Enter employee name",
+      "department": "Select department",
+      "gender": "Select gender",
+      "birthDate": "Select birth date",
+      "position": "Enter position",
+      "phone": "Enter phone number",
+      "email": "Enter email",
+      "workType": "Select work type",
+      "effectiveDate": "Effective date",
+      "expiredDate": "Expiry date"
+    },
+    "validation": {
+      "employeeCode": "Please enter employee code",
+      "employeeName": "Please enter employee name",
+      "department": "Please select department",
+      "phoneFormat": "Please enter a valid phone number",
+      "emailFormat": "Please enter a valid email",
+      "workType": "Please select work type",
+      "effectiveDate": "Please enter effective date",
+      "effectiveDateBeforeExpired": "Effective date must be before expiry date",
+      "expiredDate": "Please enter expiry date",
+      "expiredDateAfterEffective": "Expiry date must be after effective date",
+      "expiredDateMaxYear": "Year cannot exceed 9999",
+      "noSpecialChars": "Special characters are not allowed"
+    },
+    "sections": {
+      "accessTime": "Access time"
+    }
+  },
+  "accessPoints": {
+    "accessGroup": "Access group",
+    "fullAccess": "Full access",
+    "title": "List of access points accessible by permission group",
+    "columns": {
+      "accessPointName": "Access point name",
+      "unit": "Unit",
+      "operationMode": "Operation mode",
+      "verificationMode": "Verification mode",
+      "timeFrame": "Control time frame"
+    }
+  },
+  "vehicles": {
+    "title": "Employee vehicle list",
+    "buttons": {
+      "add": "Add vehicle"
+    },
+    "columns": {
+      "vehicleType": "Vehicle Type",
+      "model": "Vehicle Model",
+      "plateNumber": "License plate",
+      "color": "Color",
+      "actions": "Actions"
+    },
+    "confirmDelete": {
+      "title": "Confirm vehicle deletion",
+      "message": "Are you sure you want to delete this vehicle?"
+    },
+    "multipleDeleteConfirm": {
+      "title": "Delete multiple vehicles",
+      "message": "Are you sure you want to delete {count} vehicles?"
+    },
+    "modal": {
+      "addTitle": "Add new vehicle",
+      "editTitle": "Edit vehicle"
+    }
+  },
+  "identification": {
+    "title": "Employee identification list",
+    "buttons": {
+      "returnCard": "Return card",
+      "add": "Add identification"
+    },
+    "columns": {
+      "createdDate": "Created date",
+      "cardType": "Card type",
+      "cardId": "Card ID",
+      "status": "Status",
+      "returnDate": "Return date",
+      "actions": "Actions"
+    },
+    "confirmDelete": {
+      "title": "Confirm identification deletion",
+      "message": "Are you sure you want to delete this identification?"
+    },
+    "modal": {
+      "addTitle": "Add identification for employee",
+      "returnTitle": "Return employee identification"
+    },
+    "returnCard": {
+      "success": "Card returned successfully"
+    },
+    "form": {
+      "fields": {
+        "cardType": "Card type",
+        "cardId": "Card ID",
+        "note": "Note",
+        "cardStatus": "Card status"
+      },
+      "placeholders": {
+        "cardId": "Enter card ID",
+        "note": "Enter note (if any)"
+      },
+      "validation": {
+        "cardId": "Please enter card ID",
+        "cardIdPattern": "Card ID cannot contain special characters"
+      }
+    },
+    "returnForm": {
+      "fields": {
+        "cardId": "Card ID",
+        "reason": "Reason"
+      },
+      "placeholders": {
+        "cardId": "Card ID",
+        "reason": "Enter reason"
+      },
+      "validation": {
+        "cardId": "Please enter card ID"
+      }
+    }
+  },
+  "accountFeatures": {
+    "columns": {
+      "accountName": "Account name",
+      "email": "Email",
+      "permissions": "Permissions",
+      "actions": "Actions"
+    },
+    "deleteSuccess": "Successfully deleted: {name}"
+  }
+}

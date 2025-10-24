@@ -1,0 +1,44 @@
+{
+  "roles": "Role Management",
+  "titles": {
+    "create": "Add Role",
+    "edit": "Edit Role"
+  },
+  "title": "Role Management",
+  "create": "Add Role",
+  "search": "Search",
+  "table": {
+    "roleName": "Name",
+    "description": "Description",
+    "totalUsers": "Total Users",
+    "actions": "Actions",
+    "edit": "Edit"
+  },
+  "columns": {
+    "name": "Name",
+    "all": "Full Access",
+    "permissions": "Permissions"
+  },
+  "form": {
+    "title": {
+      "label": "Name",
+      "placeholder": "Typing name..."
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "Typing description..."
+    },
+    "permissionList": "List of Permissions",
+    "hint": "Configure permissions to access and manage system features",
+    "enableDepartmentLevel": "Enable Department Level Permission",
+    "isDefault": "Set default"
+  },
+  "deleteConfirm": {
+    "title": "Delete Confirmation",
+    "message": "Are you sure you want to delete this role?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Delete Multiple Roles",
+    "message": "Are you sure you want to delete {count} roles? This action cannot be undone."
+  }
+}

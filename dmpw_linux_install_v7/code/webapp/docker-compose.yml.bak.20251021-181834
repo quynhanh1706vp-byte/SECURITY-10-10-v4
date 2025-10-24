@@ -1,0 +1,12 @@
+services:
+  app:
+    image: vn-army-dmp-webapp:latest
+    pull_policy: never  # Use local image only
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_ENDPOINT=https://api3.demasterpro.com
+      - NEXT_PUBLIC_WS_ENDPOINT=wss://api3.demasterpro.com/ws
+    restart: unless-stopped
+    # Remove platform specification to let Docker use the image's native platform
+    # platform: linux/arm64

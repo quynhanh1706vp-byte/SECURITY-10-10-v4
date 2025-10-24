@@ -1,0 +1,30 @@
+{
+  "title": "Guest Access Report",
+  "columns": {
+    "accessTime": "Access Time",
+    "doorName": "Access Point",
+    "cardType": "ID Type",
+    "inOut": "In/Out",
+    "userName": "Guest Name",
+    "inviter": "Inviter",
+    "department": "Department",
+    "approver": "Approver",
+    "eventDetail": "Event Details",
+    "eventType": "Event Type",
+    "eventTime": "Exit Time"
+  },
+  "placeholders": {
+    "search": "Search by guest name",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "building": "Building",
+    "inOut": "In/Out"
+  },
+  "export": {
+    "button": "Export Data",
+    "title": "Export Data",
+    "download": "Download",
+    "fileFormat": "File Format",
+    "error": "Error exporting data"
+  }
+}

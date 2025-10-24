@@ -1,0 +1,23 @@
+{
+  "titles": {
+    "create": "Thêm người dùng",
+    "edit": "Sửa người dùng"
+  },
+  "deleteConfirm": {
+    "title": "Xóa nhân viên",
+    "message": "Bạn có chắc chắn muốn xóa nhân viên này không?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Xóa nhiều nhân viên",
+    "message": "Bạn có chắc chắn muốn xóa {count} nhân viên? Hành động này không thể hoàn tác."
+  },
+  "validation": {
+    "password": {
+      "minLength": "Mật khẩu phải có ít nhất 8 ký tự",
+      "hasUpperCase": "chứa chữ cái viết hoa",
+      "hasNumber": "chứa số",
+      "hasSpecial": "chứa ký tự đặc biệt",
+      "noSpaces": "Mật khẩu không được chứa khoảng trắng"
+    }
+  }
+}

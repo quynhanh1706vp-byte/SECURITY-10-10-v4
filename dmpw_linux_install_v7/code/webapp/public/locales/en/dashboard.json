@@ -1,0 +1,36 @@
+{
+  "datePicker": {
+    "placeholder": "Select date"
+  },
+  "metric": {
+    "access": {
+      "total": "Access events",
+      "abnormal": "Abnormal events",
+      "offlineDevices": "Offline devices"
+    },
+    "staff": {
+      "total": "Total staff",
+      "accessed": "Staff access"
+    },
+    "visitor": {
+      "total": "Visitors",
+      "entered": "Visitors entered",
+      "left": "Visitors left",
+      "registered": "Registered visitors",
+      "awaiting": "Awaiting approval"
+    },
+    "vehicle": {
+      "total": "Total vehicles",
+      "entered": "Vehicles entered",
+      "left": "Vehicles left",
+      "staff": "Staff vehicles",
+      "visitor": "Visitor vehicles"
+    }
+  },
+  "chart": {
+    "title": "In/out by timeline",
+    "deviceFilterPlaceholder": "All access points",
+    "nameIn": "In",
+    "nameOut": "Out"
+  }
+}

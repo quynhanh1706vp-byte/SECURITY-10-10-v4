@@ -1,0 +1,78 @@
+{
+  "titles": {
+    "management": "Quản lý nhân viên",
+    "create": "Thêm nhân viên",
+    "edit": "Sửa nhân viên",
+    "import": "Nhập nhân viên"
+  },
+  "buttons": {
+    "addEmployee": "Thêm nhân viên",
+    "importCard": "Nhập thẻ nhân viên", 
+    "addFromForm": "Thêm từ form",
+    "importExcel": "Nhập từ file excel",
+    "export": "Xuất dữ liệu",
+    "search": "Tìm kiếm"
+  },
+  "table": {
+    "columns": {
+      "name": "Tên",
+      "employeeCode": "Mã nhân viên",
+      "department": "Phòng ban",
+      "workType": "Hình thức làm việc",
+      "status": "Trạng thái hoạt động",
+      "position": "Chức vụ",
+      "phone": "Số điện thoại",
+      "email": "Email",
+      "cardNumber": "Số thẻ",
+      "joinDate": "Ngày vào làm",
+      "actions": "Thao tác"
+    }
+  },
+  "search": {
+    "placeholder": "Tìm kiếm nhân viên",
+    "filters": {
+      "department": "Phòng ban",
+      "status": "Trạng thái",
+      "workType": "Hình thức làm việc"
+    }
+  },
+  "form": {
+    "labels": {
+      "fullName": "Họ và tên",
+      "employeeCode": "Mã nhân viên",
+      "department": "Phòng ban",
+      "position": "Chức vụ",
+      "workType": "Hình thức làm việc",
+      "phone": "Số điện thoại",
+      "email": "Email",
+      "cardNumber": "Số thẻ",
+      "joinDate": "Ngày vào làm",
+      "status": "Trạng thái"
+    },
+    "placeholders": {
+      "enterFullName": "Nhập họ và tên",
+      "enterEmployeeCode": "Nhập mã nhân viên",
+      "selectDepartment": "Chọn phòng ban",
+      "selectPosition": "Chọn chức vụ",
+      "selectWorkType": "Chọn hình thức làm việc",
+      "enterPhone": "Nhập số điện thoại",
+      "enterEmail": "Nhập email",
+      "enterCardNumber": "Nhập số thẻ",
+      "selectJoinDate": "Chọn ngày vào làm"
+    },
+    "validation": {
+      "nameRequired": "Vui lòng nhập họ và tên",
+      "employeeCodeRequired": "Vui lòng nhập mã nhân viên",
+      "departmentRequired": "Vui lòng chọn phòng ban",
+      "phoneRequired": "Vui lòng nhập số điện thoại",
+      "emailRequired": "Vui lòng nhập email",
+      "emailInvalid": "Email không hợp lệ",
+      "phoneInvalid": "Số điện thoại không hợp lệ"
+    }
+  },
+  "status": {
+    "active": "Hoạt động",
+    "inactive": "Không hoạt động",
+    "suspended": "Tạm ngưng"
+  }
+}

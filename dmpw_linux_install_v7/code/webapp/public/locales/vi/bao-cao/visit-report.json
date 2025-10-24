@@ -1,0 +1,30 @@
+{
+  "title": "Báo cáo truy cập của khách mời",
+  "columns": {
+    "accessTime": "Thời gian truy cập",
+    "doorName": "Điểm truy cập",
+    "cardType": "Định danh",
+    "inOut": "Ra/vào",
+    "userName": "Tên khách",
+    "inviter": "Đầu mời gặp",
+    "department": "Phòng ban",
+    "approver": "Tài khoản duyệt",
+    "eventDetail": "Chi tiết sự kiện",
+    "eventType": "Loại sự kiện",
+    "eventTime": "Thời gian ra"
+  },
+  "placeholders": {
+    "search": "Tìm kiếm tên khách",
+    "startTime": "Thời gian bắt đầu",
+    "endTime": "Thời gian kết thúc",
+    "building": "Đơn vị",
+    "inOut": "Ra/vào"
+  },
+  "export": {
+    "button": "Xuất dữ liệu",
+    "title": "Xuất dữ liệu",
+    "download": "Tải xuống",
+    "fileFormat": "Định dạng tệp",
+    "error": "Lỗi khi xuất dữ liệu"
+  }
+}

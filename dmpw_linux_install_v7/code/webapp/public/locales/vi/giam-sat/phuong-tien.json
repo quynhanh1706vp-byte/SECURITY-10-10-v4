@@ -1,0 +1,42 @@
+{
+  "title": "Phương tiện",
+  "stats": {
+    "totalVehicles": "Số phương tiện",
+    "vehiclesIn": "Phương tiện đã vào",
+    "vehiclesOut": "Phương tiện đã ra",
+    "employeeVehicles": "Phương tiện của nhân viên",
+    "guestVehicles": "Phương tiện của khách"
+  },
+  "tabs": {
+    "all": "Tất cả",
+    "abnormal": "Cảnh báo bất thường",
+    "employee": "Nhân viên",
+    "guest": "Khách"
+  },
+  "tags": {
+    "warning": "Cảnh báo",
+    "employee": "Nhân viên",
+    "guest": "Khách"
+  },
+  "columns": {
+    "image": "Hình ảnh",
+    "time": "Thời gian",
+    "plateNumber": "Biển số",
+    "vehicleOwner": "Chủ phương tiện",
+    "object": "Đối tượng",
+    "accessPoint": "Điểm kiểm soát",
+    "unit": "Đơn vị",
+    "eventDetails": "Chi tiết sự kiện"
+  },
+  "placeholders": {
+    "accessPoint": "Điểm kiểm soát",
+    "eventType": "Loại sự kiện"
+  },
+  "fields": {
+    "plateNumber": "Biển số",
+    "event": "Sự kiện"
+  },
+  "buttons": {
+    "viewAll": "Xem tất cả"
+  }
+}

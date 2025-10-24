@@ -1,0 +1,46 @@
+{
+  "accounts": "Accounts",
+  "titles": {
+    "create": "Add User",
+    "edit": "Edit User"
+  },
+  "list": {
+    "title": "User Management",
+    "add": "Add User",
+    "search": "Search",
+    "columns": {
+      "email": "Account",
+      "userName": "Username",
+      "role": "Role",
+      "actions": "Actions",
+      "edit": "Edit"
+    }
+  },
+  "form": {
+    "username": {
+      "label": "Username",
+      "placeholder": "Typing username..."
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Typing password..."
+    },
+    "newPassword": {
+      "label": "New Password",
+      "placeholder": "Typing new password..."
+    },
+    "role": {
+      "label": "Role",
+      "placeholder": "Choose role"
+    },
+    "password_rules": "Password must include at least 8 characters, uppercase letters, lowercase letters, and special characters"
+  },
+  "deleteConfirm": {
+    "title": "Delete User",
+    "message": "Are you sure you want to delete this user?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Delete Multiple Users",
+    "message": "Are you sure you want to delete {count} users? This action cannot be undone."
+  }
+}

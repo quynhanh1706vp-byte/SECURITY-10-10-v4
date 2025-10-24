@@ -1,0 +1,140 @@
+{
+  "title": "Quản lý điểm kiểm soát",
+  "columns": {
+    "accessPointName": "Tên điểm kiểm soát",
+    "unit": "Đơn vị",
+    "deviceCode": "Mã thiết bị",
+    "operationMode": "Chế độ vận hành",
+    "verificationMode": "Chế độ kiểm tra",
+    "timeFrame": "Khung giờ kiểm soát",
+    "status": "Trạng thái hoạt động",
+    "progress": "Tiến độ",
+    "actions": "Thao tác",
+    "deviceName": "Tên thiết bị",
+    "ipAddress": "Địa chỉ IP",
+    "port": "Cổng",
+    "connectionStatus": "Trạng thái kết nối",
+    "deviceModel": "Model thiết bị",
+    "serialNumber": "Số serial",
+    "addedDate": "Ngày thêm",
+    "lastSync": "Lần đồng bộ cuối",
+    "syncStatus": "Trạng thái đồng bộ"
+  },
+  "status": {
+    "inactive": "Không hoạt động",
+    "active": "Hoạt động",
+    "warning": "Cảnh báo"
+  },
+  "buttons": {
+    "syncData": "Đồng bộ dữ liệu",
+    "sync": "Đồng bộ",
+    "copy": "Sao chép",
+    "getNewLog": "Lấy nhật kí mới",
+    "downloadAll": "Tải tất cả",
+    "addDevice": "Thêm thiết bị",
+    "edit": "Sửa",
+    "delete": "Xóa",
+    "save": "Lưu",
+    "history": "Lịch sử"
+  },
+  "placeholders": {
+    "search": "Tìm kiếm điểm kiểm soát",
+    "unit": "Đơn vị",
+    "operationMode": "Chế độ vận hành",
+    "connectionStatus": "Trạng thái kết nối",
+    "searchDevice": "Tìm kiếm thiết bị"
+  },
+  "menu": {
+    "downloadLog": "Tải xuống nhật ký",
+    "deviceHistory": "Lịch sử thiết bị",
+    "copyConfig": "Sao chép cấu hình"
+  },
+  "modal": {
+    "syncTitle": "Đồng bộ dữ liệu",
+    "historyTitle": "Lịch sử thiết bị",
+    "logTitle": "Nhật ký thiết bị",
+    "copyConfigTitle": "Sao chép cấu hình",
+    "addDeviceTitle": "Thêm thiết bị mới",
+    "editDeviceTitle": "Sửa thiết bị"
+  },
+  "sync": {
+    "success": "Đồng bộ dữ liệu thành công",
+    "error": "Đồng bộ dữ liệu thất bại"
+  },
+  "log": {
+    "noData": "Chưa có dữ liệu của thiết bị. Vui lòng nhấn nút Lấy nhật kí mới để nhận dữ liệu nhật kí mới nhất của thiết bị"
+  },
+  "selectedCount": "Đã chọn {count} bản ghi",
+  "tabs": {
+    "generalInfo": "Thông tin chung",
+    "deviceList": "Danh sách thiết bị"
+  },
+  "form": {
+    "fields": {
+      "doorName": "Tên điểm kiểm soát",
+      "building": "Đơn vị",
+      "operationType": "Chế độ vận hành",
+      "verifyMode": "Chế độ kiểm tra",
+      "doorActiveTimeZone": "Khung giờ kiểm soát",
+      "openDoorPassword": "Mật khẩu mở cửa",
+      "deviceName": "Tên thiết bị",
+      "deviceModel": "Model thiết bị",
+      "ipAddress": "Địa chỉ IP",
+      "port": "Cổng",
+      "serialNumber": "Số serial"
+    },
+    "placeholders": {
+      "doorName": "Nhập tên điểm kiểm soát",
+      "selectUnit": "Chọn đơn vị",
+      "selectOperationMode": "Chọn chế độ vận hành",
+      "selectVerifyMode": "Chọn chế độ kiểm tra",
+      "selectTimeFrame": "Chọn khung giờ",
+      "openDoorPassword": "Nhập mật khẩu mở cửa",
+      "deviceName": "Nhập tên thiết bị",
+      "ipAddress": "Nhập địa chỉ IP",
+      "port": "Nhập cổng"
+    },
+    "validation": {
+      "required": "Vui lòng nhập {field}",
+      "invalidIP": "Địa chỉ IP không hợp lệ",
+      "invalidPort": "Cổng phải là số từ 1-65535"
+    }
+  },
+  "detail": {
+    "title": "Cập nhật thông tin điểm kiểm soát"
+  },
+  "history": {
+    "columns": {
+      "time": "Thời gian",
+      "eventType": "Loại sự kiện",
+      "operator": "Người thực hiện",
+      "eventDetails": "Chi tiết sự kiện"
+    },
+    "searchPlaceholder": "Tìm kiếm lịch sử hoạt động"
+  },
+  "deviceList": {
+    "title": "Danh sách thiết bị",
+    "columns": {
+      "deviceType": "Loại thiết bị",
+      "deviceName": "Tên thiết bị",
+      "deviceCode": "Mã thiết bị",
+      "actions": "Thao tác"
+    },
+    "buttons": {
+      "addCamera": "Thêm camera",
+      "history": "Lịch sử"
+    }
+  },
+  "dataSync": {
+    "title": "Đồng bộ dữ liệu",
+    "selectAll": "Truyền tất cả dữ liệu",
+    "options": {
+      "currentTime": "Truyền dữ liệu cấu hình thời gian hiện tại",
+      "deviceConfig": "Truyền dữ liệu cấu hình thiết bị",
+      "timezone": "Truyền dữ liệu cấu hình múi giờ",
+      "holiday": "Truyền dữ liệu cấu hình ngày nghỉ",
+      "userInfo": "Truyền dữ liệu thông tin người dùng",
+      "message": "Truyền dữ liệu cấu hình bản tin"
+    }
+  }
+}

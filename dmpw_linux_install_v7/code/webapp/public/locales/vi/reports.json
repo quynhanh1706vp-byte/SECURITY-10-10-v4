@@ -1,0 +1,109 @@
+{
+  "titles": {
+    "accessReports": "Báo cáo truy cập",
+    "employeeReports": "Báo cáo nhân viên",
+    "visitorReports": "Báo cáo khách tham quan",
+    "vehicleReports": "Báo cáo phương tiện",
+    "systemReports": "Báo cáo hệ thống",
+    "analytics": "Phân tích dữ liệu",
+    "statistics": "Thống kê"
+  },
+  "dateRanges": {
+    "today": "Hôm nay",
+    "yesterday": "Hôm qua",
+    "thisWeek": "Tuần này",
+    "lastWeek": "Tuần trước",
+    "thisMonth": "Tháng này",
+    "lastMonth": "Tháng trước",
+    "thisYear": "Năm này",
+    "lastYear": "Năm trước",
+    "custom": "Tùy chỉnh",
+    "last7Days": "7 ngày qua",
+    "last30Days": "30 ngày qua",
+    "last90Days": "90 ngày qua"
+  },
+  "filters": {
+    "dateRange": "Khoảng thời gian",
+    "department": "Phòng ban",
+    "accessPoint": "Điểm kiểm soát",
+    "employee": "Nhân viên",
+    "visitor": "Khách tham quan",
+    "vehicle": "Phương tiện",
+    "eventType": "Loại sự kiện",
+    "status": "Trạng thái",
+    "direction": "Hướng",
+    "unit": "Đơn vị"
+  },
+  "columns": {
+    "time": "Thời gian",
+    "date": "Ngày",
+    "employee": "Nhân viên",
+    "employeeCode": "Mã nhân viên",
+    "cardNumber": "Số thẻ",
+    "accessPoint": "Điểm kiểm soát",
+    "direction": "Hướng",
+    "status": "Trạng thái",
+    "department": "Phòng ban",
+    "eventType": "Loại sự kiện",
+    "duration": "Thời gian",
+    "count": "Số lượng",
+    "total": "Tổng cộng",
+    "percentage": "Tỷ lệ",
+    "average": "Trung bình"
+  },
+  "charts": {
+    "accessByHour": "Lượt truy cập theo giờ",
+    "accessByDay": "Lượt truy cập theo ngày",
+    "accessByWeek": "Lượt truy cập theo tuần",
+    "accessByMonth": "Lượt truy cập theo tháng",
+    "topEmployees": "Nhân viên truy cập nhiều nhất",
+    "topAccessPoints": "Điểm kiểm soát được sử dụng nhiều nhất",
+    "departmentActivity": "Hoạt động theo phòng ban",
+    "accessTrends": "Xu hướng truy cập",
+    "peakHours": "Giờ cao điểm",
+    "workingHoursVsAfterHours": "Giờ hành chính vs Ngoài giờ"
+  },
+  "metrics": {
+    "totalAccess": "Tổng lượt truy cập",
+    "successfulAccess": "Truy cập thành công",
+    "deniedAccess": "Truy cập bị từ chối",
+    "uniqueEmployees": "Nhân viên duy nhất",
+    "activeAccessPoints": "Điểm kiểm soát hoạt động",
+    "averageAccessTime": "Thời gian truy cập trung bình",
+    "peakAccessTime": "Thời gian truy cập cao điểm",
+    "anomalousEvents": "Sự kiện bất thường"
+  },
+  "export": {
+    "excel": "Xuất Excel",
+    "pdf": "Xuất PDF",
+    "csv": "Xuất CSV",
+    "print": "In báo cáo",
+    "email": "Gửi email",
+    "schedule": "Lên lịch báo cáo"
+  },
+  "buttons": {
+    "generate": "Tạo báo cáo",
+    "refresh": "Làm mới",
+    "filter": "Lọc",
+    "clear": "Xóa bộ lọc",
+    "search": "Tìm kiếm",
+    "export": "Xuất dữ liệu",
+    "save": "Lưu báo cáo",
+    "share": "Chia sẻ"
+  },
+  "status": {
+    "generating": "Đang tạo báo cáo...",
+    "completed": "Hoàn thành",
+    "failed": "Thất bại",
+    "noData": "Không có dữ liệu",
+    "loading": "Đang tải..."
+  },
+  "messages": {
+    "noDataFound": "Không tìm thấy dữ liệu trong khoảng thời gian đã chọn",
+    "reportGenerated": "Báo cáo đã được tạo thành công",
+    "exportSuccess": "Xuất dữ liệu thành công",
+    "exportFailed": "Xuất dữ liệu thất bại",
+    "invalidDateRange": "Khoảng thời gian không hợp lệ",
+    "selectDateRange": "Vui lòng chọn khoảng thời gian"
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "title": "Danh sách khách mời",
+  "titles": {
+    "create": "Thêm khách mời",
+    "edit": "Chỉnh sửa khách mời"
+  },
+  "tabs": {
+    "generalInfo": "Thông tin chung",
+    "assignAccessPoints": "Gán điểm kiểm soát",
+    "vehicles": "Phương tiện"
+  },
+  "columns": {
+    "name": "Tên",
+    "visitFrom": "Thời gian thăm từ",
+    "visitTo": "Thời gian thăm đến",
+    "hostPerson": "Đầu mối gặp",
+    "department": "Phòng ban",
+    "approver": "Tài khoản duyệt",
+    "status": "Trạng thái",
+    "actions": "Thao tác"
+  },
+  "buttons": {
+    "approve": "Duyệt",
+    "reject": "Từ chối",
+    "edit": "Sửa",
+    "copy": "Sao chép",
+    "history": "Lịch sử",
+    "addFromForm": "Thêm từ form",
+    "addFromExcel": "Thêm từ file excel",
+    "addGuest": "Thêm khách mời",
+    "close": "Đóng"
+  },
+  "placeholders": {
+    "search": "Tìm kiếm khách mời",
+    "startDate": "Bắt đầu",
+    "endDate": "Kết thúc",
+    "approvalStatus": "Trạng thái duyệt"
+  },
+  "modal": {
+    "approveTitle": "Duyệt khách mời",
+    "importTitle": "Nhập khách mời"
+  },
+  "form": {
+    "fields": {
+      "visitorName": "Tên khách mời",
+      "visiteeDepartment": "Đơn vị công tác",
+      "phone": "Số điện thoại",
+      "documentType": "Loại giấy tờ sử dụng khi đến",
+      "documentLabel": "Loại giấy tờ",
+      "documentNumber": "Số giấy tờ",
+      "email": "Email",
+      "visiteeId": "Người cần gặp",
+      "visitorDepartment": "Phòng ban đến",
+      "roomNumber": "Số phòng",
+      "startTime": "Thời gian bắt đầu",
+      "endTime": "Thời gian kết thúc",
+      "visitReason": "Nội dung công việc",
+      "approverId": "Tài khoản duyệt",
+      "avatar": "Ảnh khách mời",
+      "idCardFront": "Ảnh mặt trước giấy tờ",
+      "idCardBack": "Ảnh mặt sau giấy tờ"
+    },
+    "placeholders": {
+      "visitorName": "Nhập tên khách mời",
+      "visiteeDepartment": "Công ty của khách",
+      "phone": "Nhập số điện thoại",
+      "documentType": "Chọn loại giấy tờ",
+      "documentLabel": "Nhập loại giấy tờ",
+      "documentNumber": "Nhập số giấy tờ",
+      "email": "Nhập email",
+      "visiteeId": "Chọn người cần gặp",
+      "visitorDepartment": "Nhập phòng ban đến",
+      "roomNumber": "Nhập số phòng",
+      "visitReason": "Nhập nội dung công việc/lịch hẹn",
+      "approverId": "Chọn tài khoản duyệt"
+    },
+    "validation": {
+      "visitorNameRequired": "Vui lòng nhập tên khách mời",
+      "phoneInvalid": "Vui lòng nhập đúng định dạng số điện thoại",
+      "documentTypeRequired": "Vui lòng chọn loại giấy tờ",
+      "emailInvalid": "Vui lòng nhập đúng định dạng email",
+      "visiteeIdRequired": "Vui lòng chọn người cần gặp",
+      "startTimeRequired": "Vui lòng chọn thời gian bắt đầu",
+      "endTimeRequired": "Vui lòng chọn thời gian kết thúc",
+      "visitReasonRequired": "Vui lòng nhập nội dung công việc",
+      "approverIdRequired": "Vui lòng chọn tài khoản duyệt",
+      "endTimeAfterStartTime": "Thời gian kết thúc phải sau thời gian bắt đầu"
+    },
+    "options": {
+      "cmnd": "CMND",
+      "cccd": "CCCD",
+      "passport": "Hộ chiếu",
+      "other": "Giấy tờ khác"
+    },
+    "sections": {
+      "appointmentInfo": "Thông tin lịch hẹn",
+      "additionalInfo": "Thông tin bổ sung"
+    },
+    "upload": {
+      "avatar": "Tải lên ảnh khách mời",
+      "idCardFront": "Tải lên ảnh mặt trước giấy tờ",
+      "idCardBack": "Tải lên ảnh mặt sau giấy tờ"
+    },
+    "buttons": {
+      "close": "Đóng",
+      "save": "Lưu dữ liệu"
+    },
+    "errors": {
+      "fileTooLarge": "Kích thước file không được vượt quá 5MB",
+      "invalidFileType": "Chỉ được phép upload file ảnh"
+    },
+    "messages": {
+      "uploadAvatarSuccess": "Upload ảnh thành công",
+      "uploadAvatarFailed": "Upload ảnh thất bại",
+      "uploadFrontSuccess": "Upload ảnh mặt trước thành công",
+      "uploadFrontFailed": "Upload ảnh mặt trước thất bại",
+      "uploadBackSuccess": "Upload ảnh mặt sau thành công",
+      "uploadBackFailed": "Upload ảnh mặt sau thất bại"
+    }
+  },
+  "history": {
+    "title": "Lịch sử",
+    "columns": {
+      "createdOn": "Ngày tạo",
+      "updatedBy": "Cập nhật bởi",
+      "oldStatus": "Trạng thái cũ",
+      "newStatus": "Trạng thái mới",
+      "notes": "Ghi chú"
+    }
+  },
+  "accessPoints": {
+    "columns": {
+      "doorName": "Tên điểm kiểm soát",
+      "building": "Đơn vị",
+      "operationType": "Chế độ vận hành",
+      "verifyMode": "Chế độ kiểm tra",
+      "accessTime": "Khung giờ kiểm soát"
+    },
+    "buttons": {
+      "assignAccessPoints": "Gán điểm kiểm soát"
+    },
+    "modal": {
+      "title": "Gán điểm truy cập cho khách mời"
+    },
+    "placeholders": {
+      "search": "Tìm kiếm",
+      "building": "Đơn vị"
+    },
+    "selectedCount": "Đã chọn: {count} bản ghi"
+  },
+  "vehicles": {
+    "title": "Danh sách phương tiện của khách mời",
+    "columns": {
+      "vehicleType": "Loại xe",
+      "model": "Hãng xe",
+      "plateNumber": "Biển số",
+      "color": "Màu sắc",
+      "actions": "Thao tác"
+    },
+    "buttons": {
+      "addVehicle": "Thêm phương tiện",
+      "edit": "Sửa"
+    },
+    "modal": {
+      "addTitle": "Thêm mới phương tiện",
+      "editTitle": "Sửa phương tiện"
+    },
+    "confirmDelete": {
+      "title": "Xác nhận xóa phương tiện",
+      "message": "Bạn có chắc chắn muốn xóa phương tiện này không?"
+    }
+  },
+  "approval": {
+    "tabs": {
+      "generalInfo": "Thông tin chung",
+      "accessPoints": "Điểm kiểm soát",
+      "accessHistory": "Lịch sử truy cập"
+    },
+    "generalInfo": {
+      "fields": {
+        "idDocument": "Giấy tờ định danh"
+      }
+    },
+    "accessHistory": {
+      "columns": {
+        "accessTime": "Thời gian truy cập",
+        "guestName": "Tên khách mời"
+      }
+    }
+  },
+  "status": {
+    "pendingApproval": "Đang chờ phê duyệt",
+    "firstApproval": "Đã duyệt lần 1",
+    "approved": "Đã duyệt",
+    "rejected": "Từ chối",
+    "cardIssued": "Đã được phát hành thẻ",
+    "completed": "Đã kết thúc",
+    "completedNoCardReturn": "Kết thúc mà không có thẻ trả lại",
+    "cardRevoked": "Thẻ đã được thu hồi",
+    "autoApproved": "Được tự động chấp thuận",
+    "specialGuest": "Đăng kí khách đặc biệt"
+  }
+}

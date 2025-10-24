@@ -1,0 +1,91 @@
+{
+  "title": "Shift Schedule Configuration",
+  "tabs": {
+    "schedule": "Schedule",
+    "shifts": "Shifts"
+  },
+  "buttons": {
+    "createSchedule": "Create Schedule",
+    "addShift": "Add Shift"
+  },
+  "modal": {
+    "addShiftTitle": "Add Shift"
+  },
+  "schedule": {
+    "columns": {
+      "content": "Content",
+      "employeeCount": "Employee Count",
+      "actions": "Actions"
+    },
+    "buttons": {
+      "edit": "Edit"
+    },
+    "placeholders": {
+      "search": "Search schedule",
+      "employee": "Employee"
+    }
+  },
+  "shifts": {
+    "columns": {
+      "shift": "Shift",
+      "shiftName": "Shift Name",
+      "actions": "Actions"
+    },
+    "buttons": {
+      "edit": "Edit"
+    },
+    "placeholders": {
+      "search": "Search shifts"
+    },
+    "modal": {
+      "editTitle": "Edit Shift"
+    }
+  },
+  "form": {
+    "shift": {
+      "fields": {
+        "name": "Shift Name",
+        "startTime": "Start Time",
+        "endTime": "End Time"
+      },
+      "placeholders": {
+        "name": "Enter shift name"
+      },
+      "validation": {
+        "nameRequired": "Please enter shift name",
+        "startTimeRequired": "Please select start time",
+        "endTimeRequired": "Please select end time",
+        "endTimeAfterStart": "End time must be greater than start time"
+      }
+    },
+    "schedule": {
+      "types": {
+        "department": "Schedule by department",
+        "event": "Event schedule"
+      },
+      "fields": {
+        "department": "Department",
+        "content": "Schedule content",
+        "dateRange": "Schedule time",
+        "shifts": "Shifts",
+        "employees": "Employees on duty"
+      },
+      "placeholders": {
+        "department": "Select department",
+        "content": "Enter schedule content",
+        "shifts": "Select one or more shifts",
+        "employees": "Select employees"
+      },
+      "validation": {
+        "departmentRequired": "Please select department",
+        "contentRequired": "Please enter schedule content",
+        "dateRangeRequired": "Please select schedule time",
+        "shiftsRequired": "Please select shifts",
+        "employeesRequired": "Please select employees"
+      },
+      "notes": {
+        "dateRange": "If the schedule period is longer than 1 day, shifts and employees will be repeated for each day in the schedule period."
+      }
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "titles": {
+    "accessReports": "Access Reports",
+    "employeeReports": "Employee Reports",
+    "visitorReports": "Visitor Reports",
+    "vehicleReports": "Vehicle Reports",
+    "systemReports": "System Reports",
+    "analytics": "Analytics",
+    "statistics": "Statistics"
+  },
+  "dateRanges": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "thisWeek": "This Week",
+    "lastWeek": "Last Week",
+    "thisMonth": "This Month",
+    "lastMonth": "Last Month",
+    "thisYear": "This Year",
+    "lastYear": "Last Year",
+    "custom": "Custom",
+    "last7Days": "Last 7 Days",
+    "last30Days": "Last 30 Days",
+    "last90Days": "Last 90 Days"
+  },
+  "filters": {
+    "dateRange": "Date Range",
+    "department": "Department",
+    "accessPoint": "Access Point",
+    "employee": "Employee",
+    "visitor": "Visitor",
+    "vehicle": "Vehicle",
+    "eventType": "Event Type",
+    "status": "Status",
+    "direction": "Direction",
+    "unit": "Unit"
+  },
+  "columns": {
+    "time": "Time",
+    "date": "Date",
+    "employee": "Employee",
+    "employeeCode": "Employee Code",
+    "cardNumber": "Card Number",
+    "accessPoint": "Access Point",
+    "direction": "Direction",
+    "status": "Status",
+    "department": "Department",
+    "eventType": "Event Type",
+    "duration": "Duration",
+    "count": "Count",
+    "total": "Total",
+    "percentage": "Percentage",
+    "average": "Average"
+  },
+  "charts": {
+    "accessByHour": "Access by Hour",
+    "accessByDay": "Access by Day",
+    "accessByWeek": "Access by Week",
+    "accessByMonth": "Access by Month",
+    "topEmployees": "Top Employees by Access",
+    "topAccessPoints": "Most Used Access Points",
+    "departmentActivity": "Activity by Department",
+    "accessTrends": "Access Trends",
+    "peakHours": "Peak Hours",
+    "workingHoursVsAfterHours": "Working Hours vs After Hours"
+  },
+  "metrics": {
+    "totalAccess": "Total Access",
+    "successfulAccess": "Successful Access",
+    "deniedAccess": "Denied Access",
+    "uniqueEmployees": "Unique Employees",
+    "activeAccessPoints": "Active Access Points",
+    "averageAccessTime": "Average Access Time",
+    "peakAccessTime": "Peak Access Time",
+    "anomalousEvents": "Anomalous Events"
+  },
+  "export": {
+    "excel": "Export Excel",
+    "pdf": "Export PDF", 
+    "csv": "Export CSV",
+    "print": "Print Report",
+    "email": "Email Report",
+    "schedule": "Schedule Report"
+  },
+  "buttons": {
+    "generate": "Generate Report",
+    "refresh": "Refresh",
+    "filter": "Filter",
+    "clear": "Clear Filters",
+    "search": "Search",
+    "export": "Export Data",
+    "save": "Save Report",
+    "share": "Share"
+  },
+  "status": {
+    "generating": "Generating report...",
+    "completed": "Completed",
+    "failed": "Failed",
+    "noData": "No Data",
+    "loading": "Loading..."
+  },
+  "messages": {
+    "noDataFound": "No data found for the selected date range",
+    "reportGenerated": "Report generated successfully",
+    "exportSuccess": "Data exported successfully",
+    "exportFailed": "Export failed",
+    "invalidDateRange": "Invalid date range",
+    "selectDateRange": "Please select a date range"
+  }
+}

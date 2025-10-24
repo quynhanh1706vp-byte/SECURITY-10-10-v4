@@ -1,0 +1,80 @@
+{
+  "accessGroups": {
+    "title": "Access Permission Groups",
+    "edit": "Edit Access Group",
+    "create": {
+      "button": "Add Access Group"
+    },
+    "columns": {
+      "name": "Group Name",
+      "totalUsers": "Number of Employees",
+      "totalDoors": "Number of Access Points",
+      "updatedAt": "Last Updated",
+      "actions": "Actions"
+    },
+    "placeholders": {
+      "search": "Search",
+      "door": "Access Point",
+      "user": "Employee"
+    },
+    "notifications": {
+      "deleteSuccess": "Deleted successfully"
+    },
+    "form": {
+      "label": {
+        "name": "Access Group Name",
+        "isDefault": "Default Access Group"
+      },
+      "placeholder": {
+        "name": "Enter access group name"
+      },
+      "validation": {
+        "nameRequired": "Please enter the access group name",
+        "isDefault": "Default required",
+        "noSpecialCharsTooltip": "Special characters are not allowed",
+        "maxLength100": "Maximum 100 characters"
+      },
+      "switch": {
+        "on": "ON",
+        "off": "OFF"
+      }
+    },
+    "tabs": {
+      "general": "General Information",
+      "assignDoors": "Assign Access Points",
+      "assignUsers": "Assign Users"
+    },
+    "assign": {
+      "addDoor": "Add Access Point",
+      "addUser": "Assign Users",
+      "modal": {
+        "assignUserTitle": "Assign Users to Access Group",
+        "assignDoorTitle": "Assign Access Points to Access Group"
+      }
+    },
+    "unassign-users": {
+      "multipleDeleteConfirm": {
+        "title": "Remove users from group",
+        "message": "Are you sure you want to remove {{count}} users from the access group?"
+      }
+    },
+    "buttons": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "search": "Search",
+      "multipleDelete": "Delete Selected"
+    },
+    "table": {
+      "name": "Name",
+      "employeeNo": "Employee ID",
+      "departmentName": "Department",
+      "workTypeName": "Work Type",
+      "doorName": "Access Point Name",
+      "donVi": "Unit",
+      "cheDoVanHanh": "Operation Mode",
+      "cheDoKiemTra": "Check Mode",
+      "khungGioKiemSoat": "Access Time Zone"
+    }
+  }
+}

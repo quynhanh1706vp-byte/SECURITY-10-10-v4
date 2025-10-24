@@ -1,0 +1,14 @@
+{
+  "titles": {
+    "create": "Thêm định danh",
+    "edit": "Chỉnh sửa định danh"
+  },
+  "deleteConfirm": {
+    "title": "Xóa định danh",
+    "message": "Bạn có chắc chắn muốn xóa định danh này không?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Xóa nhiều định danh",
+    "message": "Bạn có chắc chắn muốn xóa {count} định danh đã chọn không?"
+  }
+}

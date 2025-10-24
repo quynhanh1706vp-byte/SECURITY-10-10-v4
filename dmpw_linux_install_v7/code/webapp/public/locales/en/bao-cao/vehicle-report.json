@@ -1,0 +1,31 @@
+{
+  "title": "Vehicle Report",
+  "columns": {
+    "accessTime": "Access Time",
+    "accessPoint": "Access Point",
+    "inOut": "In/Out",
+    "vehicleOwner": "Vehicle Owner",
+    "object": "Object",
+    "licensePlate": "License Plate",
+    "vehicleType": "Vehicle Type",
+    "model": "Vehicle Model",
+    "color": "Color",
+    "eventDetail": "Event Details",
+    "eventType": "Event Type",
+    "exitTime": "Exit Time"
+  },
+  "placeholders": {
+    "search": "Search by vehicle owner",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "building": "Building",
+    "inOut": "In/Out"
+  },
+  "export": {
+    "button": "Export Data",
+    "title": "Export Data",
+    "download": "Download",
+    "fileFormat": "File Format",
+    "error": "Error exporting data"
+  }
+}

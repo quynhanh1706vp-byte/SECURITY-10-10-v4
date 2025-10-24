@@ -1,0 +1,140 @@
+{
+  "title": "Access Point Management",
+  "columns": {
+    "accessPointName": "Access Point Name",
+    "unit": "Unit",
+    "deviceCode": "Device Code",
+    "operationMode": "Operation Mode",
+    "verificationMode": "Verification Mode",
+    "timeFrame": "Control Time Frame",
+    "status": "Status",
+    "progress": "Progress",
+    "actions": "Actions",
+    "deviceName": "Device Name",
+    "ipAddress": "IP Address",
+    "port": "Port",
+    "connectionStatus": "Connection Status",
+    "deviceModel": "Device Model",
+    "serialNumber": "Serial Number",
+    "addedDate": "Added Date",
+    "lastSync": "Last Sync",
+    "syncStatus": "Sync Status"
+  },
+  "status": {
+    "inactive": "Inactive",
+    "active": "Active",
+    "warning": "Warning"
+  },
+  "buttons": {
+    "syncData": "Sync Data",
+    "sync": "Sync",
+    "copy": "Copy",
+    "getNewLog": "Get New Log",
+    "downloadAll": "Download All",
+    "addDevice": "Add Device",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "history": "History"
+  },
+  "placeholders": {
+    "search": "Search access points",
+    "unit": "Unit",
+    "operationMode": "Operation mode",
+    "connectionStatus": "Connection status",
+    "searchDevice": "Search device"
+  },
+  "menu": {
+    "downloadLog": "Download Log",
+    "deviceHistory": "Device History",
+    "copyConfig": "Copy Configuration"
+  },
+  "modal": {
+    "syncTitle": "Sync Data",
+    "historyTitle": "Device History",
+    "logTitle": "Device Log",
+    "copyConfigTitle": "Copy Configuration",
+    "addDeviceTitle": "Add New Device",
+    "editDeviceTitle": "Edit Device"
+  },
+  "sync": {
+    "success": "Data sync successful",
+    "error": "Data sync failed"
+  },
+  "log": {
+    "noData": "No device data available. Please click Get New Log button to receive the latest device log data"
+  },
+  "selectedCount": "Selected {count} records",
+  "tabs": {
+    "generalInfo": "General Information",
+    "deviceList": "Device List"
+  },
+  "form": {
+    "fields": {
+      "doorName": "Access Point Name",
+      "building": "Unit",
+      "operationType": "Operation Mode",
+      "verifyMode": "Verification Mode",
+      "doorActiveTimeZone": "Control Time Frame",
+      "openDoorPassword": "Door Open Password",
+      "deviceName": "Device Name",
+      "deviceModel": "Device Model",
+      "ipAddress": "IP Address",
+      "port": "Port",
+      "serialNumber": "Serial Number"
+    },
+    "placeholders": {
+      "doorName": "Enter access point name",
+      "selectUnit": "Select unit",
+      "selectOperationMode": "Select operation mode",
+      "selectVerifyMode": "Select verification mode",
+      "selectTimeFrame": "Select time frame",
+      "openDoorPassword": "Enter door open password",
+      "deviceName": "Enter device name",
+      "ipAddress": "Enter IP address",
+      "port": "Enter port"
+    },
+    "validation": {
+      "required": "Please enter {field}",
+      "invalidIP": "Invalid IP address",
+      "invalidPort": "Port must be a number between 1-65535"
+    }
+  },
+  "detail": {
+    "title": "Update access point information"
+  },
+  "history": {
+    "columns": {
+      "time": "Time",
+      "eventType": "Event Type",
+      "operator": "Operator",
+      "eventDetails": "Event Details"
+    },
+    "searchPlaceholder": "Search activity history"
+  },
+  "deviceList": {
+    "title": "Device List",
+    "columns": {
+      "deviceType": "Device Type",
+      "deviceName": "Device Name",
+      "deviceCode": "Device Code",
+      "actions": "Actions"
+    },
+    "buttons": {
+      "addCamera": "Add Camera",
+      "history": "History"
+    }
+  },
+  "dataSync": {
+    "title": "Data Synchronization",
+    "selectAll": "Sync all data",
+    "options": {
+      "currentTime": "Sync current time configuration",
+      "deviceConfig": "Sync device configuration",
+      "timezone": "Sync timezone configuration",
+      "holiday": "Sync holiday configuration",
+      "userInfo": "Sync user information",
+      "message": "Sync message configuration"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "titles": {
+    "create": "Thêm mới camera",
+    "edit": "Chỉnh sửa camera"
+  },
+  "form": {
+    "labels": {
+      "cameraType": "Loại camera",
+      "cameraName": "Tên camera",
+      "direction": "Hướng",
+      "directionIn": "Vào",
+      "directionOut": "Ra",
+      "videoLength": "Độ dài video",
+      "accessPoint": "Điểm kiểm soát",
+      "ipAddress": "Địa chỉ IP",
+      "port": "Cổng",
+      "username": "Tên đăng nhập",
+      "password": "Mật khẩu",
+      "cameraId": "Mã camera",
+      "saveEventUnknownFace": "Lưu sự kiện người lạ",
+      "checkEventFromWebHook": "Nhận sự kiện từ webhook để mở điểm kiểm soát"
+    },
+    "placeholders": {
+      "selectCameraType": "Chọn loại camera",
+      "enterCameraName": "Nhập tên camera",
+      "selectDirection": "Chọn",
+      "enterVideoLength": "Nhập độ dài video",
+      "selectAccessPoint": "Chọn điểm kiểm soát",
+      "enterIpAddress": "Nhập địa chỉ IP",
+      "enterPort": "Nhập cổng",
+      "enterUsername": "Nhập tên đăng nhập",
+      "enterPassword": "Nhập mật khẩu",
+      "enterCameraId": "Nhập mã camera"
+    },
+    "validation": {
+      "cameraTypeRequired": "Vui lòng chọn loại camera",
+      "cameraNameRequired": "Vui lòng nhập tên camera",
+      "directionRequired": "Vui lòng chọn hướng",
+      "videoLengthRequired": "Vui lòng nhập độ dài video",
+      "accessPointRequired": "Vui lòng chọn điểm kiểm soát",
+      "ipAddressRequired": "Vui lòng nhập địa chỉ IP",
+      "portRequired": "Vui lòng nhập cổng",
+      "cameraIdRequired": "Vui lòng nhập mã camera",
+      "cameraIdOnlyNumbers": "Mã camera chỉ được chứa số",
+      "cameraNameNoSpecialChars": "Tên camera không được chứa ký tự đặc biệt"
+    }
+  },
+  "deleteConfirm": {
+    "title": "Xóa camera",
+    "message": "Bạn có chắc chắn muốn xóa camera này không?"
+  }
+}

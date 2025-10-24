@@ -1,0 +1,207 @@
+{
+  "title": "Nhân viên",
+  "titles": {
+    "create": "Thêm nhân viên",
+    "edit": "Chỉnh sửa nhân viên"
+  },
+  "columns": {
+    "name": "Tên",
+    "employeeCode": "Mã nhân viên",
+    "department": "Phòng ban",
+    "workType": "Hình thức làm việc",
+    "status": "Trạng thái hoạt động",
+    "effectiveDate": "Ngày có hiệu lực",
+    "expiredDate": "Ngày hết hạn",
+    "actions": "Thao tác"
+  },
+  "status": {
+    "active": "Hoạt động",
+    "inactive": "Không hoạt động"
+  },
+  "buttons": {
+    "addEmployee": "Thêm nhân viên",
+    "addFromForm": "Thêm từ form",
+    "importExcel": "Nhập từ file excel",
+    "edit": "Sửa",
+    "delete": "Xóa",
+    "assignAccessPoints": "Gán điểm kiểm soát",
+    "addVehicle": "Thêm phương tiện",
+    "addCard": "Thêm thẻ",
+    "returnCard": "Trả thẻ",
+    "close": "Đóng",
+    "save": "Lưu"
+  },
+  "placeholders": {
+    "search": "Tìm kiếm nhân viên",
+    "building": "Đơn vị",
+    "department": "Phòng ban",
+    "status": "Trạng thái hoạt động"
+  },
+  "modal": {
+    "importTitle": "Nhập nhân viên"
+  },
+  "tabs": {
+    "generalInfo": "Thông tin chung",
+    "identification": "Định danh",
+    "accessPoints": "Điểm kiểm soát",
+    "vehicles": "Phương tiện",
+    "accountFeatures": "Tài khoản tính năng"
+  },
+  "import": {
+    "errors": {
+      "fileType": "Chỉ hỗ trợ file excel hoặc csv"
+    },
+    "upload": {
+      "text": "Nhấp hoặc kéo thả file vào đây để tải lên",
+      "hint": "Hỗ trợ file excel hoặc csv"
+    }
+  },
+  "form": {
+    "uploadImage": "Tải lên ảnh nhân viên",
+    "fields": {
+      "employeeCode": "Mã nhân viên",
+      "employeeName": "Tên nhân viên",
+      "department": "Phòng ban",
+      "gender": "Giới tính",
+      "birthDate": "Ngày sinh",
+      "position": "Chức vụ",
+      "phone": "Số điện thoại",
+      "email": "Email",
+      "active": "Hoạt động",
+      "workType": "Loại công việc",
+      "effectiveDate": "Ngày có hiệu lực",
+      "expiredDate": "Ngày hết hạn"
+    },
+    "placeholders": {
+      "employeeCode": "Nhập mã nhân viên",
+      "employeeName": "Nhập tên nhân viên",
+      "department": "Chọn phòng ban",
+      "gender": "Chọn giới tính",
+      "birthDate": "Chọn ngày sinh",
+      "position": "Nhập chức vụ",
+      "phone": "Nhập số điện thoại",
+      "email": "Nhập email",
+      "workType": "Chọn loại công việc",
+      "effectiveDate": "Ngày có hiệu lực",
+      "expiredDate": "Ngày hết hạn"
+    },
+    "validation": {
+      "employeeCode": "Vui lòng nhập mã nhân viên",
+      "employeeName": "Vui lòng nhập tên nhân viên",
+      "department": "Vui lòng chọn phòng ban",
+      "phoneFormat": "Vui lòng nhập đúng định dạng số điện thoại",
+      "emailFormat": "Vui lòng nhập đúng định dạng email",
+      "workType": "Vui lòng chọn loại công việc",
+      "effectiveDate": "Vui lòng nhập ngày có hiệu lực",
+      "effectiveDateBeforeExpired": "Ngày có hiệu lực phải nhỏ hơn ngày hết hạn",
+      "expiredDate": "Vui lòng nhập ngày hết hạn",
+      "expiredDateAfterEffective": "Ngày hết hạn phải lớn hơn ngày có hiệu lực",
+      "expiredDateMaxYear": "Năm không được vượt quá 9999",
+      "noSpecialChars": "Không được phép nhập ký tự đặc biệt"
+    },
+    "sections": {
+      "accessTime": "Thời gian ra vào"
+    }
+  },
+  "accessPoints": {
+    "accessGroup": "Nhóm quyền truy cập",
+    "fullAccess": "Full quyền",
+    "title": "Danh sách điểm kiểm soát có thể truy cập theo nhóm quyền",
+    "columns": {
+      "accessPointName": "Tên điểm kiểm soát",
+      "unit": "Đơn vị",
+      "operationMode": "Chế độ vận hành",
+      "verificationMode": "Chế độ kiểm tra",
+      "timeFrame": "Khung giờ kiểm soát"
+    }
+  },
+  "vehicles": {
+    "title": "Danh sách phương tiện của nhân viên",
+    "buttons": {
+      "add": "Thêm phương tiện"
+    },
+    "columns": {
+      "vehicleType": "Loại xe",
+      "model": "Hãng xe",
+      "plateNumber": "Biển số",
+      "color": "Màu sắc",
+      "actions": "Thao tác"
+    },
+    "confirmDelete": {
+      "title": "Xác nhận xóa phương tiện",
+      "message": "Bạn có chắc chắn muốn xóa phương tiện này không?"
+    },
+    "multipleDeleteConfirm": {
+      "title": "Xóa nhiều phương tiện",
+      "message": "Bạn có chắc chắn muốn xóa {count} phương tiện này không?"
+    },
+    "modal": {
+      "addTitle": "Thêm mới phương tiện",
+      "editTitle": "Sửa phương tiện"
+    }
+  },
+  "identification": {
+    "title": "Danh sách định danh của nhân viên",
+    "buttons": {
+      "returnCard": "Trả thẻ",
+      "add": "Thêm định danh"
+    },
+    "columns": {
+      "createdDate": "Ngày tạo",
+      "cardType": "Loại định danh",
+      "cardId": "Mã định danh",
+      "status": "Trạng thái",
+      "returnDate": "Ngày trả",
+      "actions": "Thao tác"
+    },
+    "confirmDelete": {
+      "title": "Xác nhận xóa định danh",
+      "message": "Bạn có chắc chắn muốn xóa định danh này không?"
+    },
+    "modal": {
+      "addTitle": "Thêm định danh cho nhân viên",
+      "returnTitle": "Trả định danh của nhân viên"
+    },
+    "returnCard": {
+      "success": "Trả thẻ thành công"
+    },
+    "form": {
+      "fields": {
+        "cardType": "Loại định danh",
+        "cardId": "Mã định danh",
+        "note": "Ghi chú",
+        "cardStatus": "Trạng thái định danh"
+      },
+      "placeholders": {
+        "cardId": "Nhập mã định danh",
+        "note": "Nhập ghi chú (nếu có)"
+      },
+      "validation": {
+        "cardId": "Vui lòng nhập mã định danh",
+        "cardIdPattern": "Mã định danh không được chứa ký tự đặc biệt"
+      }
+    },
+    "returnForm": {
+      "fields": {
+        "cardId": "Mã định danh",
+        "reason": "Lý do"
+      },
+      "placeholders": {
+        "cardId": "Mã định danh",
+        "reason": "Nhập lý do"
+      },
+      "validation": {
+        "cardId": "Vui lòng nhập mã định danh"
+      }
+    }
+  },
+  "accountFeatures": {
+    "columns": {
+      "accountName": "Tên tài khoản",
+      "email": "Email",
+      "permissions": "Phân quyền",
+      "actions": "Thao tác"
+    },
+    "deleteSuccess": "Xoá thành công: {name}"
+  }
+}

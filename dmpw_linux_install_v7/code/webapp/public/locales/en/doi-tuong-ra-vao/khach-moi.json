@@ -1,0 +1,203 @@
+{
+  "title": "Guest List",
+  "titles": {
+    "create": "Add Guest",
+    "edit": "Edit Guest"
+  },
+  "tabs": {
+    "generalInfo": "General Information",
+    "assignAccessPoints": "Assign Access Points",
+    "vehicles": "Vehicles"
+  },
+  "columns": {
+    "name": "Name",
+    "visitFrom": "Visit From",
+    "visitTo": "Visit To",
+    "hostPerson": "Host Person",
+    "department": "Department",
+    "approver": "Approver",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "buttons": {
+    "approve": "Approve",
+    "reject": "Reject",
+    "edit": "Edit",
+    "copy": "Copy",
+    "history": "History",
+    "addFromForm": "Add from Form",
+    "addFromExcel": "Add from Excel",
+    "addGuest": "Add Guest",
+    "close": "Close"
+  },
+  "placeholders": {
+    "search": "Search guests",
+    "startDate": "Start",
+    "endDate": "End",
+    "approvalStatus": "Approval Status"
+  },
+  "modal": {
+    "approveTitle": "Approve Guest",
+    "importTitle": "Import Guests"
+  },
+  "form": {
+    "fields": {
+      "visitorName": "Guest Name",
+      "visiteeDepartment": "Company",
+      "phone": "Phone Number",
+      "documentType": "Document Type",
+      "documentLabel": "Document Type",
+      "documentNumber": "Document Number",
+      "email": "Email",
+      "visiteeId": "Person to Meet",
+      "visitorDepartment": "Department to Visit",
+      "roomNumber": "Room Number",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "visitReason": "Purpose of Visit",
+      "approverId": "Approver Account",
+      "avatar": "Guest Photo",
+      "idCardFront": "ID Card Front",
+      "idCardBack": "ID Card Back"
+    },
+    "placeholders": {
+      "visitorName": "Enter guest name",
+      "visiteeDepartment": "Guest's company",
+      "phone": "Enter phone number",
+      "documentType": "Select document type",
+      "documentLabel": "Enter document type",
+      "documentNumber": "Enter document number",
+      "email": "Enter email",
+      "visiteeId": "Select person to meet",
+      "visitorDepartment": "Enter department to visit",
+      "roomNumber": "Enter room number",
+      "visitReason": "Enter purpose of visit/appointment",
+      "approverId": "Select approver account"
+    },
+    "validation": {
+      "visitorNameRequired": "Please enter guest name",
+      "phoneInvalid": "Please enter a valid phone number format",
+      "documentTypeRequired": "Please select document type",
+      "emailInvalid": "Please enter a valid email format",
+      "visiteeIdRequired": "Please select person to meet",
+      "startTimeRequired": "Please select start time",
+      "endTimeRequired": "Please select end time",
+      "visitReasonRequired": "Please enter purpose of visit",
+      "approverIdRequired": "Please select approver account",
+      "endTimeAfterStartTime": "End time must be after start time"
+    },
+    "options": {
+      "cmnd": "National ID",
+      "cccd": "Citizen ID",
+      "passport": "Passport",
+      "other": "Other Document"
+    },
+    "sections": {
+      "appointmentInfo": "Appointment Information",
+      "additionalInfo": "Additional Information"
+    },
+    "upload": {
+      "avatar": "Upload guest photo",
+      "idCardFront": "Upload ID card front",
+      "idCardBack": "Upload ID card back"
+    },
+    "buttons": {
+      "close": "Close",
+      "save": "Save Data"
+    },
+    "errors": {
+      "fileTooLarge": "File size cannot exceed 5MB",
+      "invalidFileType": "Only image files are allowed"
+    },
+    "messages": {
+      "uploadAvatarSuccess": "Photo uploaded successfully",
+      "uploadAvatarFailed": "Photo upload failed",
+      "uploadFrontSuccess": "Front ID uploaded successfully",
+      "uploadFrontFailed": "Front ID upload failed",
+      "uploadBackSuccess": "Back ID uploaded successfully",
+      "uploadBackFailed": "Back ID upload failed"
+    }
+  },
+  "history": {
+    "title": "History",
+    "columns": {
+      "createdOn": "Created On",
+      "updatedBy": "Updated By",
+      "oldStatus": "Old Status",
+      "newStatus": "New Status",
+      "notes": "Notes"
+    }
+  },
+  "accessPoints": {
+    "columns": {
+      "doorName": "Access Point Name",
+      "building": "Building",
+      "operationType": "Operation Mode",
+      "verifyMode": "Verification Mode",
+      "accessTime": "Access Time Frame"
+    },
+    "buttons": {
+      "assignAccessPoints": "Assign Access Points"
+    },
+    "modal": {
+      "title": "Assign Access Points to Guest"
+    },
+    "placeholders": {
+      "search": "Search",
+      "building": "Building"
+    },
+    "selectedCount": "Selected: {count} records"
+  },
+  "vehicles": {
+    "title": "Employee Vehicle List",
+    "columns": {
+      "vehicleType": "Vehicle Type",
+      "model": "Vehicle Model",
+      "plateNumber": "License Plate",
+      "color": "Color",
+      "actions": "Actions"
+    },
+    "buttons": {
+      "addVehicle": "Add Vehicle",
+      "edit": "Edit"
+    },
+    "modal": {
+      "addTitle": "Add New Vehicle",
+      "editTitle": "Edit Vehicle"
+    },
+    "confirmDelete": {
+      "title": "Confirm Delete Vehicle",
+      "message": "Are you sure you want to delete this vehicle?"
+    }
+  },
+  "approval": {
+    "tabs": {
+      "generalInfo": "General Information",
+      "accessPoints": "Access Points",
+      "accessHistory": "Access History"
+    },
+    "generalInfo": {
+      "fields": {
+        "idDocument": "ID Document"
+      }
+    },
+    "accessHistory": {
+      "columns": {
+        "accessTime": "Access Time",
+        "guestName": "Guest Name"
+      }
+    }
+  },
+  "status": {
+    "pendingApproval": "Pending Approval",
+    "firstApproval": "First Approval",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "cardIssued": "Card Issued",
+    "completed": "Completed",
+    "completedNoCardReturn": "Completed Without Card Return",
+    "cardRevoked": "Card Revoked",
+    "autoApproved": "Auto Approved",
+    "specialGuest": "Special Guest Registration"
+  }
+}

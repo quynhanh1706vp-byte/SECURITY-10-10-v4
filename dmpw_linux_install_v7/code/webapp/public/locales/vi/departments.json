@@ -1,0 +1,18 @@
+{
+  "departments": "Phòng ban",
+  "titles": {
+    "create": "Thêm mới phòng ban",
+    "edit": "Sửa phòng ban"
+  },
+  "deleteConfirm": {
+    "title": "Xóa phòng ban",
+    "message": "Bạn có chắc chắn muốn xóa phòng ban này?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Xóa nhiều phòng ban",
+    "message": "Bạn có chắc chắn muốn xóa {count} phòng ban?"
+  },
+  "buttons": {
+    "add": "Thêm mới"
+  }
+}

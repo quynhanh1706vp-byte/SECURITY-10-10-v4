@@ -1,0 +1,41 @@
+{
+  "title": "Access Logs",
+  "stats": {
+    "todayAccess": "Today's Access",
+    "employeeInOut": "Employee/In/Out",
+    "guestInOut": "Guest/In/Out",
+    "abnormalEvents": "Abnormal Events"
+  },
+  "tabs": {
+    "all": "All",
+    "abnormal": "Abnormal Warning",
+    "department": "Department Warning",
+    "employee": "Employee",
+    "guest": "Guest"
+  },
+  "tags": {
+    "warning": "Warning",
+    "employee": "Employee",
+    "guest": "Guest"
+  },
+  "columns": {
+    "image": "Image",
+    "time": "Time",
+    "object": "Object",
+    "identification": "Identification",
+    "accessPoint": "Access Point",
+    "unit": "Unit",
+    "eventDetails": "Event Details"
+  },
+  "placeholders": {
+    "accessPoint": "Access Point",
+    "eventType": "Event Type"
+  },
+  "fields": {
+    "contact": "Contact",
+    "event": "Event"
+  },
+  "buttons": {
+    "viewAll": "View All"
+  }
+}

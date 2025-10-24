@@ -1,0 +1,87 @@
+{
+  "ID": "STT",
+  "actions": {
+    "list": "Danh sách",
+    "create": "Tạo mới",
+    "edit": "Chỉnh sửa",
+    "show": "Xem",
+    "delete": "Xóa",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "selectAll": "Chọn tất cả",
+    "unselectAll": "Bỏ chọn tất cả"
+  },
+  "buttons": {
+    "actions": "Thao tác",
+    "create": "Tạo mới",
+    "save": "Lưu dữ liệu",
+    "logout": "Đăng xuất",
+    "delete": "Xóa",
+    "edit": "Sửa",
+    "cancel": "Đóng",
+    "confirm": "Xác nhận?",
+    "filter": "Lọc",
+    "clear": "Xóa",
+    "refresh": "Làm mới",
+    "show": "Xem",
+    "undo": "Hoàn tác",
+    "import": "Nhập",
+    "clone": "Nhân bản",
+    "notAccessTitle": "Bạn không có quyền truy cập",
+    "restart": "Khởi động lại",
+    "reload": "Tải lại",
+    "close": "Đóng"
+  },
+  "notifications": {
+    "success": "Thành công",
+    "error": "Lỗi",
+    "import_success": "Nhập dữ liệu thành công",
+    "createSuccess": "Tạo mới thành công",
+    "createError": "Tạo mới không thành công",
+    "editSuccess": "Sửa thành công",
+    "editError": "Sửa không thành công",
+    "deleteSuccess": "Xóa thành công",
+    "deleteError": "Xóa không thành công"
+  },
+  "pagination": {
+    "showTotal": "{from}-{to} của {total}"
+  },
+  "validation": {
+    "required": "{field} là trường bắt buộc",
+    "minLength": "{field} độ dài tối thiểu là {min} ký tự",
+    "maxLength": "{field} độ dài tối đa là {max} ký tự",
+    "maxLengthNumber": "{field} độ dài tối đa là {max} chữ số",
+    "birthDayInPast": "{field} phải là ngày trong quá khứ",
+    "email": {
+      "required": "Nhập email",
+      "invalid": "Email không đúng định dạng"
+    },
+    "password": {
+      "required": "Mật khẩu không được phép để trống",
+      "minLength": "Mật khẩu phải có từ ít nhất 8 ký tự",
+      "requireUppercase": "Mật khẩu phải chứa ít nhất 1 chữ cái viết hoa",
+      "requireLowercase": "Mật khẩu phải chứa ít nhất 1 chữ cái viết thường",
+      "requireNumber": "Mật khẩu phải chứa ít nhất 1 chữ số",
+      "requireSpecial": "Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt"
+    },
+    "file": {
+      "tooLarge": "Kích thước file quá lớn",
+      "invalidType": "Loại file không hợp lệ"
+    },
+    "timeRange": {
+      "invalid": "Khoảng thời gian không hợp lệ"
+    }
+  },
+  "table": {
+    "actions": "Thao tác",
+    "edit": "Sửa"
+  },
+  "pages": {
+    "home": "Trang chủ",
+    "error": {
+      "403": "Xin lỗi, bạn không có quyền truy cập vào hệ thống. Vui lòng liên hệ quản trị viên để được cấp quyền.",
+      "404": "Xin lỗi, trang bạn đang tìm kiếm không tồn tại.",
+      "backHome": "Quay lại"
+    }
+  }
+}

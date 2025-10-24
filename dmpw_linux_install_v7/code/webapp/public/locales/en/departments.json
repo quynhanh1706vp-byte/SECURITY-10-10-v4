@@ -1,0 +1,18 @@
+{
+  "departments": "Departments",
+  "titles": {
+    "create": "Add new department",
+    "edit": "Edit department"
+  },
+  "deleteConfirm": {
+    "title": "Delete department",
+    "message": "Are you sure you want to delete this department?"
+  },
+  "multipleDeleteConfirm": {
+    "title": "Delete multiple departments",
+    "message": "Are you sure you want to delete {count} departments?"
+  },
+  "buttons": {
+    "add": "Add New"
+  }
+}
