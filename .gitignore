@@ -67,3 +67,7 @@ node_modules/
 *.tar.gz
 *.7z
 *.rar
+
+# ignore unpacked image layers
+_dmpw_ignore/
+**/_unpack_all/
