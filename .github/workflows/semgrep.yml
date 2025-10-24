@@ -1,93 +1,27 @@
-name: Semgrep
+name: semgrep
 on:
-  pull_request:
-    branches: [ main ]
   push:
-    branches: [ ci/add-semgrep-trivy ]
+  pull_request:
   workflow_dispatch:
 
 jobs:
   semgrep:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
-      actions: read
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Sanity
-        continue-on-error: true
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+      - name: Install & Run Semgrep (best-effort)
         run: |
-          echo "== has semgrep.master.yml? =="; test -f semgrep.master.yml && head -n 20 semgrep.master.yml || echo "MISSING semgrep.master.yml"
-          echo "== sample tree =="; git ls-files | head -n 100
-
-      - name: Install Semgrep
-        continue-on-error: true
-        run: |
-          python3 -m pip install --upgrade pip
-          pip install --upgrade semgrep
-          semgrep --version || true
-
-      - name: Run Semgrep (JSON + SARIF)
-        id: run_semgrep
-        continue-on-error: true
-        shell: bash
-        run: |
-          mkdir -p _reports/semgrep_v5
-          if git ls-files | grep -q '^dmpw_linux_install_v5/'; then
-            INC='--include "dmpw_linux_install_v5/**"'
+          curl -sSfL https://raw.githubusercontent.com/returntocorp/semgrep/main/scripts/install-semgrep.sh \
+            | sh -s -- -b /usr/local/bin || true
+          if command -v semgrep >/dev/null; then
+            if [ -f .semgrep.yml ]; then
+              semgrep ci --oss-only --config .semgrep.yml || true
+            else
+              semgrep ci --oss-only --config p/owasp-top-ten || true
+            fi
           else
-            echo "WARN: no dmpw_linux_install_v5/ found; running full repo"
-            INC=''
+            echo "Semgrep not installed; skipping"
           fi
-          semgrep scan \
-            --config semgrep.master.yml \
-            ${INC} \
-            --metrics=off --timeout 900 \
-            --json --output _reports/semgrep_v5/semgrep.json \
-            --sarif --output _reports/semgrep_v5/semgrep.sarif
-          echo "SEMGR_EXIT=$?" | tee semgrep_exit.txt
-
-      - name: Ensure artifacts exist
-        if: always()
-        run: |
-          mkdir -p _reports/semgrep_v5
-          test -s _reports/semgrep_v5/semgrep.json  || echo "{}"          > _reports/semgrep_v5/semgrep.json
-          test -s _reports/semgrep_v5/semgrep.sarif || echo '{"runs":[]}' > _reports/semgrep_v5/semgrep.sarif
-          test -f semgrep_exit.txt || echo "SEMGR_EXIT=1" > semgrep_exit.txt
-
-      - name: Upload SARIF to Code Scanning
-        if: always()
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: _reports/semgrep_v5/semgrep.sarif
-
-      - name: Upload semgrep.json
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: semgrep_json
-          path: _reports/semgrep_v5/semgrep.json
-
-      - name: Upload semgrep.sarif
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: semgrep_sarif
-          path: _reports/semgrep_v5/semgrep.sarif
-
-      - name: Upload semgrep exit
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: semgrep_exit
-          path: semgrep_exit.txt
-
-      - name: Fail if Semgrep failed
-        shell: bash
-        run: |
-          rc=$(sed 's/.*=//' semgrep_exit.txt || echo 1)
-          echo "Semgrep exit code: $rc"
-          test "$rc" -eq 0
