@@ -1,0 +1,134 @@
+name: alerts-summary
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: '0 2 * * *'   # chạy mỗi ngày 02:00 UTC (đổi nếu muốn)
+
+permissions:
+  contents: read
+  security-events: read    # cần để đọc Dependabot alerts
+  pull-requests: write     # để comment lên PR (nếu chạy từ PR)
+
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (not strictly needed)
+        uses: actions/checkout@v4
+
+      - name: Fetch & summarize Dependabot alerts
+        env:
+          GH_REPO: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p _reports/alerts
+          OUT_JSON="_reports/alerts/alerts.json"
+          : > "$OUT_JSON"
+
+          # Lấy tối đa 1000 alerts (10 trang x 100)
+          for PAGE in $(seq 1 10); do
+            RESP="$(curl -sS -H "Authorization: Bearer $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/$GH_REPO/dependabot/alerts?state=open&per_page=100&page=${PAGE}")"
+            COUNT="$(printf '%s' "$RESP" | jq 'length')"
+            if [ "$COUNT" -eq 0 ]; then break; fi
+            # Gộp dần vào 1 file
+            if [ ! -s "$OUT_JSON" ]; then
+              printf '%s' "$RESP" > "$OUT_JSON"
+            else
+              # nối mảng JSON
+              jq -s '.[0] + .[1]' "$OUT_JSON" <(printf '%s' "$RESP") > "_reports/alerts/.tmp.json"
+              mv "_reports/alerts/.tmp.json" "$OUT_JSON"
+            fi
+          done
+
+          # Nếu rỗng, tạo mảng trống
+          [ -s "$OUT_JSON" ] || echo '[]' > "$OUT_JSON"
+
+          # Tạo CSV
+          jq -r '
+            ["id","severity","package","manifest","range","cve","summary"],
+            (.[] | [
+              (.number|tostring),
+              .security_advisory.severity,
+              .dependency.package.name,
+              .manifest.path,
+              .security_vulnerability.vulnerable_version_range,
+              (.security_advisory.cve_id // ""),
+              (.security_advisory.summary|gsub("\n";" ")|truncate(120))
+            ]) | @csv
+          ' "$OUT_JSON" > _reports/alerts/alerts.csv
+
+          # Đếm theo mức độ
+          CRIT=$(jq '[.[]|select(.security_advisory.severity=="critical")]|length' "$OUT_JSON")
+          HIGH=$(jq '[.[]|select(.security_advisory.severity=="high")]|length' "$OUT_JSON")
+          MOD=$(jq '[.[]|select(.security_advisory.severity=="moderate")]|length' "$OUT_JSON")
+          LOW=$(jq '[.[]|select(.security_advisory.severity=="low")]|length' "$OUT_JSON")
+          TOTAL=$(jq 'length' "$OUT_JSON")
+
+          # Tạo summary.md
+          {
+            echo "# Dependabot Alerts Summary"
+            echo ""
+            echo "- **Total**: ${TOTAL}"
+            echo "- **Critical**: ${CRIT}"
+            echo "- **High**: ${HIGH}"
+            echo "- **Moderate**: ${MOD}"
+            echo "- **Low**: ${LOW}"
+            echo ""
+            echo "## Top Critical/High"
+            jq -r '
+              map(select(.security_advisory.severity=="critical" or .security_advisory.severity=="high"))
+              | .[0:20]
+              | to_entries[]
+              | "- [ID \(.value.number)] \(.value.security_advisory.severity|ascii_upcase) — \(.value.dependency.package.name) (\(.value.security_vulnerability.vulnerable_version_range)) in \(.value.manifest.path) \((.value.security_advisory.cve_id // "N/A"))"
+            ' "$OUT_JSON"
+            echo ""
+            echo "CSV: \`_reports/alerts/alerts.csv\`"
+          } > _reports/alerts/summary.md
+
+          # In vào Job Summary
+          {
+            echo "## Dependabot Alerts Summary"
+            echo ""
+            echo "| Severity  | Count |"
+            echo "|-----------|------:|"
+            echo "| Critical  | ${CRIT} |"
+            echo "| High      | ${HIGH} |"
+            echo "| Moderate  | ${MOD} |"
+            echo "| Low       | ${LOW} |"
+            echo "| **Total** | **${TOTAL}** |"
+            echo ""
+            echo "Top Critical/High:"
+            echo ""
+            jq -r '
+              map(select(.security_advisory.severity=="critical" or .security_advisory.severity=="high"))
+              | .[0:10]
+              | to_entries[]
+              | "- [ID \(.value.number)] **\(.value.security_advisory.severity|ascii_upcase)** — \(.value.dependency.package.name) (\(.value.security_vulnerability.vulnerable_version_range)) in \(.value.manifest.path) \((.value.security_advisory.cve_id // "N/A"))"
+            ' "$OUT_JSON"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload alerts artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: alerts-summary-${{ github.run_id }}
+          path: |
+            _reports/alerts/summary.md
+            _reports/alerts/alerts.csv
+          if-no-files-found: error
+
+      - name: Comment on PR (if PR)
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('_reports/alerts/summary.md','utf8');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body
+            });
