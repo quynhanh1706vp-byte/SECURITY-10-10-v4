@@ -1,21 +1,15 @@
 name: semgrep
-on:
-  push:
-  pull_request:
-  workflow_dispatch:
+on: { push: {}, pull_request: {}, workflow_dispatch: {} }
 
 jobs:
   semgrep:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          lfs: true
-          fetch-depth: 0
+        with: { lfs: false, fetch-depth: 0 }
       - name: Install & Run Semgrep (best-effort)
         run: |
-          curl -sSfL https://raw.githubusercontent.com/returntocorp/semgrep/main/scripts/install-semgrep.sh \
-            | sh -s -- -b /usr/local/bin || true
+          curl -sSfL https://raw.githubusercontent.com/returntocorp/semgrep/main/scripts/install-semgrep.sh | sh -s -- -b /usr/local/bin || true
           if command -v semgrep >/dev/null; then
             if [ -f .semgrep.yml ]; then
               semgrep ci --oss-only --config .semgrep.yml || true

@@ -1,0 +1,26 @@
+name: security-light
+on: { push: {}, pull_request: {}, workflow_dispatch: {} }
+
+jobs:
+  npm-audit:
+    if: hashFiles('package.json') != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm ci || npm install
+      - run: npm audit --omit=dev || true
+
+  pip-audit:
+    if: hashFiles('requirements.txt') != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 -m pip install --upgrade pip pip-audit
+          if [ -f requirements.txt ]; then
+            pip-audit -r requirements.txt || true
+          else
+            echo "no requirements.txt"
+          fi

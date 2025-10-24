@@ -1,0 +1,7 @@
+rules:
+  - id: generic-dangerous-eval
+    patterns:
+      - pattern: eval(...)
+    message: "Avoid eval()"
+    severity: WARNING
+    languages: [javascript, typescript, python]

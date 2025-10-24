@@ -1,0 +1,6 @@
+rules:
+  - id: detect-todo
+    pattern: /TODO|FIXME/
+    message: "Leftover TODO/FIXME"
+    severity: INFO
+    languages: [generic]
