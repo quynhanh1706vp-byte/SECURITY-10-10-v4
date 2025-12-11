@@ -1,0 +1,77 @@
+name: VSP Security CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - feat/v7-import
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  vsp-security-ci:
+    name: VSP Security CI (FULL EXT)
+    # NÊN dùng self-hosted runner vì bundle & tool khá nặng
+    runs-on: self-hosted
+
+    env:
+      # Chế độ CI/CD cho script ngoài
+      VSP_MODE: CI_CD
+      # Root repo trên runner (GitHub set sẵn)
+      VSP_SRC_ROOT: ${{ github.workspace }}
+      # Thư mục output cho run CI này
+      VSP_OUT_DIR: ${{ github.workspace }}/out_ci
+      # Project chính để scan (tùy repo bạn, có thể chỉnh)
+      TARGET_PROJECT: ${{ github.workspace }}/dmpw_linux_install_v7/code/webapp
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Chuẩn bị script CI outer
+        run: |
+          chmod +x ci/VSP_CI_OUTER/*.sh
+          echo "[VSP_CI] Workspace: $PWD"
+          echo "[VSP_CI] TARGET_PROJECT = ${TARGET_PROJECT}"
+          mkdir -p "${VSP_OUT_DIR}"
+
+      - name: Chạy VSP CI outer full
+        run: |
+          # Nếu script của bạn nhận tham số thì sửa dòng dưới cho đúng:
+          #   ci/VSP_CI_OUTER/vsp_ci_outer_full_v1.sh "${TARGET_PROJECT}" "${VSP_OUT_DIR}"
+          # Tạm thời mình gọi basic:
+          ci/VSP_CI_OUTER/vsp_ci_outer_full_v1.sh
+
+      - name: Upload artifact kết quả VSP
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vsp-ci-out-${{ github.run_id }}
+          path: |
+            ${VSP_OUT_DIR}/**
+            out/**
+          if-no-files-found: ignore
+
+  deploy-demo:
+    name: Deploy Demo / Staging
+    needs: vsp-security-ci
+    # Chỉ deploy khi push lên main (không deploy trên PR)
+    if: github.ref == 'refs/heads/main'
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy DMPW (stub)
+        run: |
+          echo "[DEPLOY] Đây là job CD stub."
+          echo "[DEPLOY] Tùy môi trường bạn có thể gọi:"
+          echo "  ./harden_compose.sh"
+          echo "  ./harden_webapp_compose.sh"
+          # Ví dụ thực tế:
+          # chmod +x harden_compose.sh harden_webapp_compose.sh
+          # ./harden_compose.sh
+          # ./harden_webapp_compose.sh
