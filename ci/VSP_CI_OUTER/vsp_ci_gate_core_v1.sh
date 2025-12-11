@@ -64,7 +64,7 @@ log "Cmd: ${RUNNER} \"${SRC_ROOT}\" \"${RUN_DIR}\""
 START_TS="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 
 set +e
-# LƯU Ý: truyền SRC_ROOT trước, RUN_DIR sau
+# LƯU Ý: truyền SRC_ROOT trước, RUN_DIR sau (theo run_all_tools_v2.sh)
 "${RUNNER}" "${SRC_ROOT}" "${RUN_DIR}"
 RC_RUNNER=$?
 set -e
@@ -73,14 +73,40 @@ END_TS="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 
 log "Runner kết thúc với RC=${RC_RUNNER}"
 
-# --- GATE LOGIC DỰA TRÊN summary_unified.json ---
+# --- SAU RUNNER: THỬ UNIFY ĐỂ TẠO 2 FILE JSON THƯƠNG MẠI ---
 
 REPORT_DIR="${RUN_DIR}/report"
 SUMMARY_JSON="${REPORT_DIR}/summary_unified.json"
 
 if [[ ! -f "${SUMMARY_JSON}" ]]; then
+  log "Không thấy ${SUMMARY_JSON}, thử gọi engine unify BE để build báo cáo thương mại..."
+
+  # Cho phép override engine unify qua ENV:
+  #   export VSP_UNIFY_SCRIPT=/home/test/Data/SECURITY_BUNDLE/bin/<script_unify_thật>.sh
+  UNIFY_SCRIPT="${VSP_UNIFY_SCRIPT:-${BUNDLE_ROOT}/bin/vsp_unify_from_run_dir_v1.sh}"
+
+  if [[ -x "${UNIFY_SCRIPT}" ]]; then
+    log "UNIFY_SCRIPT = ${UNIFY_SCRIPT}"
+    log "Gọi unify với RUN_DIR = ${RUN_DIR}"
+
+    set +e
+    "${UNIFY_SCRIPT}" "${RUN_DIR}"
+    RC_UNIFY=$?
+    set -e
+
+    log "Unify kết thúc với RC=${RC_UNIFY}"
+  else
+    log "WARN: Không tìm thấy script unify: ${UNIFY_SCRIPT}"
+    log "      (Set ENV VSP_UNIFY_SCRIPT để trỏ đúng engine unify BE đang dùng)."
+  fi
+fi
+
+# Sau khi unify (nếu có), kiểm tra lại summary_unified.json
+SUMMARY_JSON="${REPORT_DIR}/summary_unified.json"
+
+if [[ ! -f "${SUMMARY_JSON}" ]]; then
   log "WARN: Không tìm thấy ${SUMMARY_JSON} – bỏ qua phần gate theo severity."
-  log "      Kiểm tra lại unify trong runner."
+  log "      Kiểm tra lại unify trong runner hoặc script unify BE."
   exit "${RC_RUNNER}"
 fi
 

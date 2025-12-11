@@ -16,11 +16,9 @@ jobs:
     runs-on: self-hosted
 
     env:
-      VSP_MODE: CI_CD
-      VSP_SRC_ROOT: ${{ github.workspace }}/dmpw_linux_install_v7/code/webapp
-      VSP_OUT_DIR: ${{ github.workspace }}/out_ci
+      # Engine VSP bên ngoài (SECURITY_BUNDLE) trên con runner này
       VSP_BUNDLE_ROOT: /home/test/Data/SECURITY_BUNDLE
-      # Ngưỡng gate:
+      # Ngưỡng gate
       VSP_MAX_CRITICAL: 0
       VSP_MAX_HIGH: 10
 
@@ -28,22 +26,35 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Chuẩn bị script CI outer
+      - name: Chuẩn bị script VSP CI OUTER
         run: |
+          cd "${{ github.workspace }}"
           chmod +x ci/VSP_CI_OUTER/*.sh
-          mkdir -p "${VSP_OUT_DIR}"
-          echo "[VSP_CI] SRC_ROOT = ${VSP_SRC_ROOT}"
-          echo "[VSP_CI] OUT_DIR = ${VSP_OUT_DIR}"
+          echo "[CI] Workspace = ${{ github.workspace }}"
+          ls ci/VSP_CI_OUTER
 
-      - name: Chạy VSP CI outer full
+      - name: Chạy VSP CI outer cho webapp v7
         run: |
-          ci/VSP_CI_OUTER/vsp_ci_outer_full_v1.sh
+          cd "${{ github.workspace }}"
+          ci/VSP_CI_OUTER/vsp_ci_outer_full_v1.sh dmpw_linux_install_v7/code/webapp
 
-      - name: Upload artifact kết quả VSP
+      - name: Upload artifact kết quả VSP CI
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: vsp-ci-out-${{ github.run_id }}
           path: |
-            ${VSP_OUT_DIR}/**
+            out_ci/**
           if-no-files-found: ignore
+
+      # OPTIONAL: đồng bộ CI run mới nhất sang VSP UI
+      - name: Sync last CI run to VSP UI (optional)
+        if: always()
+        run: |
+          cd "${{ github.workspace }}"
+          chmod +x ci/VSP_CI_OUTER/vsp_ci_sync_last_run_to_vsp_v1.sh || true
+          if [ -x ci/VSP_CI_OUTER/vsp_ci_sync_last_run_to_vsp_v1.sh ]; then
+            ci/VSP_CI_OUTER/vsp_ci_sync_last_run_to_vsp_v1.sh
+          else
+            echo "[CI] Skip sync: vsp_ci_sync_last_run_to_vsp_v1.sh chưa có hoặc chưa chmod +x."
+          fi
