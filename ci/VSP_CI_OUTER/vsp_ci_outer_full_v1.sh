@@ -2,128 +2,91 @@
 set -euo pipefail
 
 LOG_PREFIX="[VSP_CI_OUTER]"
+log() { echo "${LOG_PREFIX} $*"; }
 
-log() {
-  echo "${LOG_PREFIX} $*"
-}
-
-# --- Xác định đường dẫn cơ bản ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
-# MODE có thể là: CI_CD | LOCAL | OFFLINE (tùy bạn dùng)
-MODE="${VSP_MODE:-CI_CD}"
-
-# --- Xác định SRC_ROOT (source cần scan) ---
-# Ưu tiên:
-#   1) Tham số 1
-#   2) VSP_SRC_ROOT
-#   3) TARGET_PROJECT (thường set trong CI)
-#   4) REPO_ROOT
-if [[ $# -ge 1 && -n "${1:-}" ]]; then
-  SRC_ROOT="$1"
-elif [[ -n "${VSP_SRC_ROOT:-}" ]]; then
-  SRC_ROOT="$VSP_SRC_ROOT"
-elif [[ -n "${TARGET_PROJECT:-}" ]]; then
-  SRC_ROOT="$TARGET_PROJECT"
-else
-  SRC_ROOT="$REPO_ROOT"
-fi
-
-# --- Xác định OUT_DIR (thư mục output của run này) ---
-TS="$(date +%Y%m%d_%H%M%S)"
-RUN_ID="VSP_CI_${TS}"
-
-if [[ $# -ge 2 && -n "${2:-}" ]]; then
-  OUT_DIR="$2"
-elif [[ -n "${VSP_OUT_DIR:-}" ]]; then
-  OUT_DIR="$VSP_OUT_DIR"
-else
-  OUT_DIR="${REPO_ROOT}/out_ci/${RUN_ID}"
-fi
-
-# --- Xác định SECURITY_BUNDLE root ---
-BUNDLE_ROOT="${VSP_BUNDLE_ROOT:-/home/test/Data/SECURITY_BUNDLE}"
-
-log "MODE       = ${MODE}"
 log "REPO_ROOT  = ${REPO_ROOT}"
 log "SCRIPT_DIR = ${SCRIPT_DIR}"
-log "SRC_ROOT   = ${SRC_ROOT}"
-log "OUT_DIR    = ${OUT_DIR}"
-log "RUN_ID     = ${RUN_ID}"
+
+BUNDLE_ROOT="${VSP_BUNDLE_ROOT:-/home/test/Data/SECURITY_BUNDLE}"
 log "BUNDLE_ROOT= ${BUNDLE_ROOT}"
 
-# --- Kiểm tra căn bản ---
-if [[ ! -d "${SRC_ROOT}" ]]; then
-  log "ERROR: SRC_ROOT không tồn tại: ${SRC_ROOT}"
+if [[ ! -d "${BUNDLE_ROOT}" ]]; then
+  log "ERROR: BUNDLE_ROOT không tồn tại: ${BUNDLE_ROOT}"
   exit 2
 fi
 
-if [[ ! -d "${BUNDLE_ROOT}" ]]; then
-  log "WARN: BUNDLE_ROOT không tồn tại: ${BUNDLE_ROOT}"
-  log "      Bạn cần chỉnh VSP_BUNDLE_ROOT hoặc sửa default trong script."
+if [[ $# -ge 1 && -n "${1:-}" ]]; then
+  SRC_ROOT="$1"
+else
+  SRC_ROOT="${VSP_SRC_ROOT:-${REPO_ROOT}}"
+fi
+
+if [[ ! -d "${SRC_ROOT}" ]]; then
+  log "ERROR: SRC_ROOT không tồn tại: ${SRC_ROOT}"
   exit 3
 fi
 
-mkdir -p "${OUT_DIR}"
+log "SRC_ROOT   = ${SRC_ROOT}"
 
-# --- Kiểm tra gate core script ---
+RUN_ID="${VSP_RUN_ID:-VSP_CI_$(date +%Y%m%d_%H%M%S)}"
+OUT_CI_ROOT="${REPO_ROOT}/out_ci"
+RUN_DIR="${VSP_RUN_DIR:-${OUT_CI_ROOT}/${RUN_ID}}"
+
+mkdir -p "${RUN_DIR}" "${OUT_CI_ROOT}"
+log "RUN_ID     = ${RUN_ID}"
+log "RUN_DIR    = ${RUN_DIR}"
+
+export VSP_BUNDLE_ROOT="${BUNDLE_ROOT}"
+export VSP_SRC_ROOT="${SRC_ROOT}"
+export VSP_RUN_ID="${RUN_ID}"
+export VSP_RUN_DIR="${RUN_DIR}"
+
 GATE_CORE="${SCRIPT_DIR}/vsp_ci_gate_core_v1.sh"
 if [[ ! -x "${GATE_CORE}" ]]; then
-  if [[ -f "${GATE_CORE}" ]]; then
-    chmod +x "${GATE_CORE}" || true
-  fi
-fi
-
-if [[ ! -x "${GATE_CORE}" ]]; then
-  log "ERROR: Không tìm thấy hoặc không chạy được gate core: ${GATE_CORE}"
-  log "       Cần file vsp_ci_gate_core_v1.sh trong cùng thư mục."
+  log "ERROR: Không chạy được GATE_CORE: ${GATE_CORE}"
   exit 4
 fi
 
-# --- Export ENV để gate core dùng thống nhất ---
-export VSP_MODE="${MODE}"
-export VSP_SRC_ROOT="${SRC_ROOT}"
-export VSP_RUN_DIR="${OUT_DIR}"
-export VSP_BUNDLE_ROOT="${BUNDLE_ROOT}"
-export VSP_RUN_ID="${RUN_ID}"
-
-log "=== BẮT ĐẦU VSP CI OUTER ==="
+log "=== VSP CI OUTER BẮT ĐẦU ==="
 log "Gọi gate core: ${GATE_CORE}"
 
-START_TS="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
-
 set +e
-"${GATE_CORE}"
-RC=$?
+"${GATE_CORE}" "${RUN_DIR}"
+RC_GATE=$?
 set -e
 
-END_TS="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+log "Gate core kết thúc với mã trả về: ${RC_GATE}"
 
-log "Gate core kết thúc với mã trả về: ${RC}"
-
-# --- Ghi summary cho CI/CD / Dev xem nhanh ---
-SUMMARY_FILE="${OUT_DIR}/CI_SUMMARY.txt"
+# Ghi CI_SUMMARY.txt thô + bản human readable
+CI_SUMMARY="${RUN_DIR}/CI_SUMMARY.txt"
 {
-  echo "VSP CI OUTER SUMMARY"
-  echo "---------------------"
-  echo "Run ID       : ${RUN_ID}"
-  echo "Mode         : ${MODE}"
-  echo "Repo Root    : ${REPO_ROOT}"
-  echo "Source Root  : ${SRC_ROOT}"
-  echo "Output Dir   : ${OUT_DIR}"
-  echo "Bundle Root  : ${BUNDLE_ROOT}"
-  echo "Start (UTC)  : ${START_TS}"
-  echo "End   (UTC)  : ${END_TS}"
-  echo "Exit Code    : ${RC}"
-} > "${SUMMARY_FILE}"
+  echo "VSP_CI_OUTER SUMMARY"
+  echo "===================="
+  echo "REPO_ROOT  = ${REPO_ROOT}"
+  echo "SRC_ROOT   = ${SRC_ROOT}"
+  echo "BUNDLE_ROOT= ${BUNDLE_ROOT}"
+  echo "RUN_ID     = ${RUN_ID}"
+  echo "RUN_DIR    = ${RUN_DIR}"
+  echo "RC_GATE    = ${RC_GATE}"
+  if [[ -f "${RUN_DIR}/report/summary_unified.json" ]]; then
+    echo
+    echo "SUMMARY_BY_SEVERITY:"
+    jq '.summary_by_severity' "${RUN_DIR}/report/summary_unified.json" 2>/dev/null || true
+  fi
+} > "${CI_SUMMARY}" || true
 
-log "Đã ghi summary: ${SUMMARY_FILE}"
-
-if [[ ${RC} -eq 0 ]]; then
-  log "=== VSP CI OUTER: THÀNH CÔNG (RC=0) ==="
-else
-  log "=== VSP CI OUTER: THẤT BẠI (RC=${RC}) ==="
+HUMAN_SUMMARY_SCRIPT="${SCRIPT_DIR}/vsp_ci_build_human_summary_v1.sh"
+if [[ -x "${HUMAN_SUMMARY_SCRIPT}" ]]; then
+  "${HUMAN_SUMMARY_SCRIPT}" "${RUN_DIR}" || true
 fi
 
-exit "${RC}"
+if [[ ${RC_GATE} -eq 0 ]]; then
+  log "=== VSP CI OUTER: THÀNH CÔNG (RC=0) ==="
+else
+  log "=== VSP CI OUTER: THẤT BẠI (RC=${RC_GATE}) ==="
+fi
+
+exit "${RC_GATE}"

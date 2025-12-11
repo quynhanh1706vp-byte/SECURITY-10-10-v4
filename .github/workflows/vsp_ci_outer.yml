@@ -12,13 +12,12 @@ on:
 
 jobs:
   vsp-security-ci:
-    name: VSP Security CI (FULL EXT)
+    name: VSP Security CI (Khach)
     runs-on: self-hosted
 
     env:
-      # Engine VSP bên ngoài (SECURITY_BUNDLE) trên con runner này
       VSP_BUNDLE_ROOT: /home/test/Data/SECURITY_BUNDLE
-      # Ngưỡng gate
+      VSP_SRC_ROOT: /home/test/Data/Khach
       VSP_MAX_CRITICAL: 0
       VSP_MAX_HIGH: 10
 
@@ -26,17 +25,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Chuẩn bị script VSP CI OUTER
+      - name: Chuẩn bị script CI OUTER
         run: |
           cd "${{ github.workspace }}"
           chmod +x ci/VSP_CI_OUTER/*.sh
           echo "[CI] Workspace = ${{ github.workspace }}"
           ls ci/VSP_CI_OUTER
 
-      - name: Chạy VSP CI outer cho webapp v7
+      - name: Chạy VSP CI outer cho /home/test/Data/Khach
         run: |
           cd "${{ github.workspace }}"
-          ci/VSP_CI_OUTER/vsp_ci_outer_full_v1.sh dmpw_linux_install_v7/code/webapp
+          ci/VSP_CI_OUTER/vsp_ci_outer_full_v1.sh "${VSP_SRC_ROOT}"
 
       - name: Upload artifact kết quả VSP CI
         if: always()
@@ -47,12 +46,10 @@ jobs:
             out_ci/**
           if-no-files-found: ignore
 
-      # OPTIONAL: đồng bộ CI run mới nhất sang VSP UI
-      - name: Sync last CI run to VSP UI (optional)
+      - name: Sync CI run mới sang VSP UI (optional)
         if: always()
         run: |
           cd "${{ github.workspace }}"
-          chmod +x ci/VSP_CI_OUTER/vsp_ci_sync_last_run_to_vsp_v1.sh || true
           if [ -x ci/VSP_CI_OUTER/vsp_ci_sync_last_run_to_vsp_v1.sh ]; then
             ci/VSP_CI_OUTER/vsp_ci_sync_last_run_to_vsp_v1.sh
           else
