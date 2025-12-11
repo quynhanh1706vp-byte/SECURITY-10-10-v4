@@ -49,7 +49,7 @@
     <PackageReference Include="ClosedXML" Version="0.102.2" />
     <PackageReference Include="EPPlus.Core" Version="1.5.4" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-    <PackageReference Include="Magick.NET-Q8-x64" Version="13.9.1" />
+    <PackageReference Include="Magick.NET-Q8-x64" Version="14.8.2" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App">
       <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
@@ -69,7 +69,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.6" />
     <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
-    <PackageReference Include="RestSharp" Version="111.3.0" />
+    <PackageReference Include="RestSharp" Version="112.0.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.6.2" />
@@ -357,6 +357,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="4.7.2" />
     <Reference Include="AutoMapper">
       <HintPath>..\..\..\..\..\.nuget\packages\automapper\13.0.1\lib\net6.0\AutoMapper.dll</HintPath>
     </Reference>
