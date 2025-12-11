@@ -1,112 +1,129 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# =================[ VSP CI OUTER FULL RUN ]=================
-# - KHÔNG sửa gì trong SECURITY_BUNDLE.
-# - Tự bật venv của SECURITY_BUNDLE nếu tìm thấy.
-# - Nếu phát hiện run_vsp_full_ext.sh:
-#     -> Gọi với SRC_ROOT (signature: FULL_CMD SRC_INPUT)
-#     -> Parse log để lấy RUN_DIR thật.
-# - Nếu là script khác (run_vsp_full_ext_v2.sh / run_all_tools_v2.sh):
-#     -> Dùng mode cũ: FULL_CMD OUT_DIR SRC_ROOT.
-# ===========================================================
+LOG_PREFIX="[VSP_CI_OUTER]"
 
-SEC_BUNDLE_ROOT="${SEC_BUNDLE_ROOT:-/home/test/Data/SECURITY_BUNDLE}"
-SRC_ROOT="${SRC_ROOT:-$(pwd)}"
-RUN_PREFIX="${RUN_PREFIX:-RUN_VSP_FULL_EXT_CI}"
+log() {
+  echo "${LOG_PREFIX} $*"
+}
 
+# --- Xác định đường dẫn cơ bản ---
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+
+# MODE có thể là: CI_CD | LOCAL | OFFLINE (tùy bạn dùng)
+MODE="${VSP_MODE:-CI_CD}"
+
+# --- Xác định SRC_ROOT (source cần scan) ---
+# Ưu tiên:
+#   1) Tham số 1
+#   2) VSP_SRC_ROOT
+#   3) TARGET_PROJECT (thường set trong CI)
+#   4) REPO_ROOT
+if [[ $# -ge 1 && -n "${1:-}" ]]; then
+  SRC_ROOT="$1"
+elif [[ -n "${VSP_SRC_ROOT:-}" ]]; then
+  SRC_ROOT="$VSP_SRC_ROOT"
+elif [[ -n "${TARGET_PROJECT:-}" ]]; then
+  SRC_ROOT="$TARGET_PROJECT"
+else
+  SRC_ROOT="$REPO_ROOT"
+fi
+
+# --- Xác định OUT_DIR (thư mục output của run này) ---
 TS="$(date +%Y%m%d_%H%M%S)"
-RUN_ID="${RUN_ID:-${RUN_PREFIX}_${TS}}"
-RUN_DIR_DEFAULT="${SEC_BUNDLE_ROOT}/out/${RUN_ID}"
+RUN_ID="VSP_CI_${TS}"
 
-GATE_SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/vsp_ci_gate_core_v1.sh"
-
-echo "==================[ VSP CI OUTER FULL RUN ]=================="
-echo "[OUTER] SEC_BUNDLE_ROOT = ${SEC_BUNDLE_ROOT}"
-echo "[OUTER] SRC_ROOT        = ${SRC_ROOT}"
-echo "[OUTER] RUN_ID (outer)  = ${RUN_ID}"
-echo "[OUTER] RUN_DIR_DEFAULT = ${RUN_DIR_DEFAULT}"
-echo "[OUTER] GATE_SCRIPT     = ${GATE_SCRIPT}"
-echo "============================================================="
-
-mkdir -p "${RUN_DIR_DEFAULT}/report"
-
-# 0) THỬ BẬT VENV CỦA SECURITY_BUNDLE (NẾU CÓ)
-SEC_BUNDLE_VENV="${SEC_BUNDLE_VENV:-${SEC_BUNDLE_ROOT}/.venv/bin/activate}"
-if [ -f "$SEC_BUNDLE_VENV" ]; then
-  echo "[OUTER] Sourcing venv: $SEC_BUNDLE_VENV"
-  # shellcheck disable=SC1090
-  source "$SEC_BUNDLE_VENV"
+if [[ $# -ge 2 && -n "${2:-}" ]]; then
+  OUT_DIR="$2"
+elif [[ -n "${VSP_OUT_DIR:-}" ]]; then
+  OUT_DIR="$VSP_OUT_DIR"
 else
-  echo "[OUTER][WARN] Không tìm thấy venv tại $SEC_BUNDLE_VENV (bỏ qua bước activate)."
+  OUT_DIR="${REPO_ROOT}/out_ci/${RUN_ID}"
 fi
 
-# 1) CHỌN LỆNH FULL SCAN
-if [ "${FULL_CMD-}" != "" ]; then
-  CANDIDATES=("$FULL_CMD")
-else
-  CANDIDATES=(
-    "${SEC_BUNDLE_ROOT}/bin/run_vsp_full_ext_v2.sh"
-    "${SEC_BUNDLE_ROOT}/bin/run_vsp_full_ext.sh"
-    "${SEC_BUNDLE_ROOT}/bin/run_all_tools_v2.sh"
-  )
-fi
+# --- Xác định SECURITY_BUNDLE root ---
+BUNDLE_ROOT="${VSP_BUNDLE_ROOT:-/home/test/Data/SECURITY_BUNDLE}"
 
-FOUND_CMD=""
-for c in "${CANDIDATES[@]}"; do
-  if [ -x "$c" ]; then
-    FOUND_CMD="$c"
-    break
-  fi
-done
+log "MODE       = ${MODE}"
+log "REPO_ROOT  = ${REPO_ROOT}"
+log "SCRIPT_DIR = ${SCRIPT_DIR}"
+log "SRC_ROOT   = ${SRC_ROOT}"
+log "OUT_DIR    = ${OUT_DIR}"
+log "RUN_ID     = ${RUN_ID}"
+log "BUNDLE_ROOT= ${BUNDLE_ROOT}"
 
-if [ -z "$FOUND_CMD" ]; then
-  echo "[OUTER][ERR] Không tìm thấy lệnh full scan phù hợp."
-  echo "[OUTER][ERR] Đã thử các candidate:"
-  for c in "${CANDIDATES[@]}"; do
-    echo "  - $c"
-  done
-  echo "[OUTER][HINT] Anh có thể:"
-  echo "  1) Kiểm tra xem lệnh full scan anh đang dùng tên gì (trong bin/)."
-  echo "  2) Export FULL_CMD trỏ tới lệnh đó, ví dụ:"
-  echo "     FULL_CMD=\"/home/test/Data/SECURITY_BUNDLE/bin/run_vsp_full_ext.sh\" \\"
-  echo "       ./vsp_ci_outer_full_v1.sh"
+# --- Kiểm tra căn bản ---
+if [[ ! -d "${SRC_ROOT}" ]]; then
+  log "ERROR: SRC_ROOT không tồn tại: ${SRC_ROOT}"
   exit 2
 fi
 
-echo "[OUTER] Dùng FULL_CMD = ${FOUND_CMD}"
-
-# 2) GỌI FULL SCAN THEO ĐÚNG CHỮ KÝ
-LOG_FILE="$(mktemp /tmp/vsp_full_XXXX.log)"
-
-if [[ "${FOUND_CMD}" == *"run_vsp_full_ext.sh" ]]; then
-  echo "[OUTER] Detected run_vsp_full_ext.sh – dùng signature: FULL_CMD SRC_ROOT"
-  echo "[OUTER] Gọi: ${FOUND_CMD} \"${SRC_ROOT}\""
-  "${FOUND_CMD}" "${SRC_ROOT}" 2>&1 | tee "${LOG_FILE}"
-else
-  echo "[OUTER] Dùng signature FULL_CMD OUT_DIR SRC_ROOT"
-  echo "[OUTER] Gọi: ${FOUND_CMD} \"${RUN_DIR_DEFAULT}\" \"${SRC_ROOT}\""
-  "${FOUND_CMD}" "${RUN_DIR_DEFAULT}" "${SRC_ROOT}" 2>&1 | tee "${LOG_FILE}"
+if [[ ! -d "${BUNDLE_ROOT}" ]]; then
+  log "WARN: BUNDLE_ROOT không tồn tại: ${BUNDLE_ROOT}"
+  log "      Bạn cần chỉnh VSP_BUNDLE_ROOT hoặc sửa default trong script."
+  exit 3
 fi
 
-# 3) PARSE RUN_DIR THẬT TỪ LOG (ưu tiên dòng 'RUN_DIR   = ...')
-RUN_DIR_DETECTED="$(grep -E 'RUN_DIR\s*=' "${LOG_FILE}" | tail -1 | sed -E 's/.*RUN_DIR\s*=\s*//')"
+mkdir -p "${OUT_DIR}"
 
-if [ -z "${RUN_DIR_DETECTED}" ]; then
-  echo "[OUTER][WARN] Không parse được RUN_DIR từ log, fallback RUN_DIR_DEFAULT."
-  RUN_DIR="${RUN_DIR_DEFAULT}"
-else
-  RUN_DIR="${RUN_DIR_DETECTED}"
+# --- Kiểm tra gate core script ---
+GATE_CORE="${SCRIPT_DIR}/vsp_ci_gate_core_v1.sh"
+if [[ ! -x "${GATE_CORE}" ]]; then
+  if [[ -f "${GATE_CORE}" ]]; then
+    chmod +x "${GATE_CORE}" || true
+  fi
 fi
 
-echo "[OUTER] RUN_DIR dùng cho CI GATE = ${RUN_DIR}"
+if [[ ! -x "${GATE_CORE}" ]]; then
+  log "ERROR: Không tìm thấy hoặc không chạy được gate core: ${GATE_CORE}"
+  log "       Cần file vsp_ci_gate_core_v1.sh trong cùng thư mục."
+  exit 4
+fi
 
-# 4) GỌI CI GATE
-echo "[OUTER] Gọi CI GATE: ${GATE_SCRIPT}"
-VSP_CI_MAX_CRIT="${VSP_CI_MAX_CRIT:-0}" \
-VSP_CI_MAX_HIGH="${VSP_CI_MAX_HIGH:-0}" \
-"${GATE_SCRIPT}" "${RUN_DIR}"
+# --- Export ENV để gate core dùng thống nhất ---
+export VSP_MODE="${MODE}"
+export VSP_SRC_ROOT="${SRC_ROOT}"
+export VSP_RUN_DIR="${OUT_DIR}"
+export VSP_BUNDLE_ROOT="${BUNDLE_ROOT}"
+export VSP_RUN_ID="${RUN_ID}"
 
-EXIT_CODE=$?
-echo "[OUTER] CI GATE EXIT_CODE = ${EXIT_CODE}"
-exit "${EXIT_CODE}"
+log "=== BẮT ĐẦU VSP CI OUTER ==="
+log "Gọi gate core: ${GATE_CORE}"
+
+START_TS="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+
+set +e
+"${GATE_CORE}"
+RC=$?
+set -e
+
+END_TS="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+
+log "Gate core kết thúc với mã trả về: ${RC}"
+
+# --- Ghi summary cho CI/CD / Dev xem nhanh ---
+SUMMARY_FILE="${OUT_DIR}/CI_SUMMARY.txt"
+{
+  echo "VSP CI OUTER SUMMARY"
+  echo "---------------------"
+  echo "Run ID       : ${RUN_ID}"
+  echo "Mode         : ${MODE}"
+  echo "Repo Root    : ${REPO_ROOT}"
+  echo "Source Root  : ${SRC_ROOT}"
+  echo "Output Dir   : ${OUT_DIR}"
+  echo "Bundle Root  : ${BUNDLE_ROOT}"
+  echo "Start (UTC)  : ${START_TS}"
+  echo "End   (UTC)  : ${END_TS}"
+  echo "Exit Code    : ${RC}"
+} > "${SUMMARY_FILE}"
+
+log "Đã ghi summary: ${SUMMARY_FILE}"
+
+if [[ ${RC} -eq 0 ]]; then
+  log "=== VSP CI OUTER: THÀNH CÔNG (RC=0) ==="
+else
+  log "=== VSP CI OUTER: THẤT BẠI (RC=${RC}) ==="
+fi
+
+exit "${RC}"

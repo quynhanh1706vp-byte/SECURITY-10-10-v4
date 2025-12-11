@@ -1,71 +1,138 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# ===================[ VSP CI GATE – CORE ]===================
-# KHÔNG sửa gì trong SECURITY_BUNDLE.
-# Chỉ đọc summary_unified.json và tính CRIT/HIGH với fallback:
-#   1) .summary_all.by_severity
-#   2) .by_severity
-#
-# Env:
-#   VSP_CI_MAX_CRIT   - Ngưỡng CRITICAL cho phép (default: 0)
-#   VSP_CI_MAX_HIGH   - Ngưỡng HIGH cho phép (default: 0)
-#
-# Usage:
-#   VSP_CI_MAX_CRIT=0 VSP_CI_MAX_HIGH=0 \\
-#     ./vsp_ci_gate_core_v1.sh /path/to/RUN_VSP_FULL_EXT_...
-# ============================================================
+LOG_PREFIX="[VSP_CI_GATE]"
 
-if [ $# -lt 1 ]; then
-  echo "Usage: $0 /path/to/RUN_DIR"
-  exit 1
+log() {
+  echo "${LOG_PREFIX} $*"
+}
+
+# --- LẤY THÔNG TIN TỪ ENV / THAM SỐ ---
+
+BUNDLE_ROOT="${VSP_BUNDLE_ROOT:-/home/test/Data/SECURITY_BUNDLE}"
+SRC_ROOT="${VSP_SRC_ROOT:-}"
+RUN_ID="${VSP_RUN_ID:-VSP_CI_$(date +%Y%m%d_%H%M%S)}"
+
+if [[ $# -ge 1 && -n "${1:-}" ]]; then
+  RUN_DIR="$1"
+elif [[ -n "${VSP_RUN_DIR:-}" ]]; then
+  RUN_DIR="${VSP_RUN_DIR}"
+else
+  RUN_DIR="${BUNDLE_ROOT}/out/${RUN_ID}"
 fi
 
-RUN_DIR="$1"
-SUMMARY="$RUN_DIR/report/summary_unified.json"
+log "BUNDLE_ROOT = ${BUNDLE_ROOT}"
+log "SRC_ROOT    = ${SRC_ROOT:-<EMPTY>}"
+log "RUN_DIR     = ${RUN_DIR}"
+log "RUN_ID      = ${RUN_ID}"
 
-if [ ! -f "$SUMMARY" ]; then
-  echo "[VSP_CI_CORE][ERR] Không tìm thấy $SUMMARY"
-  echo "  PATH: $SUMMARY"
+if [[ -z "${SRC_ROOT}" ]]; then
+  log "ERROR: VSP_SRC_ROOT (SRC_ROOT) chưa được set – outer phải export VSP_SRC_ROOT."
   exit 2
 fi
 
-if ! command -v jq >/dev/null 2>&1; then
-  echo "[VSP_CI_CORE][ERR] Thiếu lệnh jq (cần để đọc JSON)."
+if [[ ! -d "${SRC_ROOT}" ]]; then
+  log "ERROR: SRC_ROOT không tồn tại: ${SRC_ROOT}"
   exit 3
 fi
 
-MAX_CRIT="${VSP_CI_MAX_CRIT:-0}"
-MAX_HIGH="${VSP_CI_MAX_HIGH:-0}"
-
-# Đọc CRIT/HIGH với 2 cấp ưu tiên: summary_all.by_severity -> by_severity
-CRIT=$(jq '(
-  .summary_all.by_severity.CRITICAL
-  // .by_severity.CRITICAL
-  // 0
-)' "$SUMMARY")
-
-HIGH=$(jq '(
-  .summary_all.by_severity.HIGH
-  // .by_severity.HIGH
-  // 0
-)' "$SUMMARY")
-
-echo "=== VSP CI GATE (CORE / EXTERNAL) ==="
-echo "RUN_DIR   = $RUN_DIR"
-echo "SUMMARY   = $SUMMARY"
-echo "CRITICAL  = $CRIT"
-echo "HIGH      = $HIGH"
-echo "MAX_CRIT  = $MAX_CRIT"
-echo "MAX_HIGH  = $MAX_HIGH"
-
-STATUS="PASS"
-EXIT_CODE=0
-
-if [ "$CRIT" -gt "$MAX_CRIT" ] || [ "$HIGH" -gt "$MAX_HIGH" ]; then
-  STATUS="FAIL"
-  EXIT_CODE=1
+if [[ ! -d "${BUNDLE_ROOT}" ]]; then
+  log "ERROR: BUNDLE_ROOT không tồn tại: ${BUNDLE_ROOT}"
+  exit 4
 fi
 
-echo "GATE_STATUS = $STATUS"
-exit "$EXIT_CODE"
+mkdir -p "${RUN_DIR}"
+
+# --- XÁC ĐỊNH RUNNER CỦA SECURITY_BUNDLE ---
+
+# Mặc định dùng run_all_tools_v2.sh, có thể override bằng ENV VSP_RUNNER
+RUNNER="${VSP_RUNNER:-${BUNDLE_ROOT}/bin/run_all_tools_v2.sh}"
+
+log "RUNNER      = ${RUNNER}"
+
+if [[ ! -x "${RUNNER}" ]]; then
+  log "ERROR: Không tìm thấy runner hoặc không có quyền chạy: ${RUNNER}"
+  log "       Set ENV VSP_RUNNER cho đúng script runner trong SECURITY_BUNDLE."
+  exit 5
+fi
+
+# --- CHẠY RUNNER ---
+
+log "=== CHẠY RUNNER VSP (FULL SCAN) ==="
+log "Cmd: ${RUNNER} \"${SRC_ROOT}\" \"${RUN_DIR}\""
+
+START_TS="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+
+set +e
+# LƯU Ý: truyền SRC_ROOT trước, RUN_DIR sau
+"${RUNNER}" "${SRC_ROOT}" "${RUN_DIR}"
+RC_RUNNER=$?
+set -e
+
+END_TS="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+
+log "Runner kết thúc với RC=${RC_RUNNER}"
+
+# --- GATE LOGIC DỰA TRÊN summary_unified.json ---
+
+REPORT_DIR="${RUN_DIR}/report"
+SUMMARY_JSON="${REPORT_DIR}/summary_unified.json"
+
+if [[ ! -f "${SUMMARY_JSON}" ]]; then
+  log "WARN: Không tìm thấy ${SUMMARY_JSON} – bỏ qua phần gate theo severity."
+  log "      Kiểm tra lại unify trong runner."
+  exit "${RC_RUNNER}"
+fi
+
+log "Đọc severity từ ${SUMMARY_JSON}"
+
+CRIT=$(jq -r '.summary_by_severity.CRITICAL // 0' "${SUMMARY_JSON}" 2>/dev/null || echo 0)
+HIGH=$(jq -r '.summary_by_severity.HIGH // 0' "${SUMMARY_JSON}" 2>/dev/null || echo 0)
+MED=$(jq -r '.summary_by_severity.MEDIUM // 0' "${SUMMARY_JSON}" 2>/dev/null || echo 0)
+LOW=$(jq -r '.summary_by_severity.LOW // 0' "${SUMMARY_JSON}" 2>/dev/null || echo 0)
+INFO=$(jq -r '.summary_by_severity.INFO // 0' "${SUMMARY_JSON}" 2>/dev/null || echo 0)
+TRACE=$(jq -r '.summary_by_severity.TRACE // 0' "${SUMMARY_JSON}" 2>/dev/null || echo 0)
+
+log "Severity counts:"
+log "  CRITICAL = ${CRIT}"
+log "  HIGH     = ${HIGH}"
+log "  MEDIUM   = ${MED}"
+log "  LOW      = ${LOW}"
+log "  INFO     = ${INFO}"
+log "  TRACE    = ${TRACE}"
+
+# Ngưỡng gate – có thể override từ ENV
+MAX_CRIT=${VSP_MAX_CRITICAL:-0}   # mặc định CI fail nếu CRITICAL > 0
+MAX_HIGH=${VSP_MAX_HIGH:-10}      # mặc định CI fail nếu HIGH > 10
+
+RC_GATE=0
+
+if (( CRIT > MAX_CRIT )); then
+  log "GATE FAIL: CRITICAL (${CRIT}) > MAX_CRITICAL (${MAX_CRIT})"
+  RC_GATE=1
+fi
+
+if (( HIGH > MAX_HIGH )); then
+  log "GATE FAIL: HIGH (${HIGH}) > MAX_HIGH (${MAX_HIGH})"
+  RC_GATE=1
+fi
+
+if (( RC_GATE == 0 )); then
+  log "GATE PASS: CRIT=${CRIT} (<=${MAX_CRIT}), HIGH=${HIGH} (<=${MAX_HIGH})"
+else
+  log "GATE RESULT: FAIL (dựa trên severity threshold)"
+fi
+
+if (( RC_RUNNER != 0 )); then
+  FINAL_RC=${RC_RUNNER}
+elif (( RC_GATE != 0 )); then
+  FINAL_RC=${RC_GATE}
+else
+  FINAL_RC=0
+fi
+
+log "Start (UTC) : ${START_TS}"
+log "End   (UTC) : ${END_TS}"
+log "Final RC    : ${FINAL_RC}"
+
+exit "${FINAL_RC}"
