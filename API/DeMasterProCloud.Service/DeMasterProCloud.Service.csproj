@@ -18,7 +18,7 @@
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="33.0.1" />
     <PackageReference Include="DinkToPdf" Version="1.0.8" />
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="AutoMapper" Version="16.1.1" />
     <PackageReference Include="PuppeteerSharp" Version="18.0.3" />
     <PackageReference Include="itext7.pdfhtml" Version="5.0.4" />
     <PackageReference Include="itext7.bouncy-castle-adapter" Version="8.0.4" />
