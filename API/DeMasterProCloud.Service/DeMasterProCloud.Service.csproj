@@ -33,7 +33,7 @@
     <PackageReference Include="ClosedXML" Version="0.102.2" />
     <PackageReference Include="EPPlus.Core" Version="1.5.4" />
     <PackageReference Include="FluentScheduler" Version="5.5.1" />
-    <PackageReference Include="Mailkit" Version="4.6.0" />
+    <PackageReference Include="Mailkit" Version="4.16.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.1"><PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
 <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
